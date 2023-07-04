@@ -1,0 +1,25 @@
+$fontSize: clamp(.7rem, 2.5vw + 1rem, 1.2rem);
+$h1FontSize: clamp(.7rem, 3vw + 1rem, 3rem);
+$h2FontSize: clamp(.7rem, 4vw + .5rem, 2rem);
+$lrgFontSize: clamp(2rem, 5vw + 1rem, 4.5rem);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+p {
+  font-size: $fontSize;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
