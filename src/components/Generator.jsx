@@ -1,7 +1,14 @@
 import useGenerator from '../hooks/useGenerator';
 
 const Generator = () => {
-    const { addTeamName, teamNameInput, setTeamNameInput, teamNames } = useGenerator();
+    const {
+        addTeamName,
+        teamNameInput,
+        setTeamNameInput,
+        teamNames,
+        handleGenerateClick,
+        allGames
+    } = useGenerator();
 
     return (
         <>
@@ -12,7 +19,12 @@ const Generator = () => {
             <section>
                 <div className="inputGroup">
                     <label htmlFor="teams">Teams</label>
-                    <input type="text" id="teams" name="teams" value={teamNameInput} onChange={(e) => setTeamNameInput(e.target.value)} />
+                    <input
+                        type="text"
+                        id="teams"
+                        name="teams"
+                        value={teamNameInput} onChange={(e) => setTeamNameInput(e.target.value)} 
+                    />
                     <button onClick={addTeamName}>Add</button>
                 </div>
             </section>
@@ -26,9 +38,15 @@ const Generator = () => {
             </section>
             <section>
                 <div className="inputGroup">
-                    <p>Click the "GENERATE" to display your randomised round robin table below</p>
-                    <button onClick={() => {}}>GENERATE</button>
+                    <p>Click the "GENERATE" to display your randomised round robin schedule below</p>
+                    <button onClick={() => handleGenerateClick()}>GENERATE</button>
                 </div>
+            </section>
+            <section>
+                {allGames && allGames.map((game) => {
+                    console.log('game', game)
+                    return <h2>{game[0]} VS {game[1]}</h2>
+                })}
             </section>
         </>
     );
