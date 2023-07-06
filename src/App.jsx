@@ -1,8 +1,9 @@
-function App() {
-  
+import Generator from './components/Generator';
+
+const App = () => {
   return (
     <>
-      App
+      <Generator />
     </>
   )
 };
