@@ -4,26 +4,32 @@ const useGenerator = () => {
     const [teamNameInput, setTeamNameInput] = useState('');
     const [teamNames, setTeamNames] = useState([]);
     const [allGames, setAllGames] = useState([]);
-    console.log("teamNameInput", teamNameInput)
-    console.log("teamNames", teamNames)
+
     const addTeamName = () => {
         setTeamNames((prev) => [...prev, teamNameInput])
         setTeamNameInput('')
     };
 
-    // have a list of strings in an array
-    // we want to grab each item and return an array of arrays
+    // Generates a round robin list, makes sure each team has same amount of home and away games
     const handleGenerateClick = () => {
         let tempList = [...teamNames];
         let tempArr = [];
-        const newArr = teamNames.length >= 2 && teamNames.map((team) => {
-            tempList.map((item) => {
+
+        teamNames.length >= 2 && teamNames.forEach((team) => {
+            tempList.forEach((item) => {
                 if (team === item) {
                     return;
                 };
-                console.log('team', team);
-                const teamPair = [team, item];
-                console.log('teamPair', teamPair);
+
+                let teamPair = [team, item];
+                const lastElTempArr = tempArr.slice(-1);
+
+                // Makes sure each person has same amount of home and away games
+                if (teamPair[0] === lastElTempArr.flat()[0]) {
+                    teamPair.reverse();
+                    tempArr.push(teamPair);
+                    return;
+                }
                 tempArr.push(teamPair);
             });
             tempList.shift();
@@ -31,18 +37,11 @@ const useGenerator = () => {
 
         console.log('tempArr', tempArr)
         setAllGames(tempArr);
+
     };
-    // those objects will contain the original item plus each item
-    // so if there is three names ['bob, 'pal', 'dave']
-    // we want to return
-    // [
-    //    ["bob", "pal"],
-    //    ["bob", "dave"],
-    //    ["pal", "dave"]
-    // ]
-    //
-    // so if there is five names ['bob, 'pal', 'dave', 'nath', 'jack']
-    // we want to return
+    
+    // five names ['bob, 'pal', 'dave', 'nath', 'jack']
+  
     // [
     //    ["bob": "pal"],
     //    ["bob": "dave"],
@@ -55,8 +54,6 @@ const useGenerator = () => {
     //    ["dave": "jack"],
     //    ["nath": "jack"]
     // ]
-    //
-    //
 
     return {
         addTeamName,
