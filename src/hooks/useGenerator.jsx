@@ -35,25 +35,29 @@ const useGenerator = () => {
             tempList.shift();
         });
 
-        console.log('tempArr', tempArr)
-        setAllGames(tempArr);
+        // Evenly distributes teams to a schedule
+        const distributeEvenly = (array) => {
+            const arr = [...new Set(array)].map(el => array.filter(e => el === e));
 
+            return array.map((_, i) => arr.map(el => el[i])).reduce((a, b) => a.concat(b)).filter(el => el);
+        };
+        
+        const gamesEvenedArr = distributeEvenly(tempArr.flat());
+        
+        // Returns the evenly distributed games back to their orignal format
+        const gamesEvenedFormattedArr = gamesEvenedArr.reduce((resArr, item, index) => {
+            const chunkIndex = Math.floor(index / 2);
+            
+            if (!resArr[chunkIndex]) {
+                resArr[chunkIndex] = [];
+            };
+
+            resArr[chunkIndex].push(item);
+            return resArr;
+        }, []);
+        
+        setAllGames(gamesEvenedFormattedArr);
     };
-    
-    // five names ['bob, 'pal', 'dave', 'nath', 'jack']
-  
-    // [
-    //    ["bob": "pal"],
-    //    ["bob": "dave"],
-    //    ["bob": "nath"],
-    //    ["bob": "jack"],
-    //    ["pal": "dave"],
-    //    ["pal": "nath"],
-    //    ["pal": "jack"],
-    //    ["dave": "nath"],
-    //    ["dave": "jack"],
-    //    ["nath": "jack"]
-    // ]
 
     return {
         addTeamName,
