@@ -7,8 +7,11 @@ const Generator = () => {
         setTeamNameInput,
         teamNames,
         handleGenerateClick,
-        allGames
+        allGames,
+        removeTeamName
     } = useGenerator();
+
+
 
     return (
         <div className='generatorContainer'>
@@ -23,7 +26,8 @@ const Generator = () => {
                         type="text"
                         id="teams"
                         name="teams"
-                        value={teamNameInput} onChange={(e) => setTeamNameInput(e.target.value)} 
+                        value={teamNameInput}
+                        onChange={(e) => setTeamNameInput(e.target.value)} 
                     />
                     <button onClick={addTeamName}>ADD</button>
                 </div>
@@ -32,7 +36,7 @@ const Generator = () => {
                 {teamNames && teamNames.map((team) => {
                     return <div className="teamAdded">
                         <p>{team}</p>
-                        <p>X</p>
+                        <p onClick={(e) => removeTeamName(e)} value={team}>X</p>
                     </div>
                 })}
             </section>

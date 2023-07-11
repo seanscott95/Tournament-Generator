@@ -10,6 +10,13 @@ const useGenerator = () => {
         setTeamNameInput('')
     };
 
+    const removeTeamName = (e) => {
+        const teamToRemove = e.target.getAttribute('value');
+
+        const newTeamNames = teamNames.filter(el => el !== teamToRemove);
+        setTeamNames(newTeamNames);
+    };
+
     // Generates a round robin list, makes sure each team has same amount of home and away games
     const handleGenerateClick = () => {
         let tempList = [...teamNames];
@@ -108,7 +115,8 @@ const useGenerator = () => {
         setTeamNameInput,
         teamNames,
         handleGenerateClick,
-        allGames
+        allGames,
+        removeTeamName
     };
 };
 
