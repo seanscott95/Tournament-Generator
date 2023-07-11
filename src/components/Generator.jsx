@@ -11,21 +11,21 @@ const Generator = () => {
     } = useGenerator();
 
     return (
-        <>
-            <section>
+        <div className='generatorContainer'>
+            <section className='heading'>
                 <h1>Welcome to the Round Robin Generator!!</h1>
                 <p>To get started enter your team names in the input below:</p>
             </section>
-            <section>
+            <section className='inputContainer'>
                 <div className="inputGroup">
-                    <label htmlFor="teams">Teams</label>
+                    <label htmlFor="teams">TEAM:</label>
                     <input
                         type="text"
                         id="teams"
                         name="teams"
                         value={teamNameInput} onChange={(e) => setTeamNameInput(e.target.value)} 
                     />
-                    <button onClick={addTeamName}>Add</button>
+                    <button onClick={addTeamName}>ADD</button>
                 </div>
             </section>
             <section>
@@ -38,17 +38,15 @@ const Generator = () => {
             </section>
             <section>
                 <div className="inputGroup">
-                    <p>Click the "GENERATE" to display your randomised round robin schedule below</p>
                     <button onClick={() => handleGenerateClick()}>GENERATE</button>
                 </div>
             </section>
             <section>
                 {allGames && allGames.map((game) => {
-                    console.log('game', game)
                     return <h2>{game[0]} VS {game[1]}</h2>
                 })}
             </section>
-        </>
+        </div>
     );
 };
 
