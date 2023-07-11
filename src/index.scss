@@ -1,8 +1,10 @@
-$fontSize: clamp(.7rem, 2.5vw + 1rem, 1.2rem);
+$fontSize: clamp(.7rem, 2.5vw + .5rem, 1.2rem);
+$lrgFontSize: clamp(1rem, 4vw + .5rem, 1.5rem);
 $h1FontSize: clamp(.7rem, 3vw + 1rem, 3rem);
-$h2FontSize: clamp(.7rem, 4vw + .5rem, 2rem);
-$lrgFontSize: clamp(2rem, 5vw + 1rem, 4.5rem);
-$primaryColor: #fa6400;
+$h2FontSize: clamp(.7rem, 4vw + .5rem, 1.75rem);
+$primaryOrangeColor: #fa6400;
+$primaryColor: #FF7300;
+
 
 * {
   margin: 0;
@@ -26,6 +28,48 @@ body {
   background: #434343;
 }
 
+/* ------------ Mixins ------------ */
+@mixin button {
+  background-color: $primaryColor;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  color: #fff;
+  cursor: pointer;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: $fontSize;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  padding: .3em 1em;
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  &:hover,
+  &:focus {
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  }
+  &:hover {
+    transform: translateY(-1px);
+  }
+  &:active {
+    background-color: #c85000;
+    transform: translateY(0);
+  }
+}
+
+@mixin teamNameListItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #676767;
+  color: $primaryColor;
+  border: 2px solid $primaryColor;
+  border-radius: .25rem;
+  height: 2em;
+}
+
 /* ---------- Components ---------- */
 /* ----- Generator ----- */
 .generatorContainer {
@@ -33,67 +77,104 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  section {
-    width: 80%;
+
+  .leftBorder {
+    border-left: 3px solid $primaryColor;
+    height: 2em;
+    margin: .25em 0;
   }
+
+  section {
+    width: 90%;
+    max-width: 800px;
+  }
+
   h1 {
     text-align: center;
     color: $primaryColor;
   }
+
   .heading {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-  padding: 1em;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
   }
-  .inputContainer {
-    .errorMessage {
-      color: white;
-    }
-    .inputGroup {
+
+  .errorMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+
+  .inputGroup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1em;
+    width: 100%;
+    padding: .5em 0;
+
+    label {
+      font-weight: bold;
+      color: $primaryColor;
+      padding-left: .5em;
+      font-size: $h2FontSize;
+
       display: flex;
-      gap: 1em;
+      justify-content: flex-end;
+    }
+
+    input {
+      line-height: 1.75;
+      width: 40vmin;
+    }
+
+    button {
+      @include button;
+    }
+    button.generateBtn {
+      font-size: $h2FontSize;
+      margin-top: 3em;
+    }
+  }
+
+  
+  ul {
+    margin-top: 3em;
+    
+    li {
+      display: flex;
+      justify-content: center;
       align-items: center;
-      label {
-        font-weight: bold;
-        color: $primaryColor;
-        border-left: 3px solid $primaryColor;
-        padding-left: .5em;
-        font-size: 1.2em;
+      gap: .25em;
+      font-size: $fontSize;
+      &:not(:last-child) {
+        margin-bottom: .25em;
       }
-      input {
-        line-height: 1.5;
-      }
-      button {
-        background-color: $primaryColor;
-        border: 1px solid transparent;
-        border-radius: .25rem;
-        color: #fff;
-        cursor: pointer;
-        font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
-        font-size: 16px;
-        font-weight: 600;
+      div:first-child {
+        @include teamNameListItem;
+        display: flex;
         justify-content: center;
-        line-height: 1.25;
-        margin: 0;
-        padding: .3em .5em;
-        position: relative;
-        text-decoration: none;
-        transition: all 250ms;
-        &:hover,
-        &:focus {
-          background-color: #fb8332;
-          box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+        align-items: center;
+        min-width: fit-content;
+        width: 60vmin;
+      }
+      div:nth-child(2) {
+        @include teamNameListItem;
+        p {
+          margin: .5em;
+          transition: all .2s ease-in-out; 
         }
-        &:hover {
-          transform: translateY(-1px);
-        }
-        &:active {
-          background-color: #c85000;
-          transform: translateY(0);
+        p:hover {
+          color: #FF0000;
+          cursor: pointer;
+          transform: scale(1.25);
         }
       }
     }

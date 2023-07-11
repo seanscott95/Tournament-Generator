@@ -9,7 +9,7 @@ html {
 }
 
 p {
-  font-size: clamp(0.7rem, 2.5vw + 1rem, 1.2rem);
+  font-size: clamp(0.7rem, 2.5vw + 0.5rem, 1.2rem);
 }
 
 body {
@@ -20,6 +20,7 @@ body {
   background: #434343;
 }
 
+/* ------------ Mixins ------------ */
 /* ---------- Components ---------- */
 /* ----- Generator ----- */
 .generatorContainer {
@@ -28,15 +29,21 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.generatorContainer .leftBorder {
+  border-left: 3px solid #FF7300;
+  height: 2em;
+  margin: 0.25em 0;
+}
 .generatorContainer section {
-  width: 80%;
+  width: 90%;
+  max-width: 800px;
 }
 .generatorContainer h1 {
   text-align: center;
-  color: #fa6400;
+  color: #FF7300;
 }
 .generatorContainer .heading {
-  color: white;
+  color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,49 +51,111 @@ body {
   gap: 1em;
   padding: 1em;
 }
-.generatorContainer .inputContainer .errorMessage {
-  color: white;
-}
-.generatorContainer .inputContainer .inputGroup {
+.generatorContainer .errorMessage {
   display: flex;
-  gap: 1em;
+  justify-content: center;
   align-items: center;
+  color: #fff;
 }
-.generatorContainer .inputContainer .inputGroup label {
+.generatorContainer .inputGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  width: 100%;
+  padding: 0.5em 0;
+}
+.generatorContainer .inputGroup label {
   font-weight: bold;
-  color: #fa6400;
-  border-left: 3px solid #fa6400;
+  color: #FF7300;
   padding-left: 0.5em;
-  font-size: 1.2em;
+  font-size: clamp(0.7rem, 4vw + 0.5rem, 1.75rem);
+  display: flex;
+  justify-content: flex-end;
 }
-.generatorContainer .inputContainer .inputGroup input {
-  line-height: 1.5;
+.generatorContainer .inputGroup input {
+  line-height: 1.75;
+  width: 40vmin;
 }
-.generatorContainer .inputContainer .inputGroup button {
-  background-color: #fa6400;
+.generatorContainer .inputGroup button {
+  background-color: #FF7300;
   border: 1px solid transparent;
   border-radius: 0.25rem;
   color: #fff;
   cursor: pointer;
   font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: clamp(0.7rem, 2.5vw + 0.5rem, 1.2rem);
   font-weight: 600;
   justify-content: center;
   line-height: 1.25;
-  margin: 0;
-  padding: 0.3em 0.5em;
+  padding: 0.3em 1em;
   position: relative;
   text-decoration: none;
   transition: all 250ms;
 }
-.generatorContainer .inputContainer .inputGroup button:hover, .generatorContainer .inputContainer .inputGroup button:focus {
+.generatorContainer .inputGroup button:hover, .generatorContainer .inputGroup button:focus {
   background-color: #fb8332;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
-.generatorContainer .inputContainer .inputGroup button:hover {
+.generatorContainer .inputGroup button:hover {
   transform: translateY(-1px);
 }
-.generatorContainer .inputContainer .inputGroup button:active {
+.generatorContainer .inputGroup button:active {
   background-color: #c85000;
   transform: translateY(0);
+}
+.generatorContainer .inputGroup button.generateBtn {
+  font-size: clamp(0.7rem, 4vw + 0.5rem, 1.75rem);
+  margin-top: 3em;
+}
+.generatorContainer ul {
+  margin-top: 3em;
+}
+.generatorContainer ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25em;
+  font-size: clamp(0.7rem, 2.5vw + 0.5rem, 1.2rem);
+}
+.generatorContainer ul li:not(:last-child) {
+  margin-bottom: 0.25em;
+}
+.generatorContainer ul li div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #676767;
+  color: #FF7300;
+  border: 2px solid #FF7300;
+  border-radius: 0.25rem;
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  width: 60vmin;
+}
+.generatorContainer ul li div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #676767;
+  color: #FF7300;
+  border: 2px solid #FF7300;
+  border-radius: 0.25rem;
+  height: 2em;
+}
+.generatorContainer ul li div:nth-child(2) p {
+  margin: 0.5em;
+  transition: all 0.2s ease-in-out;
+}
+.generatorContainer ul li div:nth-child(2) p:hover {
+  color: #FF0000;
+  cursor: pointer;
+  transform: scale(1.25);
 }/*# sourceMappingURL=index.css.map */

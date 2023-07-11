@@ -6,6 +6,9 @@ const useGenerator = () => {
     const [allGames, setAllGames] = useState([]);
 
     const addTeamName = () => {
+        if (teamNameInput.length === 0) {
+            return;
+        };
         setTeamNames((prev) => [...prev, teamNameInput])
         setTeamNameInput('')
     };
@@ -44,7 +47,7 @@ const useGenerator = () => {
 
         // Evenly distributes teams to a schedule
         const distributeEvenly = (array) => {
-            console.log('array', array)
+            // console.log('array', array)
             // i have an array of arrays with two strings in them
             // i want to order the array elements
             // i want to order the array so the games are evenly spread
@@ -79,9 +82,9 @@ const useGenerator = () => {
 
         };
         
-        console.log('tempArr', tempArr)
-        const gamesEvenedArr = distributeEvenly(tempArr);
-        console.log('1fgamesEvenedArr', gamesEvenedArr)
+        // console.log('tempArr', tempArr)
+        // const gamesEvenedArr = distributeEvenly(tempArr);
+        // console.log('1fgamesEvenedArr', gamesEvenedArr)
 
         setAllGames(tempArr);
 

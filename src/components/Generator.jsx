@@ -11,11 +11,11 @@ const Generator = () => {
         allGames,
         removeTeamName
     } = useGenerator();
-    
+
     const [message, setMessage] = useState(false);
 
     const handleGenerateButton = () => {
-        if (teamNameInput.length > 1) {
+        if (teamNameInput !== '') {
             setMessage(true);
             setTimeout(() => {
                 setMessage(false);
@@ -38,33 +38,43 @@ const Generator = () => {
                 <h1>Welcome to the Round Robin Generator!!</h1>
                 <p>To get started enter your team names in the input below:</p>
             </section>
-            <section className='inputContainer'>
-                <div className="inputGroup">
+            <section>
+                <div className="inputGroup leftBorder">
                     <label htmlFor="teams">TEAM:</label>
                     <input
                         type="text"
                         id="teams"
                         name="teams"
                         value={teamNameInput}
-                        onChange={(e) => setTeamNameInput(e.target.value)} 
+                        onChange={(e) => setTeamNameInput(e.target.value)}
                     />
                     <button onClick={addTeamName}>ADD</button>
                 </div>
 
-                {message && teamNames.length <= 2 && <p className='errorMessage'>Please add at least three teams</p>}
-                {message && teamNameInput.length > 1 && <p className='errorMessage'>Please make sure input is empty</p>}
             </section>
             <section>
-                {teamNames && teamNames.map((team) => {
-                    return <div className="teamAdded">
-                        <p>{team}</p>
-                        <p onClick={(e) => removeTeamName(e)} value={team}>X</p>
-                    </div>
-                })}
+                <ul>
+                    {teamNames && teamNames.map((team) => {
+                        return <li className="teamAdded leftBorder">
+                            <div className='teamNameText'>
+                                <p>{team}</p>
+                            </div>
+                            <div>
+                                <p onClick={(e) => removeTeamName(e)} value={team}>X</p>
+                            </div>
+                        </li>
+                    })}
+                </ul>
+                <div className='errorMessage'>
+                    {message && teamNames.length <= 2 &&
+                        <p>Please add at least three teams</p>}
+                    {message && teamNameInput !== '' &&
+                        <p>Please make sure input is empty</p>}
+                </div>
             </section>
             <section>
                 <div className="inputGroup">
-                    <button onClick={handleGenerateButton}>GENERATE</button>
+                    <button className='generateBtn' onClick={handleGenerateButton}>GENERATE</button>
                 </div>
             </section>
             <section>
