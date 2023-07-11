@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import useGenerator from '../hooks/useGenerator';
 
 const Generator = () => {
@@ -10,8 +11,26 @@ const Generator = () => {
         allGames,
         removeTeamName
     } = useGenerator();
+    
+    const [message, setMessage] = useState(false);
 
-
+    const handleGenerateButton = () => {
+        if (teamNameInput.length > 1) {
+            setMessage(true);
+            setTimeout(() => {
+                setMessage(false);
+            }, 3000);
+            return;
+        }
+        if (teamNames.length <= 2) {
+            setMessage(true);
+            setTimeout(() => {
+                setMessage(false);
+            }, 3000);
+            return;
+        }
+        handleGenerateClick();
+    };
 
     return (
         <div className='generatorContainer'>
@@ -31,6 +50,9 @@ const Generator = () => {
                     />
                     <button onClick={addTeamName}>ADD</button>
                 </div>
+
+                {message && teamNames.length <= 2 && <p className='errorMessage'>Please add at least three teams</p>}
+                {message && teamNameInput.length > 1 && <p className='errorMessage'>Please make sure input is empty</p>}
             </section>
             <section>
                 {teamNames && teamNames.map((team) => {
@@ -42,7 +64,7 @@ const Generator = () => {
             </section>
             <section>
                 <div className="inputGroup">
-                    <button onClick={() => handleGenerateClick()}>GENERATE</button>
+                    <button onClick={handleGenerateButton}>GENERATE</button>
                 </div>
             </section>
             <section>

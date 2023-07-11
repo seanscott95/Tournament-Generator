@@ -2,6 +2,7 @@ $fontSize: clamp(.7rem, 2.5vw + 1rem, 1.2rem);
 $h1FontSize: clamp(.7rem, 3vw + 1rem, 3rem);
 $h2FontSize: clamp(.7rem, 4vw + .5rem, 2rem);
 $lrgFontSize: clamp(2rem, 5vw + 1rem, 4.5rem);
+$primaryColor: #fa6400;
 
 * {
   margin: 0;
@@ -37,6 +38,7 @@ body {
   }
   h1 {
     text-align: center;
+    color: $primaryColor;
   }
   .heading {
   color: white;
@@ -47,47 +49,52 @@ body {
   gap: 1em;
   padding: 1em;
   }
-  .inputGroup {
-    display: flex;
-    gap: 1em;
-    align-items: center;
-    label {
-      font-weight: bold;
-      color: #fa6400;
-      border-left: 3px solid #fa6400;
-      padding-left: .5em;
-      font-size: 1.2em;
+  .inputContainer {
+    .errorMessage {
+      color: white;
     }
-    input {
-      line-height: 1.5;
-    }
-    button {
-      background-color: #fa6400;
-      border: 1px solid transparent;
-      border-radius: .25rem;
-      color: #fff;
-      cursor: pointer;
-      font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      justify-content: center;
-      line-height: 1.25;
-      margin: 0;
-      padding: .3em .5em;
-      position: relative;
-      text-decoration: none;
-      transition: all 250ms;
-      &:hover,
-      &:focus {
-        background-color: #fb8332;
-        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    .inputGroup {
+      display: flex;
+      gap: 1em;
+      align-items: center;
+      label {
+        font-weight: bold;
+        color: $primaryColor;
+        border-left: 3px solid $primaryColor;
+        padding-left: .5em;
+        font-size: 1.2em;
       }
-      &:hover {
-        transform: translateY(-1px);
+      input {
+        line-height: 1.5;
       }
-      &:active {
-        background-color: #c85000;
-        transform: translateY(0);
+      button {
+        background-color: $primaryColor;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        color: #fff;
+        cursor: pointer;
+        font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        justify-content: center;
+        line-height: 1.25;
+        margin: 0;
+        padding: .3em .5em;
+        position: relative;
+        text-decoration: none;
+        transition: all 250ms;
+        &:hover,
+        &:focus {
+          background-color: #fb8332;
+          box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+        }
+        &:hover {
+          transform: translateY(-1px);
+        }
+        &:active {
+          background-color: #c85000;
+          transform: translateY(0);
+        }
       }
     }
   }

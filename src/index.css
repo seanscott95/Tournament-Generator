@@ -33,6 +33,7 @@ body {
 }
 .generatorContainer h1 {
   text-align: center;
+  color: #fa6400;
 }
 .generatorContainer .heading {
   color: white;
@@ -43,22 +44,25 @@ body {
   gap: 1em;
   padding: 1em;
 }
-.generatorContainer .inputGroup {
+.generatorContainer .inputContainer .errorMessage {
+  color: white;
+}
+.generatorContainer .inputContainer .inputGroup {
   display: flex;
   gap: 1em;
   align-items: center;
 }
-.generatorContainer .inputGroup label {
+.generatorContainer .inputContainer .inputGroup label {
   font-weight: bold;
   color: #fa6400;
   border-left: 3px solid #fa6400;
   padding-left: 0.5em;
   font-size: 1.2em;
 }
-.generatorContainer .inputGroup input {
+.generatorContainer .inputContainer .inputGroup input {
   line-height: 1.5;
 }
-.generatorContainer .inputGroup button {
+.generatorContainer .inputContainer .inputGroup button {
   background-color: #fa6400;
   border: 1px solid transparent;
   border-radius: 0.25rem;
@@ -75,14 +79,14 @@ body {
   text-decoration: none;
   transition: all 250ms;
 }
-.generatorContainer .inputGroup button:hover, .generatorContainer .inputGroup button:focus {
+.generatorContainer .inputContainer .inputGroup button:hover, .generatorContainer .inputContainer .inputGroup button:focus {
   background-color: #fb8332;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
-.generatorContainer .inputGroup button:hover {
+.generatorContainer .inputContainer .inputGroup button:hover {
   transform: translateY(-1px);
 }
-.generatorContainer .inputGroup button:active {
+.generatorContainer .inputContainer .inputGroup button:active {
   background-color: #c85000;
   transform: translateY(0);
 }/*# sourceMappingURL=index.css.map */
