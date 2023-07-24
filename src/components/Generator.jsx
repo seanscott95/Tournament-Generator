@@ -59,9 +59,13 @@ const Generator = () => {
                             <div className='teamNameText'>
                                 <p>{team}</p>
                             </div>
+                            {team === null ? <div>
+                                <p>X</p>
+                            </div> :
                             <div>
                                 <p onClick={(e) => removeTeamName(e)} value={team}>X</p>
                             </div>
+                            }
                         </li>
                     })}
                 </ul>

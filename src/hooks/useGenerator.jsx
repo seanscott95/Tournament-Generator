@@ -1,16 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+
 
 const useGenerator = () => {
     const [teamNameInput, setTeamNameInput] = useState('');
-    const [teamNames, setTeamNames] = useState([]);
+    const [teamNames, setTeamNames] = useState([null, null, null]);
     const [allGames, setAllGames] = useState([]);
 
     const addTeamName = () => {
         if (teamNameInput.length === 0) {
             return;
         };
-        setTeamNames((prev) => [...prev, teamNameInput])
-        setTeamNameInput('')
+
+        const hasNull = teamNames[teamNames.length - 1] === null;
+        if (hasNull) {
+            let count = teamNames.filter(item => item !== null).length;
+
+            if (count < 3) {
+                let diff = 3 - count;
+                console.log('diff', diff)
+                if (diff === 3) {
+                    setTeamNames([teamNameInput, null, null]);
+                };
+                if (diff === 2) {
+                    setTeamNames((prev) => [...prev.filter((item) => item !== null), teamNameInput, null]);
+                };
+                if (diff === 1) {
+                    setTeamNames((prev) => [...prev.filter((item) => item !== null), teamNameInput]);
+                };
+                setTeamNameInput('');
+                return;
+            };
+        };
+
+        setTeamNames((prev) => [...prev, teamNameInput]);
+        setTeamNameInput('');
     };
 
     const removeTeamName = (e) => {
