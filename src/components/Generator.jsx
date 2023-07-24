@@ -81,9 +81,13 @@ const Generator = () => {
                     <button className='generateBtn' onClick={handleGenerateButton}>GENERATE</button>
                 </div>
             </section>
-            <section>
+            <section className='generatedTable'>
                 {allGames && allGames.map((game) => {
-                    return <h2>{game[0]} VS {game[1]}</h2>
+                    return <div className='generatedTableItem leftBorder'>
+                        <p>{game[0]}</p>
+                        <h1>VS</h1>
+                        <p>{game[1]}</p>
+                    </div>
                 })}
             </section>
         </div>
