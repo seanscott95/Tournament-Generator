@@ -18,7 +18,7 @@ const useGenerator = () => {
 
             if (count < 3) {
                 let diff = 3 - count;
-                console.log('diff', diff)
+                
                 if (diff === 3) {
                     setTeamNames([teamNameInput, null, null]);
                 };

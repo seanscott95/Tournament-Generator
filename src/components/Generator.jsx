@@ -22,7 +22,7 @@ const Generator = () => {
             }, 3000);
             return;
         }
-        if (teamNames.length <= 2) {
+        if (teamNames.filter(item => item !== null).length <= 2) {
             setMessage(true);
             setTimeout(() => {
                 setMessage(false);
@@ -54,8 +54,8 @@ const Generator = () => {
             </section>
             <section>
                 <ul>
-                    {teamNames && teamNames.map((team) => {
-                        return <li className="teamAdded leftBorder">
+                    {teamNames && teamNames.map((team, index) => {
+                        return <li className="teamAdded leftBorder" key={team + index}>
                             <div className='teamNameText'>
                                 <p>{team}</p>
                             </div>
@@ -69,14 +69,14 @@ const Generator = () => {
                         </li>
                     })}
                 </ul>
-                <div className='errorMessage'>
-                    {message && teamNames.length <= 2 &&
-                        <p>Please add at least three teams</p>}
-                    {message && teamNameInput !== '' &&
-                        <p>Please make sure input is empty</p>}
-                </div>
             </section>
             <section>
+                <div className='errorMessage'>
+                    {message && teamNameInput !== '' &&
+                        <p>Please make sure input is empty</p>}
+                    {message && teamNames.filter(item => item !== null).length <= 2 &&
+                        <p>Please add at least three teams</p>}
+                </div>
                 <div className="inputGroup">
                     <button className='generateBtn' onClick={handleGenerateButton}>GENERATE</button>
                 </div>
