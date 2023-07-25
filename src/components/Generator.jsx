@@ -38,8 +38,8 @@ const Generator = () => {
                 <h1>Welcome to the Round Robin Generator!!</h1>
                 <p>To get started enter your team names in the input below:</p>
             </section>
-            <section>
-                <div className="inputGroup leftBorder">
+            <section className='inputGroupContainer'>
+                <div className="leftBorder">
                     <label htmlFor="teams">TEAM:</label>
                     <input
                         type="text"
@@ -50,7 +50,6 @@ const Generator = () => {
                     />
                     <button onClick={addTeamName}>ADD</button>
                 </div>
-
             </section>
             <section>
                 <ul>

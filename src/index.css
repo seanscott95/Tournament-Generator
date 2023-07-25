@@ -37,14 +37,14 @@ body {
   flex-direction: column;
   align-items: center;
   background: #434343;
-  box-shadow: 0 30px 40px rgba(154, 154, 154, 0.1);
+  box-shadow: 0px 3px 30px rgba(200, 200, 200, 0.1);
   border-radius: 0.2em;
   margin: 1em 0;
 }
 .generatorContainer .leftBorder {
   border-left: 3px solid #FF7300;
   height: 2em;
-  margin: 0.25em 0;
+  margin: 0.25em;
 }
 .generatorContainer section {
   width: 100%;
@@ -71,7 +71,13 @@ body {
   color: #fff;
   min-height: 4em;
 }
-.generatorContainer .inputGroup {
+.generatorContainer .inputGroupContainer {
+  background: #676767;
+  border-top: 2px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+  padding: 0.5em 0;
+}
+.generatorContainer .inputGroupContainer div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,12 +85,8 @@ body {
   gap: 1em;
   width: 100%;
   height: 100%;
-  padding: 0.5em 0;
-  background: #676767;
-  border-top: 2px solid rgba(0, 0, 0, 0.5);
-  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 }
-.generatorContainer .inputGroup label {
+.generatorContainer .inputGroupContainer div label {
   font-weight: bold;
   color: #FF7300;
   padding-left: 0.5em;
@@ -92,11 +94,11 @@ body {
   display: flex;
   justify-content: flex-end;
 }
-.generatorContainer .inputGroup input {
+.generatorContainer .inputGroupContainer div input {
   line-height: 1.75;
   width: 40vmin;
 }
-.generatorContainer .inputGroup button {
+.generatorContainer .inputGroupContainer div button {
   background-color: #FF7300;
   border: 1px solid transparent;
   border-radius: 0.25rem;
@@ -113,14 +115,14 @@ body {
   transition: all 250ms;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
 }
-.generatorContainer .inputGroup button:hover, .generatorContainer .inputGroup button:focus {
+.generatorContainer .inputGroupContainer div button:hover, .generatorContainer .inputGroupContainer div button:focus {
   background-color: #fb8332;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
-.generatorContainer .inputGroup button:hover {
+.generatorContainer .inputGroupContainer div button:hover {
   transform: translateY(-1px);
 }
-.generatorContainer .inputGroup button:active {
+.generatorContainer .inputGroupContainer div button:active {
   background-color: #c85000;
   transform: translateY(0);
 }
@@ -187,13 +189,13 @@ body {
   border-radius: 0.25rem;
   height: 2em;
   background: #676767;
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: -moz-fit-content;
   min-width: fit-content;
-  width: 60vmin;
+  width: 80%;
 }
 .generatorContainer ul li div:nth-child(2) {
   display: flex;
@@ -205,7 +207,7 @@ body {
   border-radius: 0.25rem;
   height: 2em;
   background: #676767;
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
 }
 .generatorContainer ul li div:nth-child(2) p {
   margin: 0.5em;
@@ -248,5 +250,5 @@ body {
   padding: 0 2em;
   width: -moz-fit-content;
   width: fit-content;
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
 }/*# sourceMappingURL=index.css.map */
