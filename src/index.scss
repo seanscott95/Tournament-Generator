@@ -87,6 +87,8 @@ body {
   border-radius: .25rem;
   height: 2em;
   background: $secondaryGrey;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+
 }
 
 /* ---------- Components ---------- */
@@ -146,6 +148,8 @@ body {
     height: 100%;
     padding: .5em 0;
     background: $secondaryGrey;
+    border-top: 2px solid rgb(0,0,0,0.5);
+    border-bottom: 2px solid rgb(0,0,0,0.5);
 
     label {
       font-weight: bold;
@@ -174,7 +178,8 @@ body {
     align-items: center;
     background: $secondaryGrey;
     padding: 1em 0;
-    
+    border-top: 2px solid rgb(0,0,0,0.5);
+    border-bottom: 2px solid rgb(0,0,0,0.5);
     
     button {
       @include button;
@@ -241,7 +246,7 @@ body {
       h1 {
         font-style: italic;
         color: #dedede;
-        text-shadow: -.1em 0 0 $secondaryGrey, -.3em 0 .2em #000000;
+        text-shadow: -1px 0 0 $secondaryGrey, -4px 0 2px #000000;
       }
 
       p {
@@ -254,6 +259,7 @@ body {
         font-weight: 600;
         padding: 0 2em;
         width: fit-content;
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
       }
     }
   }

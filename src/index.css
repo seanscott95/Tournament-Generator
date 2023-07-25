@@ -81,6 +81,8 @@ body {
   height: 100%;
   padding: 0.5em 0;
   background: #676767;
+  border-top: 2px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 }
 .generatorContainer .inputGroup label {
   font-weight: bold;
@@ -129,6 +131,8 @@ body {
   align-items: center;
   background: #676767;
   padding: 1em 0;
+  border-top: 2px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 }
 .generatorContainer .generateBtnContainer button {
   background-color: #FF7300;
@@ -183,6 +187,7 @@ body {
   border-radius: 0.25rem;
   height: 2em;
   background: #676767;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -200,6 +205,7 @@ body {
   border-radius: 0.25rem;
   height: 2em;
   background: #676767;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
 }
 .generatorContainer ul li div:nth-child(2) p {
   margin: 0.5em;
@@ -229,7 +235,7 @@ body {
 .generatorContainer .generatedTable .generatedTableItem h1 {
   font-style: italic;
   color: #dedede;
-  text-shadow: -0.1em 0 0 #676767, -0.3em 0 0.2em #000000;
+  text-shadow: -1px 0 0 #676767, -4px 0 2px #000000;
 }
 .generatorContainer .generatedTable .generatedTableItem p {
   border: 2px solid #FF7300;
@@ -242,4 +248,5 @@ body {
   padding: 0 2em;
   width: -moz-fit-content;
   width: fit-content;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
 }/*# sourceMappingURL=index.css.map */
