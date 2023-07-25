@@ -6,6 +6,13 @@
 
 html {
   height: 100%;
+  --s: 50px;
+  --c: #191b22;
+  --_s: calc(2*var(--s)) calc(2*var(--s));
+  --_g: 35.36% 35.36% at;
+  --_c: #0000 66%, #20222a 68% 70%, #0000 72%;
+  background: radial-gradient(var(--_g) 100% 25%, var(--_c)) var(--s) var(--s)/var(--_s), radial-gradient(var(--_g) 0 75%, var(--_c)) var(--s) var(--s)/var(--_s), radial-gradient(var(--_g) 100% 25%, var(--_c)) 0 0/var(--_s), radial-gradient(var(--_g) 0 75%, var(--_c)) 0 0/var(--_s), repeating-conic-gradient(var(--c) 0 25%, rgba(0, 0, 0, 0) 0 50%) 0 0/var(--_s), radial-gradient(var(--_c)) 0 calc(var(--s) / 2)/var(--s) var(--s) var(--c);
+  background-attachment: fixed;
 }
 
 p {
@@ -15,9 +22,10 @@ p {
 body {
   height: 100%;
   width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
   box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background: #434343;
 }
 
 /* ------------ Mixins ------------ */
@@ -28,6 +36,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #434343;
+  box-shadow: 0 30px 40px rgba(154, 154, 154, 0.1);
+  border-radius: 0.2em;
+  margin: 1em 0;
 }
 .generatorContainer .leftBorder {
   border-left: 3px solid #FF7300;
@@ -35,8 +47,7 @@ body {
   margin: 0.25em 0;
 }
 .generatorContainer section {
-  width: 90%;
-  max-width: 800px;
+  width: 100%;
 }
 .generatorContainer h1 {
   text-align: center;
@@ -67,7 +78,9 @@ body {
   flex-wrap: wrap;
   gap: 1em;
   width: 100%;
+  height: 100%;
   padding: 0.5em 0;
+  background: #676767;
 }
 .generatorContainer .inputGroup label {
   font-weight: bold;
@@ -96,6 +109,7 @@ body {
   position: relative;
   text-decoration: none;
   transition: all 250ms;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
 }
 .generatorContainer .inputGroup button:hover, .generatorContainer .inputGroup button:focus {
   background-color: #fb8332;
@@ -108,9 +122,43 @@ body {
   background-color: #c85000;
   transform: translateY(0);
 }
-.generatorContainer .inputGroup button.generateBtn {
+.generatorContainer .generateBtnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #676767;
+  padding: 1em 0;
+}
+.generatorContainer .generateBtnContainer button {
+  background-color: #FF7300;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: #fff;
+  cursor: pointer;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(0.7rem, 2.5vw + 0.5rem, 1.2rem);
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  padding: 0.3em 1em;
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
   font-size: clamp(0.7rem, 4vw + 0.5rem, 1.75rem);
-  margin-bottom: 1em;
+  max-width: 10em;
+}
+.generatorContainer .generateBtnContainer button:hover, .generatorContainer .generateBtnContainer button:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+.generatorContainer .generateBtnContainer button:hover {
+  transform: translateY(-1px);
+}
+.generatorContainer .generateBtnContainer button:active {
+  background-color: #c85000;
+  transform: translateY(0);
 }
 .generatorContainer ul {
   margin-top: 4em;
@@ -130,11 +178,11 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: #676767;
   color: #FF7300;
   border: 2px solid #FF7300;
   border-radius: 0.25rem;
   height: 2em;
+  background: #676767;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -147,11 +195,11 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: #676767;
   color: #FF7300;
   border: 2px solid #FF7300;
   border-radius: 0.25rem;
   height: 2em;
+  background: #676767;
 }
 .generatorContainer ul li div:nth-child(2) p {
   margin: 0.5em;
@@ -168,7 +216,9 @@ body {
   justify-content: center;
   align-items: center;
   gap: 0.5em;
-  width: 90%;
+  width: 100%;
+  padding: 3em 0;
+  background: #434343;
 }
 .generatorContainer .generatedTable .generatedTableItem {
   display: flex;
@@ -179,7 +229,7 @@ body {
 .generatorContainer .generatedTable .generatedTableItem h1 {
   font-style: italic;
   color: #dedede;
-  text-shadow: -0.1em 0 0 #676767, -0.3em 0 0.2em black;
+  text-shadow: -0.1em 0 0 #676767, -0.3em 0 0.2em #000000;
 }
 .generatorContainer .generatedTable .generatedTableItem p {
   border: 2px solid #FF7300;

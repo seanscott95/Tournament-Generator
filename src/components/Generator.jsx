@@ -77,8 +77,8 @@ const Generator = () => {
                     {message && teamNames.filter(item => item !== null).length <= 2 &&
                         <p>Please add at least three teams</p>}
                 </div>
-                <div className="inputGroup">
-                    <button className='generateBtn' onClick={handleGenerateButton}>GENERATE</button>
+                <div className="generateBtnContainer">
+                    <button onClick={handleGenerateButton}>GENERATE</button>
                 </div>
             </section>
             <section className='generatedTable'>
