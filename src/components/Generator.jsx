@@ -7,7 +7,7 @@ const Generator = () => {
         teamNameInput,
         setTeamNameInput,
         teamNames,
-        handleGenerateClick,
+        generateRoundRobin,
         allGames,
         removeTeamName
     } = useGenerator();
@@ -29,7 +29,7 @@ const Generator = () => {
             }, 3000);
             return;
         }
-        handleGenerateClick();
+        generateRoundRobin();
     };
 
     return (
@@ -81,13 +81,22 @@ const Generator = () => {
                 </div>
             </section>
             <section className='generatedTable'>
-                {allGames && allGames.map((game) => {
-                    return <div className='generatedTableItem leftBorder'>
-                        <p>{game[0]}</p>
-                        <h1>VS</h1>
-                        <p>{game[1]}</p>
+                {allGames && allGames.map((game, index) => {
+                    return <div className='generatedTableItem '>
+                        <h1>ROUND {index + 1}</h1>
+                        <div className='gameContainer leftBorder'>
+                            {game.map((g, index) => {
+                                return <div>
+                                    <h3>Game {index + 1}</h3>
+                                    <p>{g[0]}</p>
+                                    <h1>VS</h1>
+                                    <p>{g[1]}</p>
+                                </div>
+                            })}
+                        </div>
                     </div>
                 })}
+                {allGames && console.log('ag', allGames)}
             </section>
         </div>
     );
