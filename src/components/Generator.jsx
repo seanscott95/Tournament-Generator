@@ -12,7 +12,8 @@ const Generator = () => {
         allGames,
         removeTeamName,
         setGeneratedNamesList,
-        generatedNamesList
+        generatedNamesList,
+        listWithByesRemoved
     } = useGenerator();
 
     const [message, setMessage] = useState(false);
@@ -42,6 +43,23 @@ const Generator = () => {
         generateRoundRobin();
         setTeamNames([null, null, null]);
     };
+
+    const [isChecked, setIsChecked] = useState(true);
+
+    const handleShowByes = () => {
+        setIsChecked(prev => !prev);
+    };
+
+    // if (!isChecked) {
+    //     console.log('allGames', allGames)
+        
+    //     setAllGames
+    // }
+
+    // console.log('allGames', allGames)
+    // console.log('allGamess', allGames.map(game => game.map(g => g.filter(el => el !== 'Bye')).filter((e) => e.length !== 1)))
+
+    // if ()
 
     return (
         <div className='generatorContainer'>
@@ -106,7 +124,19 @@ const Generator = () => {
                         </ul>
                     </div>
                 }
-                {allGames && allGames.map((game, index) => {
+                {
+                    <div>
+                        <input
+                            type="checkbox"
+                            id="showByes"
+                            name="showByes"
+                            checked={isChecked}
+                            onChange={handleShowByes}
+                        />
+                        <label htmlFor="showBye"> Display matches with Byes</label>
+                    </div>
+                }
+                {allGames && (isChecked ? allGames : listWithByesRemoved).map((game, index) => {
                     return <div className='generatedTableItem '>
                         <h1>ROUND {index + 1}</h1>
                         <div className='gameContainer leftBorder'>

@@ -7,6 +7,7 @@ const useGenerator = () => {
     const [teamNames, setTeamNames] = useState([null, null, null]);
     const [allGames, setAllGames] = useState([]);
     const [generatedNamesList, setGeneratedNamesList] = useState([]);
+    const listWithByesRemoved = allGames?.map(game => game.map(g => g.filter(el => el !== 'Bye')).filter((e) => e.length !== 1));
 
     const addTeamName = () => {
         if (teamNameInput.length === 0) {
@@ -81,7 +82,8 @@ const useGenerator = () => {
         allGames,
         removeTeamName,
         setGeneratedNamesList,
-        generatedNamesList
+        generatedNamesList,
+        listWithByesRemoved
     };
 };
 
