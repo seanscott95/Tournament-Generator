@@ -6,6 +6,7 @@ const useGenerator = () => {
     const [teamNameInput, setTeamNameInput] = useState('');
     const [teamNames, setTeamNames] = useState([null, null, null]);
     const [allGames, setAllGames] = useState([]);
+    const [generatedNamesList, setGeneratedNamesList] = useState([]);
 
     const addTeamName = () => {
         if (teamNameInput.length === 0) {
@@ -78,7 +79,9 @@ const useGenerator = () => {
         teamNames,
         generateRoundRobin,
         allGames,
-        removeTeamName
+        removeTeamName,
+        setGeneratedNamesList,
+        generatedNamesList
     };
 };
 

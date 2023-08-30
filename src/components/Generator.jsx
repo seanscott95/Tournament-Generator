@@ -10,7 +10,9 @@ const Generator = () => {
         setTeamNames,
         generateRoundRobin,
         allGames,
-        removeTeamName
+        removeTeamName,
+        setGeneratedNamesList,
+        generatedNamesList
     } = useGenerator();
 
     const [message, setMessage] = useState(false);
@@ -31,11 +33,14 @@ const Generator = () => {
             return;
         };
 
+        setGeneratedNamesList([...teamNames]);
+
         if (teamNames % 2 !== 0) {
             teamNames.splice(teamNames.length / 2, 0, 'Bye')
         };
 
         generateRoundRobin();
+        setTeamNames([null, null, null]);
     };
 
     return (
@@ -87,6 +92,20 @@ const Generator = () => {
                 </div>
             </section>
             <section className='generatedTable'>
+                {generatedNamesList.length !== 0 &&
+                    <div className='generatedNamesList'>
+                        <h1>Teams:</h1>
+                        <ul>
+                            {generatedNamesList && generatedNamesList.map((team, index) => {
+                                return <li className="teamAdded leftBorder" key={team + index}>
+                                    <div className='teamNameText'>
+                                        <p>{team}</p>
+                                    </div>
+                                </li>
+                            })}
+                        </ul>
+                    </div>
+                }
                 {allGames && allGames.map((game, index) => {
                     return <div className='generatedTableItem '>
                         <h1>ROUND {index + 1}</h1>

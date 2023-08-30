@@ -59,11 +59,12 @@ body {
   position: relative;
   text-decoration: none;
   transition: all 250ms;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+  box-shadow: 0 .1em rgb(17, 17, 17);
+  text-shadow: -.025em .075em rgb(17, 17, 17);
 
   &:hover,
   &:focus {
-    background-color: #fb8332;
+    background-color: #ee6b1476;
     box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
   }
 
@@ -72,7 +73,7 @@ body {
   }
 
   &:active {
-    background-color: #c85000;
+    background-color: #fb9048;
     transform: translateY(0);
   }
 }
@@ -235,19 +236,30 @@ body {
     width: 100%;
     padding: 3em 0;
     background: $primaryGrey;
+    h1, h3 {
+      font-style: italic;
+      color: #fff;
+      text-shadow: -1px 0 0 $secondaryGrey, -3px 0 2px #000000;
+      margin: 0 .25em;
+    }
+
+    .generatedNamesList {
+      height: 100%;
+      ul {
+        margin: 1em;
+      }
+
+      h1 {
+        
+        margin: 0 4em;
+      }
+    }
 
     .generatedTableItem {
       display: flex;
       width: 100%;
       height: 100%;
       padding: 1em;
-
-      h1, h3 {
-        font-style: italic;
-        color: #fff;
-        text-shadow: -1px 0 0 $secondaryGrey, -3px 0 2px #000000;
-        margin: 0 .25em;
-      }
       
       .gameContainer {
         display: flex;
