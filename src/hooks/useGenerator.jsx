@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 
 
@@ -74,6 +74,7 @@ const useGenerator = () => {
         addTeamName,
         teamNameInput,
         setTeamNameInput,
+        setTeamNames,
         teamNames,
         generateRoundRobin,
         allGames,

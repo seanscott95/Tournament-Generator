@@ -7,6 +7,7 @@ const Generator = () => {
         teamNameInput,
         setTeamNameInput,
         teamNames,
+        setTeamNames,
         generateRoundRobin,
         allGames,
         removeTeamName
@@ -21,14 +22,19 @@ const Generator = () => {
                 setMessage(false);
             }, 3000);
             return;
-        }
+        };
         if (teamNames.filter(item => item !== null).length <= 2) {
             setMessage(true);
             setTimeout(() => {
                 setMessage(false);
             }, 3000);
             return;
-        }
+        };
+
+        if (teamNames % 2 !== 0) {
+            teamNames.splice(teamNames.length / 2, 0, 'Bye')
+        };
+
         generateRoundRobin();
     };
 
@@ -61,9 +67,9 @@ const Generator = () => {
                             {team === null ? <div>
                                 <p>X</p>
                             </div> :
-                            <div>
-                                <p onClick={(e) => removeTeamName(e)} value={team}>X</p>
-                            </div>
+                                <div>
+                                    <p onClick={(e) => removeTeamName(e)} value={team}>X</p>
+                                </div>
                             }
                         </li>
                     })}
@@ -96,7 +102,6 @@ const Generator = () => {
                         </div>
                     </div>
                 })}
-                {allGames && console.log('ag', allGames)}
             </section>
         </div>
     );
