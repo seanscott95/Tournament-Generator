@@ -4,6 +4,8 @@ const App = () => {
   return (
     <>
       <Generator />
+      <p className='m'>M</p>
+      
     </>
   )
 };

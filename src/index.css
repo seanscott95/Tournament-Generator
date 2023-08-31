@@ -15,11 +15,6 @@ html {
   background-attachment: fixed;
 }
 
-p, label {
-  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
-  text-shadow: -1px 1px 1px #000000;
-}
-
 body {
   height: 100%;
   width: 100%;
@@ -29,17 +24,26 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+p, label {
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+  text-shadow: -1px 1px 1px #000000;
+}
+
+.m {
+  visibility: hidden;
+}
+
 /* ------------ Mixins ------------ */
 /* --------------- Components --------------- */
 /* ---------- Generator ---------- */
 .generatorContainer {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background: #434343;
   box-shadow: 0px 3px 30px rgba(200, 200, 200, 0.1);
-  border-radius: 0.2em;
+  border-radius: 0.5em;
   margin: 1em;
   /* --- Generator Input Section --- */
   /* --- Generator Button Section --- */
@@ -230,8 +234,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  width: 100%;
-  padding: 3em 0;
+  width: 90%;
   background: #434343;
 }
 .generatorContainer .generatedTable h1, .generatorContainer .generatedTable h3 {
@@ -241,6 +244,7 @@ body {
   margin: 0 0.25em;
 }
 .generatorContainer .generatedTable .generatedNamesList {
+  padding-top: 1em;
   height: 100%;
 }
 .generatorContainer .generatedTable .generatedNamesList ul {
