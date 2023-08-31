@@ -1,4 +1,4 @@
-$fontSize: clamp(.7rem, 2.5vw + .5rem, 1.2rem);
+$fontSize: clamp(.7rem, 2vw + .5rem, 1.2rem);
 $lrgFontSize: clamp(1rem, 4vw + .5rem, 1.5rem);
 $h1FontSize: clamp(.7rem, 3vw + 1rem, 3rem);
 $h2FontSize: clamp(.7rem, 4vw + .5rem, 1.75rem);
@@ -32,6 +32,7 @@ html {
 
 p {
   font-size: $fontSize;
+  text-shadow: -1px 0 3px #000000;
 }
 
 body {
@@ -91,8 +92,8 @@ body {
   box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
 }
 
-/* ---------- Components ---------- */
-/* ----- Generator ----- */
+/* --------------- Components --------------- */
+/* ---------- Generator ---------- */
 .generatorContainer {
   height: 100vh;
   display: flex;
@@ -137,7 +138,7 @@ body {
     color: #fff;
     min-height: 4em;
   }
-
+  /* --- Generator Input Section --- */
   .inputGroupContainer {
     background: $secondaryGrey;
     border-top: 2px solid rgb(0,0,0,0.5);
@@ -173,6 +174,7 @@ body {
     }
   }
 
+  /* --- Generator Button Section --- */
   .generateBtnContainer {
     width: 100%;
     display: flex;
@@ -229,6 +231,7 @@ body {
     }
   }
 
+  /* --- Generator Table Section --- */
   .generatedTable {
     display: flex;
     flex-direction: column;
@@ -248,10 +251,29 @@ body {
       ul {
         margin: 1em;
       }
-
       h1 {
-        
         margin: 0 4em;
+      }
+    }
+
+    .toggleShowByesInputGrp {
+      width: 100%;
+      margin: 1em;
+      display: flex;
+      align-items: center;
+      gap: 1em;
+      color: #fff;
+      font-size: $fontSize;
+      label {
+        text-shadow: -1px 0 3px #000000;
+        margin-bottom: .025em;
+      }
+      input {
+        font-size: $h1FontSize;
+        accent-color: $primaryOrange;
+        width: .5em;
+        height: .5em;
+        max-width: 20px;
       }
     }
 
@@ -273,8 +295,12 @@ body {
         div {
           display: flex;
           flex-direction: column;
+          justify-content: center;
+          align-items: center;
           gap: .5em;
-
+          h3 {
+            width: 100%;
+          }
           p {
             border: 2px solid $primaryOrange;
             border-radius: .25em;

@@ -50,17 +50,6 @@ const Generator = () => {
         setIsChecked(prev => !prev);
     };
 
-    // if (!isChecked) {
-    //     console.log('allGames', allGames)
-        
-    //     setAllGames
-    // }
-
-    // console.log('allGames', allGames)
-    // console.log('allGamess', allGames.map(game => game.map(g => g.filter(el => el !== 'Bye')).filter((e) => e.length !== 1)))
-
-    // if ()
-
     return (
         <div className='generatorContainer'>
             <section className='heading'>
@@ -124,8 +113,8 @@ const Generator = () => {
                         </ul>
                     </div>
                 }
-                {
-                    <div>
+                {allGames.length >= 1 &&
+                    <div className='toggleShowByesInputGrp'>
                         <input
                             type="checkbox"
                             id="showByes"
@@ -133,7 +122,7 @@ const Generator = () => {
                             checked={isChecked}
                             onChange={handleShowByes}
                         />
-                        <label htmlFor="showBye"> Display matches with Byes</label>
+                        <label htmlFor="showByes"> Display matches with Byes</label>
                     </div>
                 }
                 {allGames && (isChecked ? allGames : listWithByesRemoved).map((game, index) => {
