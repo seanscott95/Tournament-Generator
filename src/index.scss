@@ -108,7 +108,6 @@ p, label {
   border-radius: .5em;
   margin: 1em;
   
-
   .leftBorder {
     border-left: 3px solid $primaryOrange;
     height: 2em;
@@ -244,7 +243,8 @@ p, label {
     display: flex;
     flex-direction: column;
     gap: .5em;
-    width: 90%;
+    width: 100%;
+    padding: .5em;
     background: $primaryGrey;
     
     h1, h3 {
@@ -266,7 +266,7 @@ p, label {
     }
 
     .toggleShowByesInputGrp {
-      width: 100%;
+      width: 85%;
       margin: 1em;
       display: flex;
       align-items: center;
@@ -289,7 +289,6 @@ p, label {
       display: flex;
       width: 100%;
       height: 100%;
-      padding: 1em;
       
       .gameContainer {
         display: flex;
@@ -341,6 +340,21 @@ p, label {
           }
         }
       }      
+    }
+  }
+}
+
+/* ---------- Media Queries ---------- */
+@media (max-width: 400px) {
+  .generatedTableItem {
+    flex-direction: column;
+    .leftBorder {
+      border: none;
+    }
+    & h1:first-of-type {
+      border-bottom: 3px solid $primaryOrange;
+      padding: .25em 0;
+      margin: .5em;
     }
   }
 }
