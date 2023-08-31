@@ -130,11 +130,13 @@ const Generator = () => {
                         <h1>ROUND {index + 1}</h1>
                         <div className='gameContainer leftBorder'>
                             {game.map((g, index) => {
-                                return <div>
+                                return <div className='gameItemCard'>
                                     <h3>Game {index + 1}</h3>
-                                    <p>{g[0]}</p>
-                                    <h1>VS</h1>
-                                    <p>{g[1]}</p>
+                                    <div>
+                                        <p>{g[0]}</p>
+                                        <h1>VS</h1>
+                                        <p>{g[1]}</p>
+                                    </div>
                                 </div>
                             })}
                         </div>

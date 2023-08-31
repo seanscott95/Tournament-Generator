@@ -30,9 +30,9 @@ html {
   background-attachment: fixed;
 }
 
-p {
+p, label {
   font-size: $fontSize;
-  text-shadow: -1px 0 3px #000000;
+  text-shadow: -1px 1px 1px #000000;
 }
 
 body {
@@ -127,6 +127,7 @@ body {
     align-items: center;
     gap: 1em;
     padding: 1em;
+    text-shadow: -1px 1px 1px #000000;
   }
 
   .errorMessage {
@@ -161,6 +162,7 @@ body {
         font-size: $h2FontSize;
         display: flex;
         justify-content: flex-end;
+
       }
   
       input {
@@ -170,6 +172,7 @@ body {
   
       button {
         @include button;
+        text-shadow: -1px 1px 1px #000000;
       }
     }
   }
@@ -265,7 +268,6 @@ body {
       color: #fff;
       font-size: $fontSize;
       label {
-        text-shadow: -1px 0 3px #000000;
         margin-bottom: .025em;
       }
       input {
@@ -288,33 +290,48 @@ body {
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        gap: .5em;
+        gap: 1em;
         height: 100%;
         width: 100%;
 
-        div {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          gap: .5em;
+        .gameItemCard {
           h3 {
             width: 100%;
-          }
-          p {
-            border: 2px solid $primaryOrange;
-            border-radius: .25em;
-            min-width: 5em;
-            text-align: center;
-            background: $secondaryGrey;
+            background: #1d1d1d;
+            padding: .5em;
+            border-top-left-radius: .5em;
+            border-top-right-radius: .5em;
+            margin: 0;
             color: $primaryOrange;
-            font-weight: 600;
-            padding: .5em 2em;
-            margin: 0 .25em;
-            width: fit-content;
-            min-width: 8em;
-            box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
-            text-shadow: -1px 0px 2px #000000;
+          }
+          div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: .5em;
+            background: #858585;
+            padding: .5em;
+            border-bottom-left-radius: .5em;
+            border-bottom-right-radius: .5em;
+            border: 1px solid #1d1d1d;
+            h1 {
+              color: $primaryOrange;
+            }
+            p {
+              border: 2px solid $primaryOrange;
+              border-radius: .25em;
+              min-width: 5em;
+              text-align: center;
+              background: #373737;
+              color: white;
+              font-weight: 600;
+              padding: .5em 2em;
+              margin: 0 .25em;
+              width: fit-content;
+              min-width: 8em;
+              box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
+            }
           }
         }
       }      
