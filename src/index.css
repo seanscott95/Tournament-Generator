@@ -229,10 +229,10 @@ a:hover {
   text-shadow: -1px 1px 1px #000000;
 }
 .generatorContainer .inputGroupContainer button:hover, .generatorContainer .inputGroupContainer button:focus {
-  background-color: #fe5b03;
+  background-color: #0084ff;
 }
 .generatorContainer .inputGroupContainer button:active {
-  background-color: #ffa30f;
+  background-color: #38caff;
   transform: translateY(0);
 }
 .generatorContainer .generateBtnContainer {
@@ -266,10 +266,10 @@ a:hover {
   max-width: 10em;
 }
 .generatorContainer .generateBtnContainer button:hover, .generatorContainer .generateBtnContainer button:focus {
-  background-color: #fe5b03;
+  background-color: #0084ff;
 }
 .generatorContainer .generateBtnContainer button:active {
-  background-color: #ffa30f;
+  background-color: #38caff;
   transform: translateY(0);
 }
 .generatorContainer ul {
