@@ -103,66 +103,70 @@ a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 .5em;
+  margin: 0 0.5em;
   text-align: center;
-  ul {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 95%;
-    margin: 1em;
-    gap: .5em;
-  }
   .heading {
     margin-top: 1em;
     font-size: $h1FontSize;
     color: white;
     text-decoration: none;
-    font-family:monospace;
+    font-family: monospace;
   }
-  /* Neon Button */
-  .customBtn {
-    color: #fff;
-    font-weight: 500;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    width: 10em;
-  }
-  .btnNeon {
-    background: $primaryOrange;
-    padding: 0;
-    border: none;
-    padding: .75em 1.5em;
-  }
-  .btnNeon:hover {
-    background: transparent;
-    color: $primaryOrange;
-  }
-  .btnNeon:before,
-  .btnNeon:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: .1em;
-    background: $primaryOrange;
-    width: 0;
-    box-shadow: 0 0 .2em $primaryOrange, 0 0 .2em $primaryOrange inset;
-    transition: 400ms ease all;
-  }
-  .btnNeon:after {
-    right: inherit;
-    top: inherit;
-    left: 0;
-    bottom: 0;
-  }
-  .btnNeon:hover:before,
-  .btnNeon:hover:after {
-    width: 100%;
-    transition: 800ms ease all;
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 97%;
+    margin: 1em;
+    gap: 0.5em;
+    li {
+      width: 100%;
+      /* Neon Button */
+      .customBtn {
+        color: #fff;
+        font-weight: 500;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        border-radius: 0.125em;
+      }
+      .btnNeon {
+        background: $primaryOrange;
+        padding: 0;
+        border: none;
+        padding: 0.75em 1.5em;
+      }
+      .btnNeon:hover {
+        background: transparent;
+        color: $primaryOrange;
+      }
+      .btnNeon:before,
+      .btnNeon:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 0.1em;
+        background: $primaryOrange;
+        width: 0;
+        box-shadow: 0 0 0.2em $primaryOrange, 0 0 0.2em $primaryOrange inset;
+        transition: 400ms ease all;
+      }
+      .btnNeon:after {
+        right: inherit;
+        top: inherit;
+        left: 0;
+        bottom: 0;
+      }
+      .btnNeon:hover:before,
+      .btnNeon:hover:after {
+        width: 100%;
+        transition: 800ms ease all;
+      }
+    }
   }
 }
 
@@ -430,9 +434,5 @@ a:hover {
 @media (max-width: 450px) {
   .navbar ul {
     flex-direction: column;
-    width: 100%;
-    .btnNeon, li {
-      width: 100%;
-    }
   }
 }

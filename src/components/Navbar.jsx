@@ -8,17 +8,17 @@ const Navbar = () => {
       </Link>
       <ul>
         <li>
-          <Link to='roundRobin'>
+          <Link to='/roundRobin'>
             <button className='btnNeon customBtn'>Round Robin</button>
           </Link>
         </li>
         <li>
-          <Link to='roundRobin'>
+          <Link to='/single'>
             <button className='btnNeon customBtn'>Single</button>
           </Link>
         </li>
         <li>
-          <Link to='roundRobin'>
+          <Link to='/double'>
             <button className='btnNeon customBtn'>Double</button>
           </Link>
         </li>

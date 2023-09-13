@@ -51,15 +51,6 @@ a:hover {
   justify-content: center;
   margin: 0 0.5em;
   text-align: center;
-  /* Neon Button */
-}
-.navbar ul {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 95%;
-  margin: 1em;
-  gap: 0.5em;
 }
 .navbar .heading {
   margin-top: 1em;
@@ -68,7 +59,19 @@ a:hover {
   text-decoration: none;
   font-family: monospace;
 }
-.navbar .customBtn {
+.navbar ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 97%;
+  margin: 1em;
+  gap: 0.5em;
+}
+.navbar ul li {
+  width: 100%;
+  /* Neon Button */
+}
+.navbar ul li .customBtn {
   color: #fff;
   font-weight: 500;
   background: transparent;
@@ -76,20 +79,21 @@ a:hover {
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
-  width: 10em;
+  width: 100%;
+  border-radius: 0.125em;
 }
-.navbar .btnNeon {
+.navbar ul li .btnNeon {
   background: #ff7300;
   padding: 0;
   border: none;
   padding: 0.75em 1.5em;
 }
-.navbar .btnNeon:hover {
+.navbar ul li .btnNeon:hover {
   background: transparent;
   color: #ff7300;
 }
-.navbar .btnNeon:before,
-.navbar .btnNeon:after {
+.navbar ul li .btnNeon:before,
+.navbar ul li .btnNeon:after {
   content: "";
   position: absolute;
   top: 0;
@@ -100,14 +104,14 @@ a:hover {
   box-shadow: 0 0 0.2em #ff7300, 0 0 0.2em #ff7300 inset;
   transition: 400ms ease all;
 }
-.navbar .btnNeon:after {
+.navbar ul li .btnNeon:after {
   right: inherit;
   top: inherit;
   left: 0;
   bottom: 0;
 }
-.navbar .btnNeon:hover:before,
-.navbar .btnNeon:hover:after {
+.navbar ul li .btnNeon:hover:before,
+.navbar ul li .btnNeon:hover:after {
   width: 100%;
   transition: 800ms ease all;
 }
@@ -422,9 +426,5 @@ a:hover {
 @media (max-width: 450px) {
   .navbar ul {
     flex-direction: column;
-    width: 100%;
-  }
-  .navbar ul .btnNeon, .navbar ul li {
-    width: 100%;
   }
 }/*# sourceMappingURL=index.css.map */
