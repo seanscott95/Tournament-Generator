@@ -6,13 +6,7 @@
 
 html {
   height: 100%;
-  --s: 50px;
-  --c: #191b22;
-  --_s: calc(2*var(--s)) calc(2*var(--s));
-  --_g: 35.36% 35.36% at;
-  --_c: #0000 66%, #20222a 68% 70%, #0000 72%;
-  background: radial-gradient(var(--_g) 100% 25%, var(--_c)) var(--s) var(--s)/var(--_s), radial-gradient(var(--_g) 0 75%, var(--_c)) var(--s) var(--s)/var(--_s), radial-gradient(var(--_g) 100% 25%, var(--_c)) 0 0/var(--_s), radial-gradient(var(--_g) 0 75%, var(--_c)) 0 0/var(--_s), repeating-conic-gradient(var(--c) 0 25%, rgba(0, 0, 0, 0) 0 50%) 0 0/var(--_s), radial-gradient(var(--_c)) 0 calc(var(--s) / 2)/var(--s) var(--s) var(--c);
-  background-attachment: fixed;
+  background: #0c0c0c;
 }
 
 body {
@@ -24,9 +18,23 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-p, label {
+p,
+label {
   font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
   text-shadow: -1px 1px 1px #000000;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .m {
@@ -35,6 +43,75 @@ p, label {
 
 /* ------------ Mixins ------------ */
 /* --------------- Components --------------- */
+/* ----------- Navbar ----------- */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.5em;
+  text-align: center;
+  /* Neon Button */
+}
+.navbar ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 95%;
+  margin: 1em;
+  gap: 0.5em;
+}
+.navbar .heading {
+  margin-top: 1em;
+  font-size: clamp(0.7rem, 3vw + 1rem, 2.5rem);
+  color: white;
+  text-decoration: none;
+  font-family: monospace;
+}
+.navbar .customBtn {
+  color: #fff;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  width: 10em;
+}
+.navbar .btnNeon {
+  background: #ff7300;
+  padding: 0;
+  border: none;
+  padding: 0.75em 1.5em;
+}
+.navbar .btnNeon:hover {
+  background: transparent;
+  color: #ff7300;
+}
+.navbar .btnNeon:before,
+.navbar .btnNeon:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 0.1em;
+  background: #ff7300;
+  width: 0;
+  box-shadow: 0 0 0.2em #ff7300, 0 0 0.2em #ff7300 inset;
+  transition: 400ms ease all;
+}
+.navbar .btnNeon:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+.navbar .btnNeon:hover:before,
+.navbar .btnNeon:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+}
+
 /* ---------- Generator ---------- */
 .generatorContainer {
   display: flex;
@@ -50,7 +127,7 @@ p, label {
   /* --- Generator Table Section --- */
 }
 .generatorContainer .leftBorder {
-  border-left: 3px solid #FF7300;
+  border-left: 3px solid #ff7300;
   height: 2em;
   margin: 0.25em;
 }
@@ -59,7 +136,7 @@ p, label {
 }
 .generatorContainer h1 {
   text-align: center;
-  color: #FF7300;
+  color: #ff7300;
 }
 .generatorContainer .heading {
   color: #fff;
@@ -97,7 +174,7 @@ p, label {
 }
 .generatorContainer .inputGroupContainer div label {
   font-weight: bold;
-  color: #FF7300;
+  color: #ff7300;
   padding-left: 0.5em;
   font-size: clamp(0.7rem, 4vw + 0.5rem, 1.75rem);
   display: flex;
@@ -108,7 +185,7 @@ p, label {
   width: 40vmin;
 }
 .generatorContainer .inputGroupContainer div button {
-  background-color: #FF7300;
+  background-color: #ff7300;
   border: 1px solid transparent;
   border-radius: 0.25rem;
   color: #fff;
@@ -148,7 +225,7 @@ p, label {
   border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 }
 .generatorContainer .generateBtnContainer button {
-  background-color: #FF7300;
+  background-color: #ff7300;
   border: 1px solid transparent;
   border-radius: 0.25rem;
   color: #fff;
@@ -196,8 +273,8 @@ p, label {
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #FF7300;
-  border: 2px solid #FF7300;
+  color: #ff7300;
+  border: 2px solid #ff7300;
   border-radius: 0.25rem;
   height: 2em;
   background: #676767;
@@ -214,8 +291,8 @@ p, label {
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #FF7300;
-  border: 2px solid #FF7300;
+  color: #ff7300;
+  border: 2px solid #ff7300;
   border-radius: 0.25rem;
   height: 2em;
   background: #676767;
@@ -226,7 +303,7 @@ p, label {
   transition: all 0.2s ease-in-out;
 }
 .generatorContainer ul li div:nth-child(2) p:hover {
-  color: #FF0000;
+  color: #ff0000;
   cursor: pointer;
   transform: scale(1.25);
 }
@@ -238,7 +315,8 @@ p, label {
   padding: 0.5em;
   background: #434343;
 }
-.generatorContainer .generatedTable h1, .generatorContainer .generatedTable h3 {
+.generatorContainer .generatedTable h1,
+.generatorContainer .generatedTable h3 {
   font-style: italic;
   color: #fff;
   text-shadow: -1px 0 0 #676767, -3px 0 2px #000000;
@@ -267,8 +345,8 @@ p, label {
   margin-bottom: 0.025em;
 }
 .generatorContainer .generatedTable .toggleShowByesInputGrp input {
-  font-size: clamp(0.7rem, 3vw + 1rem, 3rem);
-  accent-color: #FF7300;
+  font-size: clamp(0.7rem, 3vw + 1rem, 2.5rem);
+  accent-color: #ff7300;
   width: 0.5em;
   height: 0.5em;
   max-width: 20px;
@@ -294,7 +372,7 @@ p, label {
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
   margin: 0;
-  color: #FF7300;
+  color: #ff7300;
 }
 .generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard div {
   display: flex;
@@ -309,10 +387,10 @@ p, label {
   border: 1px solid #1d1d1d;
 }
 .generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard div h1 {
-  color: #FF7300;
+  color: #ff7300;
 }
 .generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard div p {
-  border: 2px solid #FF7300;
+  border: 2px solid #ff7300;
   border-radius: 0.25em;
   min-width: 5em;
   text-align: center;
@@ -336,8 +414,17 @@ p, label {
     border: none;
   }
   .generatedTableItem h1:first-of-type {
-    border-bottom: 3px solid #FF7300;
+    border-bottom: 3px solid #ff7300;
     padding: 0.25em 0;
     margin: 0.5em;
+  }
+}
+@media (max-width: 450px) {
+  .navbar ul {
+    flex-direction: column;
+    width: 100%;
+  }
+  .navbar ul .btnNeon, .navbar ul li {
+    width: 100%;
   }
 }/*# sourceMappingURL=index.css.map */

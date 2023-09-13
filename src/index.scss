@@ -1,10 +1,10 @@
-$fontSize: clamp(.7rem, 2vw + .5rem, 1.2rem);
-$lrgFontSize: clamp(1rem, 4vw + .5rem, 1.5rem);
-$h1FontSize: clamp(.7rem, 3vw + 1rem, 3rem);
-$h2FontSize: clamp(.7rem, 4vw + .5rem, 1.75rem);
-$primaryOrange: #FF7300;
+$fontSize: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+$lrgFontSize: clamp(1rem, 4vw + 1rem, 1.5rem);
+$h1FontSize: clamp(0.7rem, 3vw + 1rem, 2.5rem);
+$h2FontSize: clamp(0.7rem, 4vw + 0.5rem, 1.75rem);
+$primaryOrange: #ff7300;
 $secondaryOrange: #fa6400;
-$primaryGrey:  #434343;
+$primaryGrey: #434343;
 $secondaryGrey: #676767;
 
 * {
@@ -15,19 +15,7 @@ $secondaryGrey: #676767;
 
 html {
   height: 100%;
-  --s: 50px;
-  --c: #191b22;
-  --_s: calc(2*var(--s)) calc(2*var(--s));
-  --_g: 35.36% 35.36% at;
-  --_c: #0000 66%, #20222a 68% 70%, #0000 72%;
-  background:
-    radial-gradient(var(--_g) 100% 25%, var(--_c)) var(--s) var(--s)/var(--_s),
-    radial-gradient(var(--_g) 0 75%, var(--_c)) var(--s) var(--s)/var(--_s),
-    radial-gradient(var(--_g) 100% 25%, var(--_c)) 0 0/var(--_s),
-    radial-gradient(var(--_g) 0 75%, var(--_c)) 0 0/var(--_s),
-    repeating-conic-gradient(var(--c) 0 25%, #0000 0 50%) 0 0/var(--_s),
-    radial-gradient(var(--_c)) 0 calc(var(--s)/2)/var(--s) var(--s) var(--c);
-  background-attachment: fixed;
+  background: #0c0c0c;
 }
 
 body {
@@ -39,9 +27,20 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-p, label {
+p,
+label {
   font-size: $fontSize;
   text-shadow: -1px 1px 1px #000000;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+a:hover {
+  text-decoration: underline;
 }
 // Margin for bottom of page
 .m {
@@ -52,20 +51,21 @@ p, label {
 @mixin button {
   background-color: $primaryOrange;
   border: 1px solid transparent;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   color: #fff;
   cursor: pointer;
-  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: system-ui, -apple-system, system-ui, 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
   font-size: $fontSize;
   font-weight: 600;
   justify-content: center;
   line-height: 1.25;
-  padding: .3em 1em;
+  padding: 0.3em 1em;
   position: relative;
   text-decoration: none;
   transition: all 250ms;
-  box-shadow: 0 .1em rgb(17, 17, 17);
-  text-shadow: -.025em .075em rgb(17, 17, 17);
+  box-shadow: 0 0.1em rgb(17, 17, 17);
+  text-shadow: -0.025em 0.075em rgb(17, 17, 17);
 
   &:hover,
   &:focus {
@@ -90,28 +90,97 @@ p, label {
   text-align: center;
   color: $primaryOrange;
   border: 2px solid $primaryOrange;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   height: 2em;
   background: $secondaryGrey;
   box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
 }
 
 /* --------------- Components --------------- */
+/* ----------- Navbar ----------- */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 .5em;
+  text-align: center;
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 95%;
+    margin: 1em;
+    gap: .5em;
+  }
+  .heading {
+    margin-top: 1em;
+    font-size: $h1FontSize;
+    color: white;
+    text-decoration: none;
+    font-family:monospace;
+  }
+  /* Neon Button */
+  .customBtn {
+    color: #fff;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    width: 10em;
+  }
+  .btnNeon {
+    background: $primaryOrange;
+    padding: 0;
+    border: none;
+    padding: .75em 1.5em;
+  }
+  .btnNeon:hover {
+    background: transparent;
+    color: $primaryOrange;
+  }
+  .btnNeon:before,
+  .btnNeon:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: .1em;
+    background: $primaryOrange;
+    width: 0;
+    box-shadow: 0 0 .2em $primaryOrange, 0 0 .2em $primaryOrange inset;
+    transition: 400ms ease all;
+  }
+  .btnNeon:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+  }
+  .btnNeon:hover:before,
+  .btnNeon:hover:after {
+    width: 100%;
+    transition: 800ms ease all;
+  }
+}
+
 /* ---------- Generator ---------- */
 .generatorContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: $primaryGrey;  
+  background: $primaryGrey;
   box-shadow: 0px 3px 30px rgba(200, 200, 200, 0.1);
-  border-radius: .5em;
+  border-radius: 0.5em;
   margin: 1em;
-  
+
   .leftBorder {
     border-left: 3px solid $primaryOrange;
     height: 2em;
-    margin: .25em;
+    margin: 0.25em;
   }
 
   section {
@@ -146,9 +215,9 @@ p, label {
   /* --- Generator Input Section --- */
   .inputGroupContainer {
     background: $secondaryGrey;
-    border-top: 2px solid rgb(0,0,0,0.5);
-    border-bottom: 2px solid rgb(0,0,0,0.5);
-    padding: .5em 0;
+    border-top: 2px solid rgb(0, 0, 0, 0.5);
+    border-bottom: 2px solid rgb(0, 0, 0, 0.5);
+    padding: 0.5em 0;
 
     div {
       display: flex;
@@ -158,22 +227,21 @@ p, label {
       gap: 1em;
       width: 100%;
       height: 100%;
-  
+
       label {
         font-weight: bold;
         color: $primaryOrange;
-        padding-left: .5em;
+        padding-left: 0.5em;
         font-size: $h2FontSize;
         display: flex;
         justify-content: flex-end;
-
       }
-  
+
       input {
         line-height: 1.75;
         width: 40vmin;
       }
-  
+
       button {
         @include button;
         text-shadow: -1px 1px 1px #000000;
@@ -189,9 +257,9 @@ p, label {
     align-items: center;
     background: $secondaryGrey;
     padding: 1em 0;
-    border-top: 2px solid rgb(0,0,0,0.5);
-    border-bottom: 2px solid rgb(0,0,0,0.5);
-    
+    border-top: 2px solid rgb(0, 0, 0, 0.5);
+    border-bottom: 2px solid rgb(0, 0, 0, 0.5);
+
     button {
       @include button;
       font-size: $h2FontSize;
@@ -205,11 +273,11 @@ p, label {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: .25em;
+      gap: 0.25em;
       font-size: $fontSize;
 
       &:not(:last-child) {
-        margin-bottom: .25em;
+        margin-bottom: 0.25em;
       }
 
       div:first-child {
@@ -225,12 +293,12 @@ p, label {
         @include teamNameListItem;
 
         p {
-          margin: .5em;
-          transition: all .2s ease-in-out;
+          margin: 0.5em;
+          transition: all 0.2s ease-in-out;
         }
 
         p:hover {
-          color: #FF0000;
+          color: #ff0000;
           cursor: pointer;
           transform: scale(1.25);
         }
@@ -242,16 +310,17 @@ p, label {
   .generatedTable {
     display: flex;
     flex-direction: column;
-    gap: .5em;
+    gap: 0.5em;
     width: 100%;
-    padding: .5em;
+    padding: 0.5em;
     background: $primaryGrey;
-    
-    h1, h3 {
+
+    h1,
+    h3 {
       font-style: italic;
       color: #fff;
       text-shadow: -1px 0 0 $secondaryGrey, -3px 0 2px #000000;
-      margin: 0 .25em;
+      margin: 0 0.25em;
     }
 
     .generatedNamesList {
@@ -274,13 +343,13 @@ p, label {
       color: #fff;
       font-size: $fontSize;
       label {
-        margin-bottom: .025em;
+        margin-bottom: 0.025em;
       }
       input {
         font-size: $h1FontSize;
         accent-color: $primaryOrange;
-        width: .5em;
-        height: .5em;
+        width: 0.5em;
+        height: 0.5em;
         max-width: 20px;
       }
     }
@@ -289,7 +358,7 @@ p, label {
       display: flex;
       width: 100%;
       height: 100%;
-      
+
       .gameContainer {
         display: flex;
         justify-content: center;
@@ -303,9 +372,9 @@ p, label {
           h3 {
             width: 100%;
             background: #1d1d1d;
-            padding: .5em;
-            border-top-left-radius: .5em;
-            border-top-right-radius: .5em;
+            padding: 0.5em;
+            border-top-left-radius: 0.5em;
+            border-top-right-radius: 0.5em;
             margin: 0;
             color: $primaryOrange;
           }
@@ -314,32 +383,32 @@ p, label {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: .5em;
+            gap: 0.5em;
             background: #858585;
-            padding: .5em;
-            border-bottom-left-radius: .5em;
-            border-bottom-right-radius: .5em;
+            padding: 0.5em;
+            border-bottom-left-radius: 0.5em;
+            border-bottom-right-radius: 0.5em;
             border: 1px solid #1d1d1d;
             h1 {
               color: $primaryOrange;
             }
             p {
               border: 2px solid $primaryOrange;
-              border-radius: .25em;
+              border-radius: 0.25em;
               min-width: 5em;
               text-align: center;
               background: #373737;
               color: white;
               font-weight: 600;
-              padding: .5em 2em;
-              margin: 0 .25em;
+              padding: 0.5em 2em;
+              margin: 0 0.25em;
               width: fit-content;
               min-width: 8em;
               box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
             }
           }
         }
-      }      
+      }
     }
   }
 }
@@ -353,8 +422,17 @@ p, label {
     }
     & h1:first-of-type {
       border-bottom: 3px solid $primaryOrange;
-      padding: .25em 0;
-      margin: .5em;
+      padding: 0.25em 0;
+      margin: 0.5em;
+    }
+  }
+}
+@media (max-width: 450px) {
+  .navbar ul {
+    flex-direction: column;
+    width: 100%;
+    .btnNeon, li {
+      width: 100%;
     }
   }
 }
