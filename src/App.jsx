@@ -1,13 +1,11 @@
-import Generator from './components/Generator';
+import TournamentLayout from './layouts/TournamentLayout';
 
 const App = () => {
   return (
     <>
-      <Generator />
-      <p className='m'>M</p>
-      
+      <TournamentLayout />      
     </>
-  )
+  );
 };
 
 export default App;

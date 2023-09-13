@@ -2,7 +2,7 @@ import { useState } from "react";
 
 
 
-const useGenerator = () => {
+const useRRGenerator = () => {
     const [teamNameInput, setTeamNameInput] = useState('');
     const [teamNames, setTeamNames] = useState([null, null, null]);
     const [allGames, setAllGames] = useState([]);
@@ -87,4 +87,4 @@ const useGenerator = () => {
     };
 };
 
-export default useGenerator;
+export default useRRGenerator;

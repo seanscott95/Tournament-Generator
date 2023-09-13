@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useGenerator from '../hooks/useGenerator';
+import useGenerator from '../hooks/useRRGenerator';
 
 const Generator = () => {
     const {
