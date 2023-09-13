@@ -60,7 +60,7 @@ const Generator = () => {
         <p>To get started enter your team names in the input below:</p>
       </section>
       <section className="inputGroupContainer">
-        <div className="leftBorder">
+        <div className="inputGroup">
           <label htmlFor="teams"><FontAwesomeIcon className="icon" icon={faUserGroup} />TEAM:</label>
           <input
             type="text"
@@ -69,8 +69,8 @@ const Generator = () => {
             value={teamNameInput}
             onChange={(e) => setTeamNameInput(e.target.value)}
           />
-          <button onClick={addTeamName}>ADD</button>
         </div>
+        <button onClick={addTeamName}>ADD</button>
       </section>
       <section>
         <ul>
