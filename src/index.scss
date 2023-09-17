@@ -81,6 +81,43 @@ a:hover {
   }
 }
 
+@mixin neonButton {
+  /* Neon Button */
+  & {
+    background: $primaryColor;
+    padding: 0;
+    border: none;
+    padding: 0.75em 1.5em;
+  }
+  &:hover {
+    background: transparent;
+    color: $primaryColor;
+  }
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 0.1em;
+    background: $primaryColor;
+    width: 0;
+    box-shadow: 0 0 0.2em $primaryColor, 0 0 0.2em $primaryColor inset;
+    transition: 400ms ease all;
+  }
+  &:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+  }
+  &:hover:before,
+  &:hover:after {
+    width: 100%;
+    transition: 800ms ease all;
+  }
+}
+
 @mixin teamNameListItem {
   display: flex;
   justify-content: center;
@@ -119,13 +156,13 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 97%;
+    width: 100%;
     margin: 1em;
     gap: 0.5em;
     li {
       width: 100%;
-      /* Neon Button */
       .customBtn {
+        @include neonButton;
         color: #fff;
         font-weight: 500;
         background: transparent;
@@ -135,39 +172,6 @@ a:hover {
         display: inline-block;
         width: 100%;
         border-radius: 0.125em;
-      }
-      .btnNeon {
-        background: $primaryColor;
-        padding: 0;
-        border: none;
-        padding: 0.75em 1.5em;
-      }
-      .btnNeon:hover {
-        background: transparent;
-        color: $primaryColor;
-      }
-      .btnNeon:before,
-      .btnNeon:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 0.1em;
-        background: $primaryColor;
-        width: 0;
-        box-shadow: 0 0 0.2em $primaryColor, 0 0 0.2em $primaryColor inset;
-        transition: 400ms ease all;
-      }
-      .btnNeon:after {
-        right: inherit;
-        top: inherit;
-        left: 0;
-        bottom: 0;
-      }
-      .btnNeon:hover:before,
-      .btnNeon:hover:after {
-        width: 100%;
-        transition: 800ms ease all;
       }
     }
   }

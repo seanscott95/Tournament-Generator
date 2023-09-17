@@ -71,15 +71,15 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 97%;
+  width: 100%;
   margin: 1em;
   gap: 0.5em;
 }
 .navbar ul li {
   width: 100%;
-  /* Neon Button */
 }
 .navbar ul li .customBtn {
+  /* Neon Button */
   color: #fff;
   font-weight: 500;
   background: transparent;
@@ -90,18 +90,17 @@ a:hover {
   width: 100%;
   border-radius: 0.125em;
 }
-.navbar ul li .btnNeon {
+.navbar ul li .customBtn {
   background: #21c1fa;
   padding: 0;
   border: none;
   padding: 0.75em 1.5em;
 }
-.navbar ul li .btnNeon:hover {
+.navbar ul li .customBtn:hover {
   background: transparent;
   color: #21c1fa;
 }
-.navbar ul li .btnNeon:before,
-.navbar ul li .btnNeon:after {
+.navbar ul li .customBtn:before, .navbar ul li .customBtn:after {
   content: "";
   position: absolute;
   top: 0;
@@ -112,14 +111,13 @@ a:hover {
   box-shadow: 0 0 0.2em #21c1fa, 0 0 0.2em #21c1fa inset;
   transition: 400ms ease all;
 }
-.navbar ul li .btnNeon:after {
+.navbar ul li .customBtn:after {
   right: inherit;
   top: inherit;
   left: 0;
   bottom: 0;
 }
-.navbar ul li .btnNeon:hover:before,
-.navbar ul li .btnNeon:hover:after {
+.navbar ul li .customBtn:hover:before, .navbar ul li .customBtn:hover:after {
   width: 100%;
   transition: 800ms ease all;
 }
