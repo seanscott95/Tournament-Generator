@@ -173,6 +173,32 @@ a:hover {
   }
 }
 
+/* ---------- Homepage ---------- */
+.homepage {
+  color: #fff;
+  margin: 5vmin 1em;
+  .infoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3em 0;
+    ul {
+      font-size: $fontSize;
+      color: rgb(177, 177, 177);
+      li {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        margin: 1em
+      }
+    }
+    img {
+      width: 50%;
+      height: auto;
+    }
+  }
+}
+
 /* ---------- Generator ---------- */
 .generatorContainer {
   display: flex;
@@ -469,5 +495,10 @@ a:hover {
   }
   .inputGroupContainer {
     flex-wrap: wrap;
+  }
+}
+@media (max-width: 600px) {
+  .infoContainer {
+    flex-direction: column-reverse;
   }
 }

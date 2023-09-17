@@ -124,6 +124,32 @@ a:hover {
   transition: 800ms ease all;
 }
 
+/* ---------- Homepage ---------- */
+.homepage {
+  color: #fff;
+  margin: 5vmin 1em;
+}
+.homepage .infoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3em 0;
+}
+.homepage .infoContainer ul {
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+  color: rgb(177, 177, 177);
+}
+.homepage .infoContainer ul li {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin: 1em;
+}
+.homepage .infoContainer img {
+  width: 50%;
+  height: auto;
+}
+
 /* ---------- Generator ---------- */
 .generatorContainer {
   display: flex;
@@ -462,5 +488,10 @@ a:hover {
   }
   .inputGroupContainer {
     flex-wrap: wrap;
+  }
+}
+@media (max-width: 600px) {
+  .infoContainer {
+    flex-direction: column-reverse;
   }
 }/*# sourceMappingURL=index.css.map */
