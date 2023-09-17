@@ -1,30 +1,15 @@
-import { useState, useEffect } from 'react';
-import useRRGenerator from '../hooks/useRRGenerator';
+import { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 
 const DisplayMatches = () => {
-  // const {
-  //   allGames,
-  //   generatedNamesList,
-  // } = useRRGenerator();
   const allGames = JSON.parse(localStorage.getItem('allGames'));
-  console.log('oiiiiiii', allGames)
   const generatedNamesList = JSON.parse(localStorage.getItem('generatedNamesList'));
-  console.log('fffff', generatedNamesList)
 
-  let h;
+  const allGamesByesRemoved = allGames.map(game => game.map(g => g.filter(el => el !== 'Bye')).filter((e) => e.length !== 1));
 
-  useEffect(() => {
-    h = allGames;
-    console.log('h', h)
-  },[allGames]);
-
-  console.log('gNL', generatedNamesList)
-  console.log('allGames', allGames[0][0])
-
-  const listWithByesRemoved = allGames?.map(game => game.map(g => g.filter(el => el !== 'Bye')).filter((e) => e.length !== 1));
+  const namesListByesRemoved = generatedNamesList.filter(el => el !== 'Bye');
 
   const [isChecked, setIsChecked] = useState(true);
   const handleShowByes = () => {
@@ -48,7 +33,7 @@ const DisplayMatches = () => {
             </ul>
             <ul>
               {generatedNamesList &&
-                generatedNamesList.map((team, index) => {
+                namesListByesRemoved.map((team, index) => {
                   return (
                     <li className="teamAdded leftBorder" key={team + index}>
                       <div className="teamNameText">
@@ -73,7 +58,7 @@ const DisplayMatches = () => {
           </div>
         )}
         {allGames &&
-          (isChecked ? allGames : listWithByesRemoved).map((game, index) => {
+          (isChecked ? allGames : allGamesByesRemoved).map((game, index) => {
             return (
               <div className="generatedTableItem ">
                 <h1>ROUND {index + 1}</h1>

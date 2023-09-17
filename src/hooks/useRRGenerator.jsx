@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import capitaliseFirstLetter from '../helper/capitaliseFirstLetter';
 
 const useRRGenerator = () => {
     const [teamNameInput, setTeamNameInput] = useState('');
@@ -10,6 +11,7 @@ const useRRGenerator = () => {
         if (teamNameInput.length === 0) {
             return;
         };
+        const capTeamNameInput = capitaliseFirstLetter(teamNameInput);
 
         const hasNull = teamNames[teamNames.length - 1] === null;
         if (hasNull) {
@@ -19,20 +21,20 @@ const useRRGenerator = () => {
                 let diff = 3 - count;
                 
                 if (diff === 3) {
-                    setTeamNames([teamNameInput, null, null]);
+                    setTeamNames([capTeamNameInput, null, null]);
                 };
                 if (diff === 2) {
-                    setTeamNames((prev) => [...prev.filter((item) => item !== null), teamNameInput, null]);
+                    setTeamNames((prev) => [...prev.filter((item) => item !== null), capTeamNameInput, null]);
                 };
                 if (diff === 1) {
-                    setTeamNames((prev) => [...prev.filter((item) => item !== null), teamNameInput]);
+                    setTeamNames((prev) => [...prev.filter((item) => item !== null), capTeamNameInput]);
                 };
                 setTeamNameInput('');
                 return;
             };
         };
 
-        setTeamNames((prev) => [...prev, teamNameInput]);
+        setTeamNames((prev) => [...prev, capTeamNameInput]);
         setTeamNameInput('');
     };
 
@@ -47,7 +49,7 @@ const useRRGenerator = () => {
     const generateRoundRobin = () => {
         localStorage.removeItem('allGames');
         localStorage.removeItem('generatedNamesList');
-        
+
         let teamArr = teamNames;
         const length = teamArr.length;
 

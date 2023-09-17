@@ -1,5 +1,5 @@
 import useGenerator from '../hooks/useRRGenerator';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGroup } from '@fortawesome/free-solid-svg-icons';
@@ -15,6 +15,16 @@ const TeamInputGroup = ({ setIsGenerated }) => {
     removeTeamName,
     setGeneratedNamesList,
   } = useGenerator();
+
+  // If user has previous data in local storage, data will render for
+  // the list of team names that can be inputted
+  const gNL = JSON.parse(localStorage.getItem('generatedNamesList'));
+  useEffect(() => {
+    if (gNL !== null) {
+      let list = gNL.filter(el => el !== 'Bye');
+      setTeamNames(list);
+    };
+  },[]);
 
   const [message, setMessage] = useState(false);
 
