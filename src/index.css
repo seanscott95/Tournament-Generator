@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  height: 100%;
+  height: calc(100vh - 48px);
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
@@ -122,6 +122,21 @@ a:hover {
 .navbar ul li .btnNeon:hover:after {
   width: 100%;
   transition: 800ms ease all;
+}
+
+/* ----------- Footer ----------- */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  max-width: 1000px;
+  margin: 1em 0;
+  padding: 0.5em 0;
+  border-bottom: 3px solid #21c1fa;
+  border-top: 3px solid #21c1fa;
+  color: #c7c7c7;
+  text-align: center;
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
 }
 
 /* ---------- Homepage ---------- */

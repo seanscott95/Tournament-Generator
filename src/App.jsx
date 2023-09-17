@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Homepage from './components/Homepage';
 import RRGenerator from './components/RRGenerator';
 import SingleGenerator from './components/SingleGenerator';
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/double" element={<DoubleGenerator />} />
         </Routes>
         <p className="m">Margin</p>
+        <Footer />
       </Router>
     </>
   );
