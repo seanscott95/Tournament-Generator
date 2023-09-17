@@ -1,13 +1,10 @@
-import { useState } from "react";
-
-
+import { useState, useRef } from "react";
 
 const useRRGenerator = () => {
     const [teamNameInput, setTeamNameInput] = useState('');
     const [teamNames, setTeamNames] = useState([null, null, null]);
     const [allGames, setAllGames] = useState([]);
     const [generatedNamesList, setGeneratedNamesList] = useState([]);
-    const listWithByesRemoved = allGames?.map(game => game.map(g => g.filter(el => el !== 'Bye')).filter((e) => e.length !== 1));
 
     const addTeamName = () => {
         if (teamNameInput.length === 0) {
@@ -48,6 +45,9 @@ const useRRGenerator = () => {
 
     // Generates a round robin tournament array
     const generateRoundRobin = () => {
+        localStorage.removeItem('allGames');
+        localStorage.removeItem('generatedNamesList');
+        
         let teamArr = teamNames;
         const length = teamArr.length;
 
@@ -70,6 +70,8 @@ const useRRGenerator = () => {
         };
         
         setAllGames(allMatches);
+        localStorage.setItem('allGames', JSON.stringify(allMatches))
+        localStorage.setItem('generatedNamesList', JSON.stringify(teamNames))
     };
 
     return {
@@ -83,7 +85,6 @@ const useRRGenerator = () => {
         removeTeamName,
         setGeneratedNamesList,
         generatedNamesList,
-        listWithByesRemoved
     };
 };
 
