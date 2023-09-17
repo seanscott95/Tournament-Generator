@@ -1,4 +1,4 @@
-# Total Golf [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# Tournament Generator [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Links
 - [GitHub](https://github.com/seanscott95/round-robin-generator)
