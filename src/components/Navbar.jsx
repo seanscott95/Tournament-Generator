@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
 
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrophy, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+
 const Navbar = () => {
   return (
     <nav className='navbar'>
       <Link to='/' className='heading'>
-        <h1 >TOURNAMENT GENERATOR</h1>
+        <h1 >TOURNAMENT <FontAwesomeIcon className="icon" icon={faTrophy} /> GENERATOR</h1>
       </Link>
       <ul>
         <li>

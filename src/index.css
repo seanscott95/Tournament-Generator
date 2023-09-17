@@ -12,7 +12,7 @@ html {
 body {
   height: 100%;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -52,15 +52,20 @@ a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 0.5em;
   text-align: center;
+  margin: 1em;
 }
 .navbar .heading {
-  margin-top: 1em;
-  font-size: clamp(0.7rem, 3vw + 1rem, 2.5rem);
+  margin-top: 0.5em;
+  font-size: clamp(0.7rem, 3vw + 0.75rem, 2.5rem);
   color: white;
   text-decoration: none;
   font-family: monospace;
+  width: 100%;
+}
+.navbar .heading h1 {
+  border: 3px solid #21c1fa;
+  padding: 0.25em;
 }
 .navbar ul {
   display: flex;
@@ -374,7 +379,7 @@ a:hover {
   margin-bottom: 0.025em;
 }
 .generatorContainer .generatedTable .toggleShowByesInputGrp input {
-  font-size: clamp(0.7rem, 3vw + 1rem, 2.5rem);
+  font-size: clamp(0.7rem, 3vw + 0.75rem, 2.5rem);
   accent-color: #21c1fa;
   width: 0.5em;
   height: 0.5em;
