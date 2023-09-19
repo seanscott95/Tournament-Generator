@@ -7,6 +7,8 @@ $primaryOrange: #ff7300;
 $secondaryOrange: #fa6400;
 $primaryGrey: #434343;
 $secondaryGrey: #676767;
+$primaryBackground: #0c0c0c;
+
 
 * {
   margin: 0;
@@ -16,7 +18,7 @@ $secondaryGrey: #676767;
 
 html {
   height: calc(100vh - 48px);
-  background: #0c0c0c;
+  background: $primaryBackground;
 }
 
 body {
@@ -81,11 +83,6 @@ a:hover {
   &:hover,
   &:focus {
     background-color: #0084ff;
-  }
-
-  &:active {
-    background-color: #38caff;
-    transform: translateY(0);
   }
 }
 
@@ -160,6 +157,7 @@ a:hover {
       padding: .25em;
     }
   }
+  // NavLinks
   ul {
     display: flex;
     align-items: center;
@@ -180,6 +178,16 @@ a:hover {
         display: inline-block;
         width: 100%;
         border-radius: 0.125em;
+      }
+      // Active NavLink styles
+      .active > button {
+        background:$primaryBackground;
+        color: $primaryColor;
+        border: .125em solid $primaryColor;
+        border-radius: 0.125em;
+      }
+      .active > button:hover {
+        border: .125em solid $primaryBackground;
       }
     }
   }

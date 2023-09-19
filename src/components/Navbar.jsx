@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,19 +12,24 @@ const Navbar = () => {
       </Link>
       <ul>
         <li>
-          <Link to='/roundRobin'>
+          <NavLink
+            to='/roundRobin'
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "active" : ""
+            }
+          >
             <button className='btnNeon customBtn'>Round Robin</button>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to='/single'>
+          <NavLink to='/single'>
             <button className='btnNeon customBtn'>Single</button>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to='/double'>
+          <NavLink to='/double'>
             <button className='btnNeon customBtn'>Double</button>
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </nav>
