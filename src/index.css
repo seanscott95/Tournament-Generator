@@ -240,34 +240,6 @@ a:hover {
   align-items: center;
   gap: 1em;
 }
-.generatorContainer .inputGroupContainer .inputGroup {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
-  height: 100%;
-}
-.generatorContainer .inputGroupContainer .inputGroup .icon {
-  margin: 0.25em;
-  font-size: clamp(1rem, 4vw + 1rem, 1.5rem);
-}
-.generatorContainer .inputGroupContainer .inputGroup label {
-  font-weight: bold;
-  color: #21c1fa;
-  padding-left: 0.5em;
-  font-size: clamp(1rem, 4vw + 1rem, 1.5rem);
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-.generatorContainer .inputGroupContainer .inputGroup input {
-  line-height: 2.5;
-  width: 100%;
-  border-radius: 0.25em;
-  border: none;
-  padding: 0 1em;
-  margin-right: 0.5em;
-}
 .generatorContainer .inputGroupContainer button {
   background-color: #21c1fa;
   border: 1px solid transparent;
@@ -287,9 +259,40 @@ a:hover {
   text-shadow: -0.025em 0.075em rgb(17, 17, 17);
   line-height: 1.1;
   text-shadow: -1px 1px 1px #000000;
+  margin: 0 0.5em;
+  width: 100%;
+  max-width: 20vmin;
 }
 .generatorContainer .inputGroupContainer button:hover, .generatorContainer .inputGroupContainer button:focus {
   background-color: #0084ff;
+}
+.generatorContainer .inputGroupContainer .inputGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  height: 100%;
+  width: 100%;
+}
+.generatorContainer .inputGroupContainer .inputGroup .icon {
+  margin: 0.25em;
+  font-size: clamp(0.7rem, 3vw + 0.5rem, 1.75rem);
+}
+.generatorContainer .inputGroupContainer .inputGroup label {
+  font-weight: bold;
+  color: #21c1fa;
+  padding-left: 0.5em;
+  font-size: clamp(0.7rem, 3vw + 0.5rem, 1.75rem);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.generatorContainer .inputGroupContainer .inputGroup input {
+  width: 100%;
+  border-radius: 0.25em;
+  border: none;
+  margin-right: 0.5em;
+  padding: 0.625em;
 }
 .generatorContainer .generateBtnContainer {
   width: 100%;
@@ -318,7 +321,7 @@ a:hover {
   transition: all 250ms;
   box-shadow: 0 0.1em rgb(17, 17, 17);
   text-shadow: -0.025em 0.075em rgb(17, 17, 17);
-  font-size: clamp(0.7rem, 4vw + 0.5rem, 1.75rem);
+  font-size: clamp(0.7rem, 3vw + 0.5rem, 1.75rem);
   max-width: 10em;
 }
 .generatorContainer .generateBtnContainer button:hover, .generatorContainer .generateBtnContainer button:focus {
@@ -395,23 +398,26 @@ a:hover {
   height: 100%;
   width: 100%;
 }
+.generatorContainer .generatedTable .generatedNamesList ul {
+  margin: 1em;
+}
 .generatorContainer .generatedTable .generatedNamesList .tournamentInfo {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75em;
   width: 100%;
-  padding: 0;
+  padding: 0 0.5em;
   margin: 1em 0;
 }
 .generatorContainer .generatedTable .generatedNamesList .tournamentInfo li {
-  font-size: clamp(1rem, 4vw + 1rem, 1.5rem);
+  font-size: clamp(0.7rem, 3vw + 0.5rem, 1.75rem);
   display: flex;
   gap: 0.5em;
   color: #fff;
   text-shadow: -1px 1px 1px #000000;
-}
-.generatorContainer .generatedTable .generatedNamesList ul {
-  margin: 1em;
+  margin: 0;
 }
 .generatorContainer .generatedTable .toggleShowByesInputGrp {
   width: 85%;
@@ -472,6 +478,7 @@ a:hover {
 }
 .generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard div h1 {
   color: #21c1fa;
+  margin: 0;
 }
 .generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard div p {
   border: 2px solid #21c1fa;
@@ -502,6 +509,12 @@ a:hover {
     padding: 0.25em 0;
     margin: 0.5em;
   }
+  .generatorContainer .heading h1 {
+    font-size: 1rem;
+  }
+  .generatorContainer .heading p {
+    font-size: 0.75rem;
+  }
 }
 @media (max-width: 450px) {
   .navbar ul {
@@ -509,6 +522,10 @@ a:hover {
   }
   .inputGroupContainer {
     flex-wrap: wrap;
+  }
+  .inputGroupContainer button {
+    margin: 0 2em;
+    min-width: 90%;
   }
 }
 @media (max-width: 600px) {
