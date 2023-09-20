@@ -466,6 +466,9 @@ a:hover {
             h3 {
               color: $primaryColor;
             }
+            .icon {
+              font-size: $fontSize;
+            }
           }
           .cardBody {
             display: flex;

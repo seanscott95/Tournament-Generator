@@ -469,6 +469,9 @@ a:hover {
 .generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardHeading h3 {
   color: #21c1fa;
 }
+.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardHeading .icon {
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+}
 .generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody {
   display: flex;
   flex-direction: column;

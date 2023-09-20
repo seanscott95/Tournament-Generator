@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrophy, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import { faTrophy, faUserGroup, faArrowRotateRight } from '@fortawesome/free-solid-svg-icons';
 
 const TournamentKeeper = () => {
   // Retrieves all the games from local storage
@@ -41,8 +41,8 @@ const TournamentKeeper = () => {
     });
   };
 
-  const allGamesObj = arrToObjLayout(allGames);
-  const allGamesNoByesObj = arrToObjLayout(allGamesNoByes);
+  let allGamesObj = arrToObjLayout(allGames);
+  let allGamesNoByesObj = arrToObjLayout(allGamesNoByes);
 
 
   // Toggles the display matches with byes checkbox
@@ -64,10 +64,8 @@ const TournamentKeeper = () => {
     e.target.classList.add('winner');
   };
 
-
   // Refreshes who the winner and completed values of the selected game
-  const refreshCardWinner = (e) => {
-    const game = e.target.value;
+  const refreshCardWinner = (game) => {
     allGamesObj[game - 1].winner = '';
     allGamesObj[game - 1].completed = false;
 
@@ -132,9 +130,12 @@ const TournamentKeeper = () => {
                     {game.player1 === 'Bye' || game.player2 === 'Bye' ? (
                       <></>
                     ) : (
-                      <button onClick={refreshCardWinner} value={gameNumber}>
-                        Refresh
-                      </button>
+                      <FontAwesomeIcon
+                        className="icon"
+                        icon={faArrowRotateRight}
+                        onClick={() => refreshCardWinner(gameNumber)}
+                        value={gameNumber}
+                      />
                     )}
                   </div>
                   <div className="cardBody">
