@@ -1,22 +1,31 @@
 import { useState, useEffect } from 'react';
+import useRRGenerator from '../hooks/useRRGenerator';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrophy, faUserGroup, faArrowRotateRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTrophy,
+  faUserGroup,
+  faArrowRotateRight,
+} from '@fortawesome/free-solid-svg-icons';
 
 const TournamentKeeper = () => {
+  const { generateSingleElimination, setTeamNames } = useRRGenerator();
+
+  let round = 1;
   // Retrieves all the games from local storage
-  const allGames = JSON.parse(localStorage.getItem('allGamesSingle'));
+  // const allGames = JSON.parse(localStorage.getItem('allGamesSingle'));
+  let allGames = JSON.parse(localStorage.getItem('allGamesSingle'));
   // Removes all games with byes in them
-  const allGamesNoByes = allGames
+  let allGamesNoByes = allGames
     .map((g) => g.filter((el) => el !== 'Bye'))
     .filter((e) => e.length !== 1);
 
   // Retrieves the list of team names from local storage
-  const generatedNamesList = JSON.parse(
+  let generatedNamesList = JSON.parse(
     localStorage.getItem('generatedNamesList')
   );
   // Removes the byes from the list
-  const namesListNoByes = generatedNamesList.filter((el) => el !== 'Bye');
+  let namesListNoByes = generatedNamesList.filter((el) => el !== 'Bye');
 
   // Formats the arr to an object to be used in the jsx
   const arrToObjLayout = (arr) => {
@@ -44,7 +53,6 @@ const TournamentKeeper = () => {
   let allGamesObj = arrToObjLayout(allGames);
   let allGamesNoByesObj = arrToObjLayout(allGamesNoByes);
 
-
   // Toggles the display matches with byes checkbox
   const [isChecked, setIsChecked] = useState(true);
   const handleShowByes = () => {
@@ -55,9 +63,9 @@ const TournamentKeeper = () => {
   const handleClickForWinner = (e, winner, game) => {
     // If there is already a winner exit function
     if (allGamesObj[game - 1].winner !== '') return;
-    
+
     // Sets the allGamesObj object for the particular game to
-    // completed is true, the winning team 
+    // completed is true, the winning team
     allGamesObj[game - 1].winner = winner;
     allGamesObj[game - 1].completed = true;
     // Adds the class of winner to the event element
@@ -74,9 +82,33 @@ const TournamentKeeper = () => {
     teamNameEl.forEach((game) => game.classList.remove('winner'));
   };
 
+  const handleNextRound = () => {
+    const winners = allGamesObj.filter((e) => e.completed === true);
+
+    // Checks to see if all games are completedallGamesObj.length === winners.length)
+    if (allGamesObj.length === winners.length) {
+      const winningTeams = winners.map((el) => el.winner);
+      // localStorage.setItem(JSON.stringify(`SR${round}`, allGamesObj));
+      generateSingleElimination(round, winningTeams);
+      round++;
+    };
+  };
+
   useEffect(() => {
     console.log('useEFfect allgo', allGamesObj);
-  }, [allGamesObj]);
+    allGames = JSON.parse(localStorage.getItem('allGamesSingle'));
+  
+    allGamesNoByes = allGames
+      .map((g) => g.filter((el) => el !== 'Bye'))
+      .filter((e) => e.length !== 1);
+
+    generatedNamesList = JSON.parse(
+      localStorage.getItem('generatedNamesList')
+    );
+    namesListNoByes = generatedNamesList.filter((el) => el !== 'Bye');
+    allGamesObj = arrToObjLayout(allGames);
+    allGamesNoByesObj = arrToObjLayout(allGamesNoByes);
+  }, [allGamesObj, generateSingleElimination]);
 
   return (
     <section className="generatedTable">
@@ -166,8 +198,9 @@ const TournamentKeeper = () => {
             </div>
           );
         })}
-      <button>NEXT ROUND</button>
-      <br />
+        <div className='nextRoundBtnContainer'>
+          <button onClick={handleNextRound}>NEXT ROUND</button>
+        </div>
     </section>
   );
 };

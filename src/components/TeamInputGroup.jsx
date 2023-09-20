@@ -52,9 +52,11 @@ const TeamInputGroup = ({ setIsGenerated }) => {
 
     setGeneratedNamesList([...teamNames]);
 
-    if (teamNames % 2 !== 0) {
+    if (teamNames.length % 2 !== 0) {
       if (!teamNames.includes('Bye')) {
-        teamNames.splice(teamNames.length / 2, 0, 'Bye');
+        if (location.pathname === '/roundRobin') {
+          teamNames.splice(teamNames.length / 2, 0, 'Bye');
+        }
       };
     };
 

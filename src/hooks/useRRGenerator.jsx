@@ -76,74 +76,43 @@ const useRRGenerator = () => {
         localStorage.setItem('generatedNamesList', JSON.stringify(teamNames))
     };
 
-    const generateSingleElimination = () => {
-        localStorage.removeItem('allGamesSingle');
-        localStorage.removeItem('generatedNamesList');
+    const generateSingleElimination = (round = 1, winningTeams = null) => {
+        
+        if (winningTeams?.length === 1) {
+            console.log('WE HAVE A WINNER, END OF GAME')
+            return;
+        }
+        if (round === 1) {
+            localStorage.removeItem('allGamesSingle');
+            localStorage.removeItem('generatedNamesList');
+        };
+
+        if (teamNames.length % 2 !== 0) {
+            if (!teamNames.includes('Bye')) {
+                teamNames.push('Bye');
+            };
+        };
 
         let teamArr = teamNames;
-        const length = teamArr.length;
+        if (winningTeams !== null) {
+            teamArr = winningTeams
+        };
 
-        let rounds = 1;
         let allMatches = [];
-
-        // while (rounds <= length - 1) {
-        //     let gamesObj = [];
-
-        //     let halfOfTeamArr = teamArr.slice(0, length / 2);
-        //     halfOfTeamArr.forEach((team, index) => {
-        //         gamesObj.push([team, teamArr[length - 1 - index]]);
-        //     });
-
-        //     teamArr.splice(1, 0, teamArr[length - 1]);
-        //     teamArr.pop();
-
-        //     rounds++
-        //     allMatches.push(gamesObj);
-        // };
         
         // Randomise order
         teamArr.sort(() => Math.random() - 0.5)
-        // Match people teams in pairs
-        // calculate rounds
+        // Match teams into pairs
         const gamesObj = teamArr.map((team, index) => {
             if (index % 2 === 0) {
                 return [team, teamArr[index + 1]]
             };
-            return null;
         });
-        const filteredGames = gamesObj.filter((game) => game !== null);
-        console.log('gamesObj', gamesObj);
-
-        allMatches.push(filteredGames);
-
-
-        // while (rounds <= length - 1) {
-        //     let gamesObj = [];
-
-        //     let halfOfTeamArr = teamArr.slice(0, length / 2);
-        //     halfOfTeamArr.forEach((team, index) => {
-        //         gamesObj.push([team, teamArr[length - 1 - index]]);
-        //     });
-
-        //     teamArr.splice(1, 0, teamArr[length - 1]);
-        //     teamArr.pop();
-
-        //     rounds++
-        //     allMatches.push(gamesObj);
-        // };
-        // if only two people left or on last round, stop
-        // return those
-        console.log('teamArr', teamArr)
-        console.log('teamArr2', teamArr)
-
-        // wait for input response
-        // save response for later
-        // take losers of teamArr
-        // match people
-        // return the new games
-        // repeat until two players
+        const filteredGames = gamesObj.filter((game) => game !== undefined);
         
+        allMatches.push(filteredGames);
         setAllGames(allMatches);
+
         localStorage.setItem('allGamesSingle', JSON.stringify(...allMatches));
         localStorage.setItem('generatedNamesList', JSON.stringify(teamNames));
     };
