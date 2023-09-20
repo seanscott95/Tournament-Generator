@@ -14,6 +14,17 @@ const TournamentKeeper = () => {
   const namesListByesRemoved = generatedNamesList.filter((el) => el !== 'Bye');
 
   let allGamesObj = allGames.map((game, index) => {
+    console.log('test', game);
+    if (game[0] === 'Bye' || game[1] === 'Bye') {
+      const winner = game[0] === 'Bye' ? game[1] : game[0];
+      return {
+        game: index + 1,
+        player1: game[0],
+        player2: game[1],
+        winner: winner,
+        completed: true,
+      };
+    }
     return {
       game: index + 1,
       player1: game[0],
@@ -69,87 +80,95 @@ const TournamentKeeper = () => {
   }, [allGamesObj]);
 
   return (
-      <section className="generatedTable">
-        {generatedNamesList.length !== 0 && (
-          <div className="generatedNamesList">
-            <ul className="tournamentInfo">
-              <li>
-                <FontAwesomeIcon className="icon" icon={faTrophy} />
-                Round Robin
-              </li>
-              <li>
-                <FontAwesomeIcon className="icon" icon={faUserGroup} />
-                {namesListByesRemoved.length} Teams
-              </li>
-            </ul>
-            <ul>
-              {generatedNamesList &&
-                namesListByesRemoved.map((team, index) => {
-                  return (
-                    <li className="teamAdded leftBorder" key={team + index}>
-                      <div className="teamNameText">
-                        <p>{team}</p>
-                      </div>
-                    </li>
-                  );
-                })}
-            </ul>
-          </div>
-        )}
-        {allGamesObj.length >= 1 && (
-          <div className="toggleShowByesInputGrp">
-            <input
-              type="checkbox"
-              id="showByes"
-              name="showByes"
-              checked={isChecked}
-              onChange={handleShowByes}
-            />
-            <label htmlFor="showByes"> Display matches with Byes</label>
-          </div>
-        )}
-        {allGamesObj &&
-          (isChecked ? allGamesObj : allGamesByesRemovesObj).map(
-            (game, index) => {
-              const gameNumber = game.game;
-              return (
-                <div className="generatedTableItem" key={index}>
-                  <div className="gameContainer leftBorder">
-                    <div className="gameItemCard">
-                      <div className="cardHeading">
-                        <h3>Game {gameNumber}</h3>
+    <section className="generatedTable">
+      {generatedNamesList.length !== 0 && (
+        <div className="generatedNamesList">
+          <ul className="tournamentInfo">
+            <li>
+              <FontAwesomeIcon className="icon" icon={faTrophy} />
+              Round Robin
+            </li>
+            <li>
+              <FontAwesomeIcon className="icon" icon={faUserGroup} />
+              {namesListByesRemoved.length} Teams
+            </li>
+          </ul>
+          <ul>
+            {generatedNamesList &&
+              namesListByesRemoved.map((team, index) => {
+                return (
+                  <li className="teamAdded leftBorder" key={team + index}>
+                    <div className="teamNameText">
+                      <p>{team}</p>
+                    </div>
+                  </li>
+                );
+              })}
+          </ul>
+        </div>
+      )}
+      {allGamesObj.length >= 1 && (
+        <div className="toggleShowByesInputGrp">
+          <input
+            type="checkbox"
+            id="showByes"
+            name="showByes"
+            checked={isChecked}
+            onChange={handleShowByes}
+          />
+          <label htmlFor="showByes"> Display matches with Byes</label>
+        </div>
+      )}
+      {allGamesObj &&
+        (isChecked ? allGamesObj : allGamesByesRemovesObj).map(
+          (game, index) => {
+            const gameNumber = game.game;
+            return (
+              <div className="generatedTableItem" key={index}>
+                <div className="gameContainer leftBorder">
+                  <div className="gameItemCard">
+                    <div className="cardHeading">
+                      <h3>Game {gameNumber}</h3>
+                      {game.player1 === 'Bye' || game.player2 === 'Bye' ? (
+                        <></>
+                      ) : (
                         <button onClick={refreshCardWinner} value={gameNumber}>
                           Refresh
                         </button>
-                      </div>
-                      <div className="cardBody">
-                        <p
-                          onClick={(e) =>
-                            handleClickForWinner(e, game.player1, gameNumber)
-                          }
-                          className={`game${gameNumber}`}
-                        >
-                          {game.player1}
-                        </p>
-                        <h1>VS</h1>
-                        <p
-                          onClick={(e) =>
-                            handleClickForWinner(e, game.player2, gameNumber)
-                          }
-                          className={`game${gameNumber}`}
-                        >
-                          {game.player2}
-                        </p>
-                      </div>
+                      )}
+                    </div>
+                    <div className="cardBody">
+                      <p
+                        onClick={(e) =>
+                          handleClickForWinner(e, game.player1, gameNumber)
+                        }
+                        className={`game${gameNumber} ${
+                          game.winner === game.player1 ? 'winner' : ''
+                        }`}
+                      >
+                        {game.player1}
+                      </p>
+                      <h1>VS</h1>
+                      <p
+                        onClick={(e) =>
+                          handleClickForWinner(e, game.player2, gameNumber)
+                        }
+                        className={`game${gameNumber} ${
+                          game.winner === game.player2 ? 'winner' : ''
+                        }`}
+                      >
+                        {game.player2}
+                      </p>
                     </div>
                   </div>
                 </div>
-              );
-            }
-          )}
-        <button>NEXT ROUND</button>
-        <br />
-      </section>
+              </div>
+            );
+          }
+        )}
+      <button>NEXT ROUND</button>
+      <br />
+    </section>
   );
 };
 
