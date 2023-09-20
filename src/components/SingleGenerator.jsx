@@ -1,15 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import TeamInputGroup from './TeamInputGroup';
 import TournamentKeeper from './TournamentKeeper';
 
 const SingleGenerator = () => {
   const [isGenerated, setIsGenerated] = useState(false);
-  console.log('isG', isGenerated)
-
-  useEffect(() => {
-
-  }, [])
 
   return (
     <>
