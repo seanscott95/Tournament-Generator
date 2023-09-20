@@ -28,7 +28,7 @@ const DisplayMatches = () => {
               </li>
               <li>
                 <FontAwesomeIcon className="icon" icon={faUserGroup} />
-                {generatedNamesList.length} Teams
+                {namesListByesRemoved.length} Teams
               </li>
             </ul>
             <ul>
@@ -66,8 +66,10 @@ const DisplayMatches = () => {
                   {game.map((g, index) => {
                     return (
                       <div className="gameItemCard">
-                        <h3>Game {index + 1}</h3>
-                        <div>
+                        <div className='cardHeading'>
+                          <h3>Game {index + 1}</h3>
+                        </div>
+                        <div className='cardBody'>
                           <p>{g[0]}</p>
                           <h1>VS</h1>
                           <p>{g[1]}</p>
