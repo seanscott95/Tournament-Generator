@@ -1,10 +1,14 @@
-import useGenerator from '../hooks/useRRGenerator';
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom'
+import useGenerator from '../hooks/useRRGenerator';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGroup } from '@fortawesome/free-solid-svg-icons';
 
 const TeamInputGroup = ({ setIsGenerated }) => {
+
+  const location = useLocation();
+
   const {
     addTeamName,
     teamNameInput,
@@ -14,6 +18,8 @@ const TeamInputGroup = ({ setIsGenerated }) => {
     generateRoundRobin,
     removeTeamName,
     setGeneratedNamesList,
+    generateSingleElimination,
+    generateDoubleElimination,
   } = useGenerator();
 
   // If user has previous data in local storage, data will render for
@@ -47,10 +53,15 @@ const TeamInputGroup = ({ setIsGenerated }) => {
     setGeneratedNamesList([...teamNames]);
 
     if (teamNames % 2 !== 0) {
-      teamNames.splice(teamNames.length / 2, 0, 'Bye');
+      if (!teamNames.includes('Bye')) {
+        teamNames.splice(teamNames.length / 2, 0, 'Bye');
+      };
     };
 
-    generateRoundRobin();
+    if (location.pathname === '/roundRobin') generateRoundRobin();
+    if (location.pathname === '/single') generateSingleElimination();
+    if (location.pathname === '/double') generateDoubleElimination();
+
     setTeamNames([null, null, null]);
     setIsGenerated(true);
   };

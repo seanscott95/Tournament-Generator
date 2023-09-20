@@ -243,22 +243,18 @@ a:hover {
   box-shadow: 0px 3px 30px rgba(200, 200, 200, 0.1);
   border-radius: 0.25em;
   margin: 1em;
- 
   .leftBorder {
     border-left: 3px solid $primaryColor;
     height: 2em;
     margin: 0.25em;
   }
-
   section {
     width: 100%;
   }
-
   h1 {
     text-align: center;
     color: $primaryColor;
   }
-
   .heading {
     color: #fff;
     padding: 1em;
@@ -267,7 +263,6 @@ a:hover {
       margin-top: 1em;
     }
   }
-
   .errorMessageSection {
     display: flex;
     flex-direction: column;
@@ -458,16 +453,21 @@ a:hover {
         height: 100%;
         width: 100%;
         .gameItemCard {
-          h3 {
+          .cardHeading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             width: 100%;
             background: #1d1d1d;
             padding: 0.5em;
             border-top-left-radius: 0.5em;
             border-top-right-radius: 0.5em;
             margin: 0;
-            color: $primaryColor;
+            h3 {
+              color: $primaryColor;
+            }
           }
-          div {
+          .cardBody {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -478,6 +478,10 @@ a:hover {
             border-bottom-left-radius: 0.5em;
             border-bottom-right-radius: 0.5em;
             border: 1px solid #1d1d1d;
+            .winner {
+              border: 1px solid greenyellow;
+              color: greenyellow;
+            }
             h1 {
               color: $primaryColor;
               margin: 0;

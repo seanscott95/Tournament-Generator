@@ -12,12 +12,14 @@ const App = () => {
     <>
       <Router>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/roundRobin" element={<RRGenerator />} />
-          <Route path="/single" element={<SingleGenerator />} />
-          <Route path="/double" element={<DoubleGenerator />} />
-        </Routes>
+        <div className="generatorContainer">
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/roundRobin" element={<RRGenerator />} />
+            <Route path="/single" element={<SingleGenerator />} />
+            <Route path="/double" element={<DoubleGenerator />} />
+          </Routes>
+        </div>
         <p className="m">Margin</p>
         <Footer />
       </Router>

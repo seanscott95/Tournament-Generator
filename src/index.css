@@ -455,16 +455,21 @@ a:hover {
   height: 100%;
   width: 100%;
 }
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard h3 {
+.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   background: #1d1d1d;
   padding: 0.5em;
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
   margin: 0;
+}
+.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardHeading h3 {
   color: #21c1fa;
 }
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard div {
+.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -476,11 +481,15 @@ a:hover {
   border-bottom-right-radius: 0.5em;
   border: 1px solid #1d1d1d;
 }
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard div h1 {
+.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody .winner {
+  border: 1px solid greenyellow;
+  color: greenyellow;
+}
+.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody h1 {
   color: #21c1fa;
   margin: 0;
 }
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard div p {
+.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody p {
   border: 2px solid #21c1fa;
   border-radius: 0.25em;
   min-width: 5em;
