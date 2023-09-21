@@ -468,6 +468,9 @@ a:hover {
             }
             .icon {
               font-size: $fontSize;
+              &:hover {
+                cursor: pointer;
+              }
             }
           }
           .cardBody {
@@ -502,6 +505,9 @@ a:hover {
               width: fit-content;
               min-width: 8em;
               box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
+              &:hover {
+                cursor: pointer;
+              }
             }
           }
         }
