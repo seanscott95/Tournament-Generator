@@ -9,7 +9,10 @@ const RRGenerator = () => {
     <>
       <section className="heading">
         <h1>Welcome to the Round Robin Generator!!</h1>
-        <p>To get started enter your team names in the input below:</p>
+        <ol>
+          <li>To get started enter your team names in the input below</li>
+          <li>Once finished click the Generate button to start tournament</li>
+        </ol>
       </section>
       <section>
         { isGenerated

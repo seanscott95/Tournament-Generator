@@ -28,7 +28,7 @@ body {
 p,
 label {
   font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
-  text-shadow: -1px 1px 1px #000000;
+  text-shadow: -0.05em 0.05em 0.05em #000000;
 }
 
 li {
@@ -208,10 +208,17 @@ a:hover {
 .generatorContainer .heading {
   color: #fff;
   padding: 1em;
-  text-shadow: -1px 1px 1px #000000;
+  text-shadow: -0.05em 0.05em 0.05em #000000;
 }
-.generatorContainer .heading p {
-  margin-top: 1em;
+.generatorContainer .heading ol {
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+  margin: 1em 5%;
+  width: 95%;
+}
+.generatorContainer .heading ol li {
+  list-style: decimal;
+  margin: 0.5em 0;
+  font-size: 0.9em;
 }
 .generatorContainer .errorMessageSection {
   display: flex;
@@ -220,6 +227,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   color: #fff;
+  min-height: 3em;
 }
 .generatorContainer .errorMessageSection .errorMessage p {
   background: red;
@@ -276,13 +284,13 @@ a:hover {
 }
 .generatorContainer .inputGroupContainer .inputGroup .icon {
   margin: 0.25em;
-  font-size: clamp(0.7rem, 3vw + 0.5rem, 1.75rem);
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.75rem);
 }
 .generatorContainer .inputGroupContainer .inputGroup label {
   font-weight: bold;
   color: #21c1fa;
   padding-left: 0.5em;
-  font-size: clamp(0.7rem, 3vw + 0.5rem, 1.75rem);
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.75rem);
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -321,7 +329,7 @@ a:hover {
   transition: all 250ms;
   box-shadow: 0 0.1em rgb(17, 17, 17);
   text-shadow: -0.025em 0.075em rgb(17, 17, 17);
-  font-size: clamp(0.7rem, 3vw + 0.5rem, 1.75rem);
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.75rem);
   max-width: 10em;
 }
 .generatorContainer .generateBtnContainer button:hover, .generatorContainer .generateBtnContainer button:focus, .generatorContainer .nextRoundBtnContainer button:hover, .generatorContainer .nextRoundBtnContainer button:focus {
@@ -403,18 +411,17 @@ a:hover {
 }
 .generatorContainer .generatedTable .generatedNamesList .tournamentInfo {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  text-align: center;
   gap: 0.75em;
   width: 100%;
-  padding: 0 0.5em;
-  margin: 1em 0;
+  margin: 0.25em;
 }
 .generatorContainer .generatedTable .generatedNamesList .tournamentInfo li {
-  font-size: clamp(0.7rem, 3vw + 0.5rem, 1.75rem);
-  display: flex;
-  gap: 0.5em;
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.75rem);
+  width: 100%;
+  gap: 0.75em;
   color: #fff;
   text-shadow: -1px 1px 1px #000000;
   margin: 0;

@@ -10,6 +10,7 @@ import {
 
 const TournamentKeeper = () => {
   const { generateSingleElimination, setTeamNames } = useRRGenerator();
+  const [message, setMessage] = useState('');
 
   let round = 1;
   // Retrieves all the games from local storage
@@ -84,6 +85,13 @@ const TournamentKeeper = () => {
 
   const handleNextRound = () => {
     const winners = allGamesObj.filter((e) => e.completed === true);
+    if (allGamesObj.length !== winners.length) {
+      setMessage(true);
+      setTimeout(() => {
+        setMessage(false);
+      }, 3000);
+      return;
+    }
 
     // Checks to see if all games are completedallGamesObj.length === winners.length)
     if (allGamesObj.length === winners.length) {
@@ -91,20 +99,18 @@ const TournamentKeeper = () => {
       // localStorage.setItem(JSON.stringify(`SR${round}`, allGamesObj));
       generateSingleElimination(round, winningTeams);
       round++;
-    };
+    }
   };
 
   useEffect(() => {
     console.log('useEFfect allgo', allGamesObj);
     allGames = JSON.parse(localStorage.getItem('allGamesSingle'));
-  
+
     allGamesNoByes = allGames
       .map((g) => g.filter((el) => el !== 'Bye'))
       .filter((e) => e.length !== 1);
 
-    generatedNamesList = JSON.parse(
-      localStorage.getItem('generatedNamesList')
-    );
+    generatedNamesList = JSON.parse(localStorage.getItem('generatedNamesList'));
     namesListNoByes = generatedNamesList.filter((el) => el !== 'Bye');
     allGamesObj = arrToObjLayout(allGames);
     allGamesNoByesObj = arrToObjLayout(allGamesNoByes);
@@ -198,9 +204,14 @@ const TournamentKeeper = () => {
             </div>
           );
         })}
-        <div className='nextRoundBtnContainer'>
+      <section className="errorMessageSection">
+        <div className="errorMessage">
+          {message && <p>Please make sure all games are completed</p>}
+        </div>
+        <div className="nextRoundBtnContainer">
           <button onClick={handleNextRound}>NEXT ROUND</button>
         </div>
+      </section>
     </section>
   );
 };
