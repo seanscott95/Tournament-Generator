@@ -77,6 +77,9 @@ const useRRGenerator = () => {
     };
 
     const generateSingleElimination = (round = 1, winningTeams = null) => {
+        let teamArr = teamNames;
+        let allMatches = [];
+
         if (round === 1) {
             localStorage.removeItem('allGamesSingle');
             localStorage.removeItem('generatedNamesList');
@@ -91,9 +94,6 @@ const useRRGenerator = () => {
         if (winningTeams !== null) {
             teamArr = winningTeams;
         };
-        
-        let teamArr = teamNames;
-        let allMatches = [];
         
         // Randomise order
         teamArr.sort(() => Math.random() - 0.5)
