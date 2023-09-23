@@ -8,8 +8,8 @@ import {
   faArrowRotateRight,
 } from '@fortawesome/free-solid-svg-icons';
 
-const TournamentKeeper = () => {
-  const { generateSingleElimination, setTeamNames } = useRRGenerator();
+const TournamentKeeper = ({ setTournamentOver }) => {
+  const { generateSingleElimination } = useRRGenerator();
   const [message, setMessage] = useState('');
 
   let round = 1;
@@ -91,15 +91,30 @@ const TournamentKeeper = () => {
         setMessage(false);
       }, 3000);
       return;
-    }
+    };
 
-    // Checks to see if all games are completedallGamesObj.length === winners.length)
+    // Checks to see if all games are completed
     if (allGamesObj.length === winners.length) {
       const winningTeams = winners.map((el) => el.winner);
+      // Ends the tournament
+      if (winningTeams.length === 1) {
+        setTournamentOver(true);
+        return;
+      };
       // localStorage.setItem(JSON.stringify(`SR${round}`, allGamesObj));
+      if (winningTeams.length % 2 !== 0) {
+        if (!winningTeams.includes('Bye')) {
+          winningTeams.push('Bye');
+        };
+      };
+
+      // Removes all winner classes from current game cards
+      const teamNameEl = document.querySelectorAll('.cardBody p');
+      teamNameEl.forEach((game) => game.classList.remove('winner'));
+
       generateSingleElimination(round, winningTeams);
       round++;
-    }
+    };
   };
 
   useEffect(() => {
@@ -123,7 +138,7 @@ const TournamentKeeper = () => {
           <ul className="tournamentInfo">
             <li>
               <FontAwesomeIcon className="icon" icon={faTrophy} />
-              Round Robin
+              Single Elimination
             </li>
             <li>
               <FontAwesomeIcon className="icon" icon={faUserGroup} />
@@ -195,7 +210,7 @@ const TournamentKeeper = () => {
                       className={`game${gameNumber} ${
                         game.winner === game.player2 ? 'winner' : ''
                       }`}
-                    >
+                      >
                       {game.player2}
                     </p>
                   </div>

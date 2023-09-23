@@ -5,6 +5,7 @@ import TournamentKeeper from './TournamentKeeper';
 
 const SingleGenerator = () => {
   const [isGenerated, setIsGenerated] = useState(false);
+  const [tournamentOver, setTournamentOver] = useState(false);
 
   return (
     <>
@@ -19,10 +20,13 @@ const SingleGenerator = () => {
         </ol>
       </section>
       <section>
-        {isGenerated
-          ? <TournamentKeeper />
+        {isGenerated && !tournamentOver
+          ? <TournamentKeeper setTournamentOver={setTournamentOver} />
           : <TeamInputGroup setIsGenerated={setIsGenerated} />
         }
+      </section>
+      <section>
+        {tournamentOver && <>Game Over</>}
       </section>
     </>
   );

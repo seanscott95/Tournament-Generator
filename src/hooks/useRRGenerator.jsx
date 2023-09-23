@@ -67,37 +67,32 @@ const useRRGenerator = () => {
             teamArr.splice(1, 0, teamArr[length - 1]);
             teamArr.pop();
 
-            rounds++
+            rounds++;
             allMatches.push(gamesObj);
         };
         
         setAllGames(allMatches);
-        localStorage.setItem('allGames', JSON.stringify(allMatches))
-        localStorage.setItem('generatedNamesList', JSON.stringify(teamNames))
+        localStorage.setItem('allGames', JSON.stringify(allMatches));
+        localStorage.setItem('generatedNamesList', JSON.stringify(teamNames));
     };
 
     const generateSingleElimination = (round = 1, winningTeams = null) => {
-        
-        if (winningTeams?.length === 1) {
-            console.log('WE HAVE A WINNER, END OF GAME')
-            return;
-        }
         if (round === 1) {
             localStorage.removeItem('allGamesSingle');
             localStorage.removeItem('generatedNamesList');
         };
-
-        if (teamNames.length % 2 !== 0) {
-            if (!teamNames.includes('Bye')) {
-                teamNames.push('Bye');
+        
+        if (teamArr.length % 2 !== 0) {
+            if (!teamArr.includes('Bye')) {
+                teamArr.push('Bye');
             };
         };
-
-        let teamArr = teamNames;
+        
         if (winningTeams !== null) {
-            teamArr = winningTeams
+            teamArr = winningTeams;
         };
-
+        
+        let teamArr = teamNames;
         let allMatches = [];
         
         // Randomise order
