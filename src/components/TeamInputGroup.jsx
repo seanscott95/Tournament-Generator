@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom';
 import useGenerator from '../hooks/useRRGenerator';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGroup } from '@fortawesome/free-solid-svg-icons';
 
-const TeamInputGroup = ({ setIsGenerated }) => {
-
+const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
   const location = useLocation();
 
   const {
@@ -25,30 +24,43 @@ const TeamInputGroup = ({ setIsGenerated }) => {
   // If user has previous data in local storage, data will render for
   // the list of team names that can be inputted
   const gNL = JSON.parse(localStorage.getItem('generatedNamesList'));
-  useEffect(() => {
-    if (gNL !== null) {
-      let list = gNL.filter(el => el !== 'Bye');
-      setTeamNames(list);
-    };
-  },[]);
 
-  const [message, setMessage] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [teamMinError, setTeamMinError] = useState(false);
+  const runError = () => {
+    setError(true);
+    setTimeout(() => {
+      setError(false);
+    }, 3000);
+    return;
+  };
 
   const handleGenerateButton = () => {
+    if (!minTeamLimit) {
+      if (teamNames.filter((item) => item !== null).length <= 2) {
+        runError();
+        return;
+      }
+    }
     if (teamNameInput !== '') {
-      setMessage(true);
-      setTimeout(() => {
-        setMessage(false);
-      }, 3000);
-      return;
-    };
-    if (teamNames.filter((item) => item !== null).length <= 2) {
-      setMessage(true);
-      setTimeout(() => {
-        setMessage(false);
-      }, 3000);
-      return;
-    };
+      runError();
+    }
+
+    if (minTeamLimit) {
+      const teamMinimum = [4, 8, 16, 32, 64, 128];
+      const result = teamMinimum.some((number) => {
+        return number === teamNames.length;
+      });
+
+      if (!result) {
+        setTeamMinError(true);
+        setTimeout(() => {
+          setTeamMinError(false);
+        }, 3000);
+        return;
+      }
+    }
 
     setGeneratedNamesList([...teamNames]);
 
@@ -57,8 +69,8 @@ const TeamInputGroup = ({ setIsGenerated }) => {
         if (location.pathname === '/roundRobin') {
           teamNames.splice(teamNames.length / 2, 0, 'Bye');
         }
-      };
-    };
+      }
+    }
 
     if (location.pathname === '/roundRobin') generateRoundRobin();
     if (location.pathname === '/single') generateSingleElimination();
@@ -67,6 +79,13 @@ const TeamInputGroup = ({ setIsGenerated }) => {
     setTeamNames([null, null, null]);
     setIsGenerated(true);
   };
+
+  useEffect(() => {
+    if (gNL !== null) {
+      let list = gNL.filter((el) => el !== 'Bye');
+      setTeamNames(list);
+    }
+  }, []);
 
   return (
     <>
@@ -113,11 +132,16 @@ const TeamInputGroup = ({ setIsGenerated }) => {
       </section>
       <section className="errorMessageSection">
         <div className="errorMessage">
-          {message && teamNameInput !== '' && (
+          {error && teamNameInput !== '' && (
             <p>Please make sure input is empty</p>
           )}
-          {message && teamNames.filter((item) => item !== null).length <= 2 && (
-            <p>Please add at least three teams</p>
+          {error &&
+            !minTeamLimit &&
+            teamNames.filter((item) => item !== null).length <= 2 && (
+              <p>Please add at least three teams</p>
+            )}
+          {teamMinError && (
+            <p>Please have exactly 4, 8, 16, 32, 64 or 128 teams</p>
           )}
         </div>
         <div className="generateBtnContainer">

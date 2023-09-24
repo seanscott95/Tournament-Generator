@@ -220,6 +220,41 @@ a:hover {
   margin: 0.5em 0;
   font-size: 0.9em;
 }
+.generatorContainer .minTeamInputGrp {
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+}
+.generatorContainer .minTeamInputGrp .warningTeamLimit {
+  color: #fff;
+  font-size: 0.75em;
+  margin: 0 1em;
+  padding-bottom: 0.5em;
+}
+.generatorContainer .minTeamInputGrp div {
+  width: 85%;
+  margin: 1em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  color: #fff;
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+}
+.generatorContainer .minTeamInputGrp div label {
+  margin-bottom: 0.025em;
+}
+.generatorContainer .minTeamInputGrp div input {
+  font-size: clamp(0.7rem, 3vw + 0.75rem, 2.5rem);
+  accent-color: #21c1fa;
+  width: 0.5em;
+  height: 0.5em;
+  max-width: 20px;
+}
+.generatorContainer .minTeamInputGrp div label {
+  display: flex;
+  gap: 0.25em;
+}
+.generatorContainer .minTeamInputGrp div label span {
+  font-size: 0.75em;
+}
 .generatorContainer .errorMessageSection {
   display: flex;
   flex-direction: column;
@@ -302,7 +337,8 @@ a:hover {
   margin-right: 0.5em;
   padding: 0.625em;
 }
-.generatorContainer .generateBtnContainer, .generatorContainer .nextRoundBtnContainer {
+.generatorContainer .generateBtnContainer,
+.generatorContainer .nextRoundBtnContainer {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -312,7 +348,8 @@ a:hover {
   border-top: 2px solid rgba(0, 0, 0, 0.5);
   border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 }
-.generatorContainer .generateBtnContainer button, .generatorContainer .nextRoundBtnContainer button {
+.generatorContainer .generateBtnContainer button,
+.generatorContainer .nextRoundBtnContainer button {
   background-color: #21c1fa;
   border: 1px solid transparent;
   border-radius: 0.25rem;
@@ -332,7 +369,9 @@ a:hover {
   font-size: clamp(0.7rem, 2vw + 0.5rem, 1.75rem);
   max-width: 10em;
 }
-.generatorContainer .generateBtnContainer button:hover, .generatorContainer .generateBtnContainer button:focus, .generatorContainer .nextRoundBtnContainer button:hover, .generatorContainer .nextRoundBtnContainer button:focus {
+.generatorContainer .generateBtnContainer button:hover, .generatorContainer .generateBtnContainer button:focus,
+.generatorContainer .nextRoundBtnContainer button:hover,
+.generatorContainer .nextRoundBtnContainer button:focus {
   background-color: #0084ff;
 }
 .generatorContainer ul {
