@@ -26,7 +26,6 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
   const gNL = JSON.parse(localStorage.getItem('generatedNamesList'));
 
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const [teamMinError, setTeamMinError] = useState(false);
   const runError = () => {
     setError(true);

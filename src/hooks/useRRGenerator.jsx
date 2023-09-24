@@ -83,6 +83,8 @@ const useRRGenerator = () => {
         if (round === 1) {
             localStorage.removeItem('allGamesSingle');
             localStorage.removeItem('generatedNamesList');
+            localStorage.removeItem('originalNamesList');
+            localStorage.setItem('originalNamesList', JSON.stringify(teamNames));
         };
         
         if (teamArr.length % 2 !== 0) {
