@@ -22,11 +22,11 @@ const TournamentKeeper = ({ setTournamentOver }) => {
     .filter((e) => e.length !== 1);
 
   // Retrieves the list of team names from local storage
-  let generatedNamesList = JSON.parse(
-    localStorage.getItem('generatedNamesList')
+  let originalTeams = JSON.parse(
+    localStorage.getItem('originalNamesList')
   );
   // Removes the byes from the list
-  let namesListNoByes = generatedNamesList.filter((el) => el !== 'Bye');
+  let originalTeamsNoByes = originalTeams.filter((el) => el !== 'Bye');
 
   // Formats the arr to an object to be used in the jsx
   const arrToObjLayout = (arr) => {
@@ -112,8 +112,8 @@ const TournamentKeeper = ({ setTournamentOver }) => {
       const teamNameEl = document.querySelectorAll('.cardBody p');
       teamNameEl.forEach((game) => game.classList.remove('winner'));
 
-      generateSingleElimination(round, winningTeams);
       round++;
+      generateSingleElimination(round, winningTeams);
     };
   };
 
@@ -125,15 +125,15 @@ const TournamentKeeper = ({ setTournamentOver }) => {
       .map((g) => g.filter((el) => el !== 'Bye'))
       .filter((e) => e.length !== 1);
 
-    generatedNamesList = JSON.parse(localStorage.getItem('generatedNamesList'));
-    namesListNoByes = generatedNamesList.filter((el) => el !== 'Bye');
+    originalTeams = JSON.parse(localStorage.getItem('originalNamesList'));
+    originalTeamsNoByes = originalTeams.filter((el) => el !== 'Bye');
     allGamesObj = arrToObjLayout(allGames);
     allGamesNoByesObj = arrToObjLayout(allGamesNoByes);
   }, [allGamesObj, generateSingleElimination]);
 
   return (
     <section className="generatedTable">
-      {generatedNamesList.length !== 0 && (
+      {originalTeams.length !== 0 && (
         <div className="generatedNamesList">
           <ul className="tournamentInfo">
             <li>
@@ -142,12 +142,12 @@ const TournamentKeeper = ({ setTournamentOver }) => {
             </li>
             <li>
               <FontAwesomeIcon className="icon" icon={faUserGroup} />
-              {namesListNoByes.length} Teams
+              {originalTeamsNoByes.length} Teams
             </li>
           </ul>
           <ul>
-            {generatedNamesList &&
-              namesListNoByes.map((team, index) => {
+            {originalTeams &&
+              originalTeamsNoByes.map((team, index) => {
                 return (
                   <li className="teamAdded leftBorder" key={team + index}>
                     <div className="teamNameText">
