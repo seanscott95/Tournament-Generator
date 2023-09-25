@@ -468,6 +468,20 @@ a:hover {
     .toggleShowByesInputGrp {
       @include checkboxInputGrp;
     }
+    .matchFinishedIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1em;
+      width: 100%;
+      color: white;
+      .completed .icon {
+        color: $primaryColor;
+      }
+      .notCompleted .icon {
+        color: grey;
+      }
+    }
     .tableItemContainer {
       display: flex;
       flex-wrap: wrap;

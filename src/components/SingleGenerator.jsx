@@ -38,7 +38,6 @@ const SingleGenerator = () => {
             onChange={() => setMinTeamLimit((prev) => !prev)}
           />
           <label htmlFor="minTeamInput">
-            {' '}
             Team Limit <span>*</span>
           </label>
         </div>
@@ -50,7 +49,10 @@ const SingleGenerator = () => {
       </section>
       <section>
         {isGenerated && !tournamentOver ? (
-          <TournamentKeeper setTournamentOver={setTournamentOver} />
+          <TournamentKeeper
+            setTournamentOver={setTournamentOver}
+            minTeamLimit={minTeamLimit}
+          />
         ) : (
           <TeamInputGroup
             setIsGenerated={setIsGenerated}

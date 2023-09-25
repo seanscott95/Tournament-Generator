@@ -7,8 +7,9 @@ import {
   faUserGroup,
   faArrowRotateRight,
 } from '@fortawesome/free-solid-svg-icons';
+import MatchCountDisplay from './MatchCountDisplay';
 
-const TournamentKeeper = ({ setTournamentOver }) => {
+const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
   const { generateSingleElimination } = useRRGenerator();
   const [message, setMessage] = useState('');
 
@@ -67,14 +68,15 @@ const TournamentKeeper = ({ setTournamentOver }) => {
     // completed is true, the winning team
     allGamesObj[game - 1].winner = winner;
     allGamesObj[game - 1].completed = true;
+
     // Adds the class of winner to the event element
     e.target.classList.add('winner');
   };
 
   // Refreshes who the winner and completed values of the selected game
   const refreshCardWinner = (game) => {
-    allGamesObj[game - 1].winner = '';
-    allGamesObj[game - 1].completed = false;
+    allGamesObj[game - 1].winner = winner;
+    allGamesObj[game - 1].completed = true;
 
     // Removes the winner class from the team names of the selected game card
     const teamNameEl = document.querySelectorAll(`.game${game}`);
@@ -117,7 +119,6 @@ const TournamentKeeper = ({ setTournamentOver }) => {
 
   useEffect(() => {
     console.log('useEFfect allgo', allGamesObj);
-    allGames = JSON.parse(localStorage.getItem('allGamesSingle'));
 
     allGamesNoByes = allGames
       .map((g) => g.filter((el) => el !== 'Bye'))
@@ -125,7 +126,6 @@ const TournamentKeeper = ({ setTournamentOver }) => {
 
     originalTeams = JSON.parse(localStorage.getItem('originalNamesList'));
     originalTeamsNoByes = originalTeams.filter((el) => el !== 'Bye');
-    allGamesObj = arrToObjLayout(allGames);
     allGamesNoByesObj = arrToObjLayout(allGamesNoByes);
   }, [allGamesObj, generateSingleElimination]);
 
@@ -157,7 +157,7 @@ const TournamentKeeper = ({ setTournamentOver }) => {
           </ul>
         </div>
       )}
-      {allGamesObj.length >= 1 && (
+      {!minTeamLimit && allGamesObj.length >= 1 && (
         <div className="toggleShowByesInputGrp">
           <input
             type="checkbox"
@@ -169,6 +169,14 @@ const TournamentKeeper = ({ setTournamentOver }) => {
           <label htmlFor="showByes"> Display matches with Byes</label>
         </div>
       )}
+      <div className='showFinishedMatchesContainer'>
+        {allGamesObj && 
+          <MatchCountDisplay 
+            allGamesNoByesObj={allGamesNoByesObj}
+            allGamesObj={allGamesObj}
+          />
+        }
+      </div>
       <div className='tableItemContainer '>
         {allGamesObj &&
           (isChecked ? allGamesObj : allGamesNoByesObj).map((game, index) => {
