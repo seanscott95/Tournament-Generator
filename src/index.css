@@ -484,6 +484,20 @@ a:hover {
   height: 0.5em;
   max-width: 20px;
 }
+.generatorContainer .generatedTable .tableItemContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  width: 100%;
+}
+.generatorContainer .generatedTable .tableItemContainer .generatedTableItem {
+  width: auto;
+}
+.generatorContainer .generatedTable .tableItemContainer .generatedTableItem:last-child {
+  margin-bottom: 0;
+}
 .generatorContainer .generatedTable .generatedTableItem {
   display: flex;
   width: 100%;

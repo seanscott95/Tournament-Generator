@@ -22,9 +22,7 @@ const TournamentKeeper = ({ setTournamentOver }) => {
     .filter((e) => e.length !== 1);
 
   // Retrieves the list of team names from local storage
-  let originalTeams = JSON.parse(
-    localStorage.getItem('originalNamesList')
-  );
+  let originalTeams = JSON.parse(localStorage.getItem('originalNamesList'));
   // Removes the byes from the list
   let originalTeamsNoByes = originalTeams.filter((el) => el !== 'Bye');
 
@@ -91,7 +89,7 @@ const TournamentKeeper = ({ setTournamentOver }) => {
         setMessage(false);
       }, 3000);
       return;
-    };
+    }
 
     // Checks to see if all games are completed
     if (allGamesObj.length === winners.length) {
@@ -100,13 +98,13 @@ const TournamentKeeper = ({ setTournamentOver }) => {
       if (winningTeams.length === 1) {
         setTournamentOver(true);
         return;
-      };
+      }
       // localStorage.setItem(JSON.stringify(`SR${round}`, allGamesObj));
       if (winningTeams.length % 2 !== 0) {
         if (!winningTeams.includes('Bye')) {
           winningTeams.push('Bye');
-        };
-      };
+        }
+      }
 
       // Removes all winner classes from current game cards
       const teamNameEl = document.querySelectorAll('.cardBody p');
@@ -114,7 +112,7 @@ const TournamentKeeper = ({ setTournamentOver }) => {
 
       round++;
       generateSingleElimination(round, winningTeams);
-    };
+    }
   };
 
   useEffect(() => {
@@ -171,54 +169,56 @@ const TournamentKeeper = ({ setTournamentOver }) => {
           <label htmlFor="showByes"> Display matches with Byes</label>
         </div>
       )}
-      {allGamesObj &&
-        (isChecked ? allGamesObj : allGamesNoByesObj).map((game, index) => {
-          const gameNumber = game.game;
-          return (
-            <div className="generatedTableItem" key={index}>
-              <div className="gameContainer leftBorder">
-                <div className="gameItemCard">
-                  <div className="cardHeading">
-                    <h3>Game {gameNumber}</h3>
-                    {game.player1 === 'Bye' || game.player2 === 'Bye' ? (
-                      <></>
-                    ) : (
-                      <FontAwesomeIcon
-                        className="icon"
-                        icon={faArrowRotateRight}
-                        onClick={() => refreshCardWinner(gameNumber)}
-                        value={gameNumber}
-                      />
-                    )}
-                  </div>
-                  <div className="cardBody">
-                    <p
-                      onClick={(e) =>
-                        handleClickForWinner(e, game.player1, gameNumber)
-                      }
-                      className={`game${gameNumber} ${
-                        game.winner === game.player1 ? 'winner' : ''
-                      }`}
-                    >
-                      {game.player1}
-                    </p>
-                    <h1>VS</h1>
-                    <p
-                      onClick={(e) =>
-                        handleClickForWinner(e, game.player2, gameNumber)
-                      }
-                      className={`game${gameNumber} ${
-                        game.winner === game.player2 ? 'winner' : ''
-                      }`}
+      <div className='tableItemContainer '>
+        {allGamesObj &&
+          (isChecked ? allGamesObj : allGamesNoByesObj).map((game, index) => {
+            const gameNumber = game.game;
+            return (
+              <div className="generatedTableItem" key={index}>
+                <div className="gameContainer">
+                  <div className="gameItemCard">
+                    <div className="cardHeading">
+                      <h3>Game {gameNumber}</h3>
+                      {game.player1 === 'Bye' || game.player2 === 'Bye' ? (
+                        <></>
+                      ) : (
+                        <FontAwesomeIcon
+                          className="icon"
+                          icon={faArrowRotateRight}
+                          onClick={() => refreshCardWinner(gameNumber)}
+                          value={gameNumber}
+                        />
+                      )}
+                    </div>
+                    <div className="cardBody">
+                      <p
+                        onClick={(e) =>
+                          handleClickForWinner(e, game.player1, gameNumber)
+                        }
+                        className={`game${gameNumber} ${
+                          game.winner === game.player1 ? 'winner' : ''
+                        }`}
                       >
-                      {game.player2}
-                    </p>
+                        {game.player1}
+                      </p>
+                      <h1>VS</h1>
+                      <p
+                        onClick={(e) =>
+                          handleClickForWinner(e, game.player2, gameNumber)
+                        }
+                        className={`game${gameNumber} ${
+                          game.winner === game.player2 ? 'winner' : ''
+                        }`}
+                      >
+                        {game.player2}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+      </div>
       <section className="errorMessageSection">
         <div className="errorMessage">
           {message && <p>Please make sure all games are completed</p>}

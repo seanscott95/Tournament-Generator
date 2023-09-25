@@ -468,6 +468,20 @@ a:hover {
     .toggleShowByesInputGrp {
       @include checkboxInputGrp;
     }
+    .tableItemContainer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1em;
+      width: 100%;
+      .generatedTableItem {
+        width: auto;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
     .generatedTableItem {
       display: flex;
       width: 100%;
