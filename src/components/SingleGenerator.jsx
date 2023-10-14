@@ -24,14 +24,32 @@ const SingleGenerator = () => {
           />
         </div>
         <div className="instructions">
-          <ol>
-            <li>To get started enter your team names in the input below</li>
+          {isGenerated ? (
+            
+            <ol>
             <li>
-              Total teams should be either 4, 8, 16, 32, 64 or 128 teams long
+              Click on the team that won their game to turn there name green
             </li>
-            <li>Once finished click the Generate button to start tournament</li>
-            <li>NOTE - You can remove the team limit option in the settings</li>
+            <li>
+              Once all the games have a selected winner click on the next
+              round button
+            </li>
+            <li>Repeat the process until the tournament is over and enjoy!</li>
           </ol>
+          ) : (
+            <ol>
+              <li>To get started enter your team names in the input below</li>
+              <li>
+                Total teams should be either 4, 8, 16, 32, 64 or 128 teams long
+              </li>
+              <li>
+                Once finished click the Generate button to start tournament
+              </li>
+              <li>
+                NOTE - You can remove the team limit option in the settings
+              </li>
+            </ol>
+          )}
         </div>
       </section>
       <section className="minTeamInputGrp">
@@ -55,22 +73,10 @@ const SingleGenerator = () => {
       </section>
       <section>
         {isGenerated && !tournamentOver ? (
-          <>
-            <ol>
-              <li>
-                Click on the team that won their game to turn there name green
-              </li>
-              <li>
-                Once all the games have a selected winner click on the next
-                round button
-              </li>
-              <li>Repeat the process until you're finished and enjoy!</li>
-            </ol>
-            <TournamentKeeper
-              setTournamentOver={setTournamentOver}
-              minTeamLimit={minTeamLimit}
-            />
-          </>
+          <TournamentKeeper
+            setTournamentOver={setTournamentOver}
+            minTeamLimit={minTeamLimit}
+          />
         ) : (
           <TeamInputGroup
             setIsGenerated={setIsGenerated}

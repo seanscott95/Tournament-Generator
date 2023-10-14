@@ -306,6 +306,7 @@ a:hover {
       justify-content: center;
       align-items: center;
       width: 102%;
+      margin: .5em;
       ol {
         font-size: $fontSize;
         margin: .5em;
@@ -477,19 +478,20 @@ a:hover {
       }
       .tournamentInfo {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        text-align: center;
-        gap: 0.75em;
-        width: 100%;
-        margin: 0.25em;
-        li {
-          font-size: $h2FontSize;
-          width: 100%;
-          gap: 0.75em;
-          color: #fff;
-          text-shadow: -1px 1px 1px #000000;
+        ul {
+          display: flex;
+          justify-content: space-between;
+          width: 73%;
           margin: 0;
+          li {
+            font-size: $h2FontSize;
+            gap: 0.5em;
+            margin: 0;
+            color: #fff;
+            text-shadow: -1px 1px 1px #000000;
+          }
         }
       }
     }
@@ -636,7 +638,35 @@ a:hover {
       min-width: 90%;
     }
   }
+  .tournamentInfo {
+    ul {
+      flex-direction: column;
+      gap: .5em;
+      justify-content: center;
+      align-items: start;
+      padding-left: .5em;
+    }
+  }
 }
+
+// .tournamentInfo {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   ul {
+//     display: flex;
+//     justify-content: space-between;
+//     width: 73%;
+//     margin: 0;
+//     li {
+//       font-size: $h2FontSize;
+//       gap: 0.5em;
+//       margin: 0;
+//       color: #fff;
+//       text-shadow: -1px 1px 1px #000000;
+//     }
+//   }
+// }
 @media (max-width: 600px) {
   .infoContainer {
     flex-direction: column-reverse;
