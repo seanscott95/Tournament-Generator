@@ -1,22 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import TeamInputGroup from './TeamInputGroup';
 import TournamentKeeper from './TournamentKeeper';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
-import GameOver from './GameOver';
+import TournamentOver from './TournamentOver';
 
 const SingleGenerator = () => {
   const [isGenerated, setIsGenerated] = useState(false);
   const [tournamentOver, setTournamentOver] = useState(false);
   const [minTeamLimit, setMinTeamLimit] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
-
-  useEffect(() => {
-    console.log('tO', tournamentOver);
-    console.log('iG', isGenerated);
-  }, [tournamentOver, isGenerated]);
 
   return (
     <>
@@ -106,7 +101,7 @@ const SingleGenerator = () => {
       </section>
       <section>
         {tournamentOver && (
-          <GameOver
+          <TournamentOver
             setIsGenerated={setIsGenerated}
             setTournamentOver={setTournamentOver}
           />
