@@ -133,16 +133,18 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
     <section className="generatedTable">
       {originalTeams.length !== 0 && (
         <div className="generatedNamesList">
-          <ul className="tournamentInfo">
-            <li>
-              <FontAwesomeIcon className="icon" icon={faTrophy} />
-              Single Elimination
-            </li>
-            <li>
-              <FontAwesomeIcon className="icon" icon={faUserGroup} />
-              {originalTeamsNoByes.length} Teams
-            </li>
-          </ul>
+          <div className="tournamentInfo">
+            <ul >
+              <li>
+                <FontAwesomeIcon className="icon" icon={faTrophy} />
+                Single Elimination
+              </li>
+              <li>
+                <FontAwesomeIcon className="icon" icon={faUserGroup} />
+                {originalTeamsNoByes.length} Teams
+              </li>
+            </ul>
+          </div>
           <ul>
             {originalTeams &&
               originalTeamsNoByes.map((team, index) => {
