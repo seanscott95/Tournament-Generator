@@ -13,9 +13,10 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
   const { generateSingleElimination } = useRRGenerator();
   const [message, setMessage] = useState('');
 
-  let round = 1;
+  // Used to label the local storage key for 'SE' (Single Elimination)
+  const [round, setRound] = useState(1);
+  
   // Retrieves all the games from local storage
-  // const allGames = JSON.parse(localStorage.getItem('allGamesSingle'));
   let allGames = JSON.parse(localStorage.getItem('allGamesSingle'));
   // Removes all games with byes in them
   let allGamesNoByes = allGames
@@ -93,28 +94,41 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
       return;
     }
 
+    // Saves each round in the SE local storage key
+    const prevRounds = JSON.parse(localStorage.getItem('SE')) || [];
+    localStorage.setItem(
+      `SE`,
+      JSON.stringify({
+        ...prevRounds,
+        [`Round${round}`]: {
+          ...allGamesObj,
+        },
+      })
+    );
+
     // Checks to see if all games are completed
     if (allGamesObj.length === winners.length) {
       const winningTeams = winners.map((el) => el.winner);
       // Ends the tournament
       if (winningTeams.length === 1) {
+        setRound(1);
         setTournamentOver(true);
         return;
-      }
-      // localStorage.setItem(JSON.stringify(`SR${round}`, allGamesObj));
+      };
+
       if (winningTeams.length % 2 !== 0) {
         if (!winningTeams.includes('Bye')) {
           winningTeams.push('Bye');
-        }
-      }
+        };
+      };
 
       // Removes all winner classes from current game cards
       const teamNameEl = document.querySelectorAll('.cardBody p');
       teamNameEl.forEach((game) => game.classList.remove('winner'));
 
-      round++;
-      generateSingleElimination(round, winningTeams);
-    }
+      setRound((prev) => prev + 1);
+      generateSingleElimination(winningTeams);
+    };
   };
 
   useEffect(() => {
@@ -134,7 +148,7 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
       {originalTeams.length !== 0 && (
         <div className="generatedNamesList">
           <div className="tournamentInfo">
-            <ul >
+            <ul>
               <li>
                 <FontAwesomeIcon className="icon" icon={faTrophy} />
                 Single Elimination
@@ -171,15 +185,15 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
           <label htmlFor="showByes"> Display matches with Byes</label>
         </div>
       )}
-      <div className='showFinishedMatchesContainer'>
-        {allGamesObj && 
-          <MatchCountDisplay 
+      <div className="showFinishedMatchesContainer">
+        {allGamesObj && (
+          <MatchCountDisplay
             allGamesNoByesObj={allGamesNoByesObj}
             allGamesObj={allGamesObj}
           />
-        }
+        )}
       </div>
-      <div className='tableItemContainer '>
+      <div className="tableItemContainer ">
         {allGamesObj &&
           (isChecked ? allGamesObj : allGamesNoByesObj).map((game, index) => {
             const gameNumber = game.game;
@@ -234,7 +248,11 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
           {message && <p>Please make sure all games are completed</p>}
         </div>
         <div className="nextRoundBtnContainer">
-          <button onClick={handleNextRound}>NEXT ROUND</button>
+          {allGames.length === 1 ? (
+            <button onClick={handleNextRound}>FINISH TOURNAMENT</button>
+          ) : (
+            <button onClick={handleNextRound}>NEXT ROUND</button>
+          )}
         </div>
       </section>
     </section>
