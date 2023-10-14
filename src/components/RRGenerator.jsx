@@ -9,16 +9,19 @@ const RRGenerator = () => {
     <>
       <section className="heading">
         <h1>Welcome to the Round Robin Generator!!</h1>
-        <ol>
-          <li>To get started enter your team names in the input below</li>
-          <li>Once finished click the Generate button to start tournament</li>
-        </ol>
+        <div className="instructions">
+          <ol>
+            <li>To get started enter your team names in the input below</li>
+            <li>Once finished click the Generate button to start tournament</li>
+          </ol>
+        </div>
       </section>
       <section>
-        { isGenerated
-          ? <DisplayMatches />
-          : <TeamInputGroup setIsGenerated={setIsGenerated} />
-        }
+        {isGenerated ? (
+          <DisplayMatches />
+        ) : (
+          <TeamInputGroup setIsGenerated={setIsGenerated} />
+        )}
       </section>
     </>
   );

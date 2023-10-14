@@ -158,15 +158,20 @@ a:hover {
   color: #fff;
   margin: 5vmin 1em;
 }
+.homepage h2 {
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.75rem);
+  text-align: center;
+  color: #21c1fa;
+}
 .homepage .infoContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 3em 0;
+  margin: 1em 0;
 }
 .homepage .infoContainer ul {
   font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
-  color: rgb(177, 177, 177);
+  color: rgb(230, 230, 230);
 }
 .homepage .infoContainer ul li {
   display: flex;
@@ -210,12 +215,35 @@ a:hover {
   padding: 1em;
   text-shadow: -0.05em 0.05em 0.05em #000000;
 }
-.generatorContainer .heading ol {
-  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
-  margin: 1em 5%;
-  width: 95%;
+.generatorContainer .heading .pageHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
 }
-.generatorContainer .heading ol li {
+.generatorContainer .heading .pageHeader h2 {
+  text-align: center;
+  color: #21c1fa;
+  margin: 0 1.5em;
+}
+.generatorContainer .heading .pageHeader svg {
+  position: absolute;
+  right: 1%;
+  top: 5%;
+  font-size: clamp(0.7rem, 2vw + 0.75rem, 1.5rem);
+}
+.generatorContainer .heading .instructions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 102%;
+}
+.generatorContainer .heading .instructions ol {
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+  margin: 0.5em;
+}
+.generatorContainer .heading .instructions ol li {
   list-style: decimal;
   margin: 0.5em 0;
   font-size: 0.9em;
