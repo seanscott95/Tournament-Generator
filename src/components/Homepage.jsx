@@ -7,7 +7,7 @@ const Homepage = () => {
   return (
     <>
       <section className='homepage'>
-        <h1>Create tournaments with your friends and see who really is the best...</h1>
+        <h2>Create tournaments with your friends and see who really is the best...</h2>
         <div className='infoContainer'>
           <ul>
             <li>
@@ -18,10 +18,10 @@ const Homepage = () => {
               Organise your tournaments with this simple to use generator</li>
             <li>
               <FontAwesomeIcon className="icon" icon={faUserCheck} />
-              No subscription required, free and easy to use</li>
+              Free and easy to use with no signup required</li>
             <li>
               <FontAwesomeIcon className="icon" icon={faUserGroup} />
-              No limit for number of teams
+              No limit to the amount of teams you can use
             </li>
           </ul>
           <img src={RRMatches} alt="Generated tournament" />
