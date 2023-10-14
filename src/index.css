@@ -197,6 +197,7 @@ a:hover {
   /* --- Generator Input Section --- */
   /* --- Generator Button Section --- */
   /* --- Generator Table Section --- */
+  /* --- Tournament Over Component --- */
 }
 .generatorContainer .leftBorder {
   border-left: 3px solid #21c1fa;
@@ -616,6 +617,32 @@ a:hover {
 }
 .generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody p:hover {
   cursor: pointer;
+}
+.generatorContainer .tournamentOver {
+  width: 100%;
+  text-align: center;
+}
+.generatorContainer .tournamentOver .btnResetSingleElim {
+  background-color: #21c1fa;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: #fff;
+  cursor: pointer;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  padding: 0.3em 1em;
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  box-shadow: 0 0.1em rgb(17, 17, 17);
+  text-shadow: -0.025em 0.075em rgb(17, 17, 17);
+  margin: 0.5em;
+}
+.generatorContainer .tournamentOver .btnResetSingleElim:hover, .generatorContainer .tournamentOver .btnResetSingleElim:focus {
+  background-color: #0084ff;
 }
 
 /* ---------- Media Queries ---------- */

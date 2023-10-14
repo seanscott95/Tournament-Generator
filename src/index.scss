@@ -603,6 +603,15 @@ a:hover {
       }
     }
   }
+  /* --- Tournament Over Component --- */
+  .tournamentOver {
+    width: 100%;
+    text-align: center;
+    .btnResetSingleElim {
+      @include button;
+      margin: .5em;
+    }
+  }
 }
 
 /* ---------- Media Queries ---------- */
