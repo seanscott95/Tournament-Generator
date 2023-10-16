@@ -21,10 +21,6 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
     generateDoubleElimination,
   } = useGenerator();
 
-  // If user has previous data in local storage, data will render for
-  // the list of team names that can be inputted
-  const gNL = JSON.parse(localStorage.getItem('generatedNamesList'));
-
   const [error, setError] = useState(false);
   const [teamMinError, setTeamMinError] = useState(false);
   const runError = () => {
@@ -85,6 +81,18 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
     };
   };
 
+  useEffect(() => {
+    // If user has previous data in local storage, data will render for
+    // the list of team names that can be inputted
+    const generatedNamesListFromLocal = JSON.parse(localStorage.getItem('generatedNamesList'));
+    if (generatedNamesListFromLocal !== null) {
+      let list = generatedNamesListFromLocal.filter((el) => el !== 'Bye');
+      setTeamNames(list);
+    };
+    const originalNamesListFromLocal = JSON.parse(localStorage.getItem('originalNamesList'));
+    if (originalNamesListFromLocal !== null) setTeamNames(originalNamesListFromLocal);
+  }, []);
+  
   // Adds an event listener on the window specifically for enter key
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
@@ -92,14 +100,7 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
       window.removeEventListener('keydown', handleKeyPress);
     };
   }, [handleKeyPress]);
-  // Adds the teams names from local storage to the teamNames state
-  useEffect(() => {
-    if (gNL !== null) {
-      let list = gNL.filter((el) => el !== 'Bye');
-      setTeamNames(list);
-    };
-  }, []);
-
+  
   return (
     <>
       <section className="inputGroupContainer">
