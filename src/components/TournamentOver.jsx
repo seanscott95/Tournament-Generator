@@ -60,9 +60,13 @@ const TournamentOver = ({ setIsGenerated, setTournamentOver}) => {
                         <h3>Game {g.game}</h3>
                       </div>
                       <div className='cardBody'>
-                        <p>{g.player1}</p>
+                        <p
+                          className={`${g.winner === g.player1 ? 'winner' : ''}`}
+                        >{g.player1}</p>
                         <h1>VS</h1>
-                        <p>{g.player2}</p>
+                        <p
+                          className={`${g.winner === g.player2 ? 'winner' : ''}`}
+                        >{g.player2}</p>
                       </div>
                     </div>
                   );
