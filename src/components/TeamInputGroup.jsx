@@ -114,13 +114,11 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
             name="teams"
             value={teamNameInput}
             onChange={(e) => setTeamNameInput(e.target.value)}
-            // onChange={(e) => console.log('e', e)}
           />
         </div>
-        <button
-          onClick={addTeamName}
-          
-        >ADD</button>
+        <div className='btnAdd'>
+          <button onClick={addTeamName}>ADD</button>
+        </div>
       </section>
       <section>
         <ul>
