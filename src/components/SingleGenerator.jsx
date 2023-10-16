@@ -64,17 +64,19 @@ const SingleGenerator = () => {
               )}
         </div>
       </section>
-      <section className="minTeamInputGrp">
+      <section>
         {showSettings && (
-          <div>
-            <input
-              type="checkbox"
-              id="minTeamInput"
-              name="minTeamInput"
-              checked={minTeamLimit}
-              onChange={() => setMinTeamLimit((prev) => !prev)}
-            />
-            <label htmlFor="minTeamInput">Team Limit</label>
+          <div className='minTeamInputGrp'>
+            <div>
+              <input
+                type="checkbox"
+                id="minTeamInput"
+                name="minTeamInput"
+                checked={minTeamLimit}
+                onChange={() => setMinTeamLimit((prev) => !prev)}
+              />
+              <label htmlFor="minTeamInput">Team Limit</label>
+            </div>
             <p className="warningTeamLimit">
               Turning off team limit can result in an uneven amount of teams
               suitable for single elimination. In rounds with an odd amount of
