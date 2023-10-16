@@ -76,8 +76,8 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
 
   // Refreshes who the winner and completed values of the selected game
   const refreshCardWinner = (game) => {
-    allGamesObj[game - 1].winner = winner;
-    allGamesObj[game - 1].completed = true;
+    allGamesObj[game - 1].winner = '';
+    allGamesObj[game - 1].completed = false;
 
     // Removes the winner class from the team names of the selected game card
     const teamNameEl = document.querySelectorAll(`.game${game}`);
