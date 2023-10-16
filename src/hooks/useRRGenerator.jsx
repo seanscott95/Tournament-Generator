@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import capitaliseFirstLetter from '../helper/capitaliseFirstLetter';
 
 const useRRGenerator = () => {
@@ -8,11 +8,11 @@ const useRRGenerator = () => {
   const [generatedNamesList, setGeneratedNamesList] = useState([]);
 
   const addTeamName = () => {
-    if (teamNameInput.length === 0) {
-      return;
-    }
+    if (teamNameInput === '') {
+        return;
+    };
     const capTeamNameInput = capitaliseFirstLetter(teamNameInput);
-
+    
     const hasNull = teamNames[teamNames.length - 1] === null;
     if (hasNull) {
       let count = teamNames.filter((item) => item !== null).length;
@@ -22,25 +22,25 @@ const useRRGenerator = () => {
 
         if (diff === 3) {
           setTeamNames([capTeamNameInput, null, null]);
-        }
+        };
         if (diff === 2) {
           setTeamNames((prev) => [
             ...prev.filter((item) => item !== null),
             capTeamNameInput,
             null,
           ]);
-        }
+        };
         if (diff === 1) {
           setTeamNames((prev) => [
             ...prev.filter((item) => item !== null),
             capTeamNameInput,
           ]);
-        }
+        };
         setTeamNameInput('');
         return;
-      }
-    }
-
+      };
+    };
+    
     setTeamNames((prev) => [...prev, capTeamNameInput]);
     setTeamNameInput('');
   };
