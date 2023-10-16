@@ -50,12 +50,12 @@ const TournamentOver = ({ setIsGenerated, setTournamentOver}) => {
       <div className="generatedTable">
         {allGames !== null && allGames.map((game, index) => {
           return (
-            <div className="generatedTableItem ">
+            <div className="generatedTableItem" key={index}>
               <h1>ROUND {index + 1}</h1>
               <div className="gameContainer leftBorder">
-                {Object.values(game).map((g) => {
+                {Object.values(game).map((g, i) => {
                   return (
-                    <div className="gameItemCard">
+                    <div className="gameItemCard" key={i}>
                       <div className='cardHeading'>
                         <h3>Game {g.game}</h3>
                       </div>
