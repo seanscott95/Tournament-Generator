@@ -92,7 +92,7 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
         setMessage(false);
       }, 3000);
       return;
-    }
+    };
 
     // Saves each round in the SE local storage key
     const prevRounds = JSON.parse(localStorage.getItem('SE')) || [];
@@ -103,7 +103,7 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
         [`Round${round}`]: {
           ...allGamesObj,
         },
-      })
+      }),
     );
 
     // Checks to see if all games are completed
