@@ -464,179 +464,192 @@ a:hover {
       }
     }
   }
-
-  /* --- Generator Table Section --- */
-  .generatedTable {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-    width: 100%;
-    background: $primaryGrey;
-    h1,
-    h3 {
-      font-style: italic;
-      color: #fff;
-      text-shadow: -1px 0 0 $secondaryGrey, -3px 0 2px #000000;
-      margin: 0 0.25em;
-    }
-    .generatedNamesList {
-      padding-top: 1em;
-      height: 100%;
-      width: 100%;
-      ul {
-        margin: 1em;
-      }
-      .tournamentInfo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        ul {
-          display: flex;
-          justify-content: space-between;
-          width: 73%;
-          margin: 0;
-          li {
-            font-size: $h2FontSize;
-            gap: 0.5em;
-            margin: 0;
-            color: #fff;
-            text-shadow: -1px 1px 1px #000000;
-          }
-        }
-      }
-    }
-    .toggleShowByesInputGrp {
-      @include checkboxInputGrp;
-    }
-    .matchCountInformation {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .roundTitle {
-        width: 60%;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        h1 {
-          width: fit-content;
-          font-size: $lrgFontSize;
-          border-bottom: 3px solid $primaryColor;
-        }
-      }
-      .matchFinishedIcon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1em;
-        width: 100%;
-        color: white;
-        .completed .icon {
-          color: $primaryColor;
-        }
-        .notCompleted .icon {
-          color: grey;
-        }
-      }
-    }
-    .tableItemContainer {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 1em;
-      width: 100%;
-      .generatedTableItem {
-        width: auto;
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-    .generatedTableItem {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      &:last-child {
-        margin-bottom: 1em;
-      }
-      .gameContainer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1em;
-        height: 100%;
-        width: 100%;
-        .gameItemCard {
-          .cardHeading {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            background: #1d1d1d;
-            padding: 0.5em;
-            border-top-left-radius: 0.5em;
-            border-top-right-radius: 0.5em;
-            margin: 0;
-            h3 {
-              color: $primaryColor;
-            }
-            .icon {
-              font-size: $fontSize;
-              &:hover {
-                cursor: pointer;
-              }
-            }
-          }
-          .cardBody {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5em;
-            background: #858585;
-            padding: 0.5em;
-            border-bottom-left-radius: 0.5em;
-            border-bottom-right-radius: 0.5em;
-            border: 1px solid #1d1d1d;
-            .winner {
-              border: 1px solid greenyellow;
-              color: greenyellow;
-            }
-            h1 {
-              color: $primaryColor;
-              margin: 0;
-            }
-            p {
-              border: 2px solid $primaryColor;
-              border-radius: 0.25em;
-              min-width: 5em;
-              text-align: center;
-              background: #373737;
-              color: white;
-              font-weight: 600;
-              padding: 0.5em 2em;
-              margin: 0 0.25em;
-              width: fit-content;
-              min-width: 8em;
-              box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
-              &:hover {
-                cursor: pointer;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
   /* --- Tournament Over Component --- */
   .tournamentOver {
     width: 100%;
     text-align: center;
+    color: #fff;
+    h3 {
+      margin: .5em .5em 1em .5em;
+    }
+    span {
+      color: $primaryColor;
+    }
     .btnResetSingleElim {
       @include button;
       margin: .5em;
+    }
+    .big {
+      font-size: $h1FontSize;
+      margin-bottom: .25em;
+    }
+    .generatedTable {
+      margin-top: 1em;
+    }
+  }
+}
+/* --- Generator Table Section --- */
+.generatedTable {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+  background: $primaryGrey;
+  h1,
+  h3 {
+    font-style: italic;
+    color: #fff;
+    text-shadow: -1px 0 0 $secondaryGrey, -3px 0 2px #000000;
+    margin: 0 0.25em;
+  }
+  .generatedNamesList {
+    padding-top: 1em;
+    height: 100%;
+    width: 100%;
+    ul {
+      margin: 1em;
+    }
+    .tournamentInfo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      ul {
+        display: flex;
+        justify-content: space-between;
+        width: 73%;
+        margin: 0;
+        li {
+          font-size: $h2FontSize;
+          gap: 0.5em;
+          margin: 0;
+          color: #fff;
+          text-shadow: -1px 1px 1px #000000;
+        }
+      }
+    }
+  }
+  .toggleShowByesInputGrp {
+    @include checkboxInputGrp;
+  }
+  .matchCountInformation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .roundTitle {
+      width: 60%;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      h1 {
+        width: fit-content;
+        font-size: $lrgFontSize;
+        border-bottom: 3px solid $primaryColor;
+      }
+    }
+    .matchFinishedIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1em;
+      width: 100%;
+      color: white;
+      .completed .icon {
+        color: $primaryColor;
+      }
+      .notCompleted .icon {
+        color: grey;
+      }
+    }
+  }
+  .tableItemContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    width: 100%;
+    .generatedTableItem {
+      width: auto;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .generatedTableItem {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    &:last-child {
+      margin-bottom: 1em;
+    }
+    .gameContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1em;
+      height: 100%;
+      width: 100%;
+      .gameItemCard {
+        .cardHeading {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          background: #1d1d1d;
+          padding: 0.5em;
+          border-top-left-radius: 0.5em;
+          border-top-right-radius: 0.5em;
+          margin: 0;
+          h3 {
+            color: $primaryColor;
+          }
+          .icon {
+            font-size: $fontSize;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+        .cardBody {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5em;
+          background: #858585;
+          padding: 0.5em;
+          border-bottom-left-radius: 0.5em;
+          border-bottom-right-radius: 0.5em;
+          border: 1px solid #1d1d1d;
+          .winner {
+            border: 1px solid greenyellow;
+            color: greenyellow;
+          }
+          h1 {
+            color: $primaryColor;
+            margin: 0;
+          }
+          p {
+            border: 2px solid $primaryColor;
+            border-radius: 0.25em;
+            min-width: 5em;
+            text-align: center;
+            background: #373737;
+            color: white;
+            font-weight: 600;
+            padding: 0.5em 2em;
+            margin: 0 0.25em;
+            width: fit-content;
+            min-width: 8em;
+            box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
     }
   }
 }

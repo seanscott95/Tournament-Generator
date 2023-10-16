@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrophy } from '@fortawesome/free-solid-svg-icons';
+
 const TournamentOver = ({ setIsGenerated, setTournamentOver}) => {
 
-  const [allGames, setAllGames] = useState('');
+  const [allGames, setAllGames] = useState(null);
   const [winner, setWinner] = useState('');
 
   const resetTournament = () => {
@@ -28,18 +31,47 @@ const TournamentOver = ({ setIsGenerated, setTournamentOver}) => {
   useEffect(() => {
     const gamesFromLocal = JSON.parse(localStorage.getItem('SE'));
     if (gamesFromLocal !== null) {
-      setAllGames(gamesFromLocal);
+      const gamesArr = Object.values(gamesFromLocal);
+      setAllGames(gamesArr);
       const winnerFromLocal = Object.values(gamesFromLocal).reverse()[0][0].winner;
       setWinner(winnerFromLocal);
     };
   }, []);
-  
+
   return (
     <div className='tournamentOver'>
+      <FontAwesomeIcon className="icon big" icon={faTrophy} /> 
       <h1>Tournament Over</h1>
-      <p>Winner is {winner}</p>
-      <button className='btnResetSingleElim' onClick={resetTournament}>Reset</button>
-      <button className='btnResetSingleElim' onClick={playAgain}>Play Again</button>
+      <h3>Congratulations to the winner <span>{winner}</span></h3>
+      <div>
+        <button className='btnResetSingleElim' onClick={resetTournament}>Reset</button>
+        <button className='btnResetSingleElim' onClick={playAgain}>Play Again</button>
+      </div>
+      <div className="generatedTable">
+        {allGames !== null && allGames.map((game, index) => {
+          return (
+            <div className="generatedTableItem ">
+              <h1>ROUND {index + 1}</h1>
+              <div className="gameContainer leftBorder">
+                {Object.values(game).map((g) => {
+                  return (
+                    <div className="gameItemCard">
+                      <div className='cardHeading'>
+                        <h3>Game {g.game}</h3>
+                      </div>
+                      <div className='cardBody'>
+                        <p>{g.player1}</p>
+                        <h1>VS</h1>
+                        <p>{g.player2}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

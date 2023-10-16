@@ -196,7 +196,6 @@ a:hover {
   margin: 1em;
   /* --- Generator Input Section --- */
   /* --- Generator Button Section --- */
-  /* --- Generator Table Section --- */
   /* --- Tournament Over Component --- */
 }
 .generatorContainer .leftBorder {
@@ -466,189 +465,16 @@ a:hover {
   cursor: pointer;
   transform: scale(1.25);
 }
-.generatorContainer .generatedTable {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  width: 100%;
-  background: #434343;
-}
-.generatorContainer .generatedTable h1,
-.generatorContainer .generatedTable h3 {
-  font-style: italic;
-  color: #fff;
-  text-shadow: -1px 0 0 #676767, -3px 0 2px #000000;
-  margin: 0 0.25em;
-}
-.generatorContainer .generatedTable .generatedNamesList {
-  padding-top: 1em;
-  height: 100%;
-  width: 100%;
-}
-.generatorContainer .generatedTable .generatedNamesList ul {
-  margin: 1em;
-}
-.generatorContainer .generatedTable .generatedNamesList .tournamentInfo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.generatorContainer .generatedTable .generatedNamesList .tournamentInfo ul {
-  display: flex;
-  justify-content: space-between;
-  width: 73%;
-  margin: 0;
-}
-.generatorContainer .generatedTable .generatedNamesList .tournamentInfo ul li {
-  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.75rem);
-  gap: 0.5em;
-  margin: 0;
-  color: #fff;
-  text-shadow: -1px 1px 1px #000000;
-}
-.generatorContainer .generatedTable .toggleShowByesInputGrp {
-  width: 85%;
-  margin: 1em;
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  color: #fff;
-  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
-}
-.generatorContainer .generatedTable .toggleShowByesInputGrp label {
-  margin-bottom: 0.025em;
-}
-.generatorContainer .generatedTable .toggleShowByesInputGrp input {
-  font-size: clamp(0.7rem, 3vw + 0.75rem, 2.5rem);
-  accent-color: #21c1fa;
-  width: 0.5em;
-  height: 0.5em;
-  max-width: 20px;
-}
-.generatorContainer .generatedTable .matchCountInformation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.generatorContainer .generatedTable .matchCountInformation .roundTitle {
-  width: 60%;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-.generatorContainer .generatedTable .matchCountInformation .roundTitle h1 {
-  width: -moz-fit-content;
-  width: fit-content;
-  font-size: clamp(0.7rem, 2vw + 0.75rem, 1.5rem);
-  border-bottom: 3px solid #21c1fa;
-}
-.generatorContainer .generatedTable .matchCountInformation .matchFinishedIcon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1em;
-  width: 100%;
-  color: white;
-}
-.generatorContainer .generatedTable .matchCountInformation .matchFinishedIcon .completed .icon {
-  color: #21c1fa;
-}
-.generatorContainer .generatedTable .matchCountInformation .matchFinishedIcon .notCompleted .icon {
-  color: grey;
-}
-.generatorContainer .generatedTable .tableItemContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-  width: 100%;
-}
-.generatorContainer .generatedTable .tableItemContainer .generatedTableItem {
-  width: auto;
-}
-.generatorContainer .generatedTable .tableItemContainer .generatedTableItem:last-child {
-  margin-bottom: 0;
-}
-.generatorContainer .generatedTable .generatedTableItem {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-.generatorContainer .generatedTable .generatedTableItem:last-child {
-  margin-bottom: 1em;
-}
-.generatorContainer .generatedTable .generatedTableItem .gameContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1em;
-  height: 100%;
-  width: 100%;
-}
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardHeading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  background: #1d1d1d;
-  padding: 0.5em;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
-  margin: 0;
-}
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardHeading h3 {
-  color: #21c1fa;
-}
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardHeading .icon {
-  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
-}
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardHeading .icon:hover {
-  cursor: pointer;
-}
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5em;
-  background: #858585;
-  padding: 0.5em;
-  border-bottom-left-radius: 0.5em;
-  border-bottom-right-radius: 0.5em;
-  border: 1px solid #1d1d1d;
-}
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody .winner {
-  border: 1px solid greenyellow;
-  color: greenyellow;
-}
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody h1 {
-  color: #21c1fa;
-  margin: 0;
-}
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody p {
-  border: 2px solid #21c1fa;
-  border-radius: 0.25em;
-  min-width: 5em;
-  text-align: center;
-  background: #373737;
-  color: white;
-  font-weight: 600;
-  padding: 0.5em 2em;
-  margin: 0 0.25em;
-  width: -moz-fit-content;
-  width: fit-content;
-  min-width: 8em;
-  box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
-}
-.generatorContainer .generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody p:hover {
-  cursor: pointer;
-}
 .generatorContainer .tournamentOver {
   width: 100%;
   text-align: center;
+  color: #fff;
+}
+.generatorContainer .tournamentOver h3 {
+  margin: 0.5em 0.5em 1em 0.5em;
+}
+.generatorContainer .tournamentOver span {
+  color: #21c1fa;
 }
 .generatorContainer .tournamentOver .btnResetSingleElim {
   background-color: #21c1fa;
@@ -671,6 +497,195 @@ a:hover {
 }
 .generatorContainer .tournamentOver .btnResetSingleElim:hover, .generatorContainer .tournamentOver .btnResetSingleElim:focus {
   background-color: #0084ff;
+}
+.generatorContainer .tournamentOver .big {
+  font-size: clamp(0.7rem, 3vw + 0.75rem, 2.5rem);
+  margin-bottom: 0.25em;
+}
+.generatorContainer .tournamentOver .generatedTable {
+  margin-top: 1em;
+}
+
+/* --- Generator Table Section --- */
+.generatedTable {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+  background: #434343;
+}
+.generatedTable h1,
+.generatedTable h3 {
+  font-style: italic;
+  color: #fff;
+  text-shadow: -1px 0 0 #676767, -3px 0 2px #000000;
+  margin: 0 0.25em;
+}
+.generatedTable .generatedNamesList {
+  padding-top: 1em;
+  height: 100%;
+  width: 100%;
+}
+.generatedTable .generatedNamesList ul {
+  margin: 1em;
+}
+.generatedTable .generatedNamesList .tournamentInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.generatedTable .generatedNamesList .tournamentInfo ul {
+  display: flex;
+  justify-content: space-between;
+  width: 73%;
+  margin: 0;
+}
+.generatedTable .generatedNamesList .tournamentInfo ul li {
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.75rem);
+  gap: 0.5em;
+  margin: 0;
+  color: #fff;
+  text-shadow: -1px 1px 1px #000000;
+}
+.generatedTable .toggleShowByesInputGrp {
+  width: 85%;
+  margin: 1em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  color: #fff;
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+}
+.generatedTable .toggleShowByesInputGrp label {
+  margin-bottom: 0.025em;
+}
+.generatedTable .toggleShowByesInputGrp input {
+  font-size: clamp(0.7rem, 3vw + 0.75rem, 2.5rem);
+  accent-color: #21c1fa;
+  width: 0.5em;
+  height: 0.5em;
+  max-width: 20px;
+}
+.generatedTable .matchCountInformation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.generatedTable .matchCountInformation .roundTitle {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.generatedTable .matchCountInformation .roundTitle h1 {
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: clamp(0.7rem, 2vw + 0.75rem, 1.5rem);
+  border-bottom: 3px solid #21c1fa;
+}
+.generatedTable .matchCountInformation .matchFinishedIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  width: 100%;
+  color: white;
+}
+.generatedTable .matchCountInformation .matchFinishedIcon .completed .icon {
+  color: #21c1fa;
+}
+.generatedTable .matchCountInformation .matchFinishedIcon .notCompleted .icon {
+  color: grey;
+}
+.generatedTable .tableItemContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  width: 100%;
+}
+.generatedTable .tableItemContainer .generatedTableItem {
+  width: auto;
+}
+.generatedTable .tableItemContainer .generatedTableItem:last-child {
+  margin-bottom: 0;
+}
+.generatedTable .generatedTableItem {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.generatedTable .generatedTableItem:last-child {
+  margin-bottom: 1em;
+}
+.generatedTable .generatedTableItem .gameContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  height: 100%;
+  width: 100%;
+}
+.generatedTable .generatedTableItem .gameContainer .gameItemCard .cardHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: #1d1d1d;
+  padding: 0.5em;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  margin: 0;
+}
+.generatedTable .generatedTableItem .gameContainer .gameItemCard .cardHeading h3 {
+  color: #21c1fa;
+}
+.generatedTable .generatedTableItem .gameContainer .gameItemCard .cardHeading .icon {
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+}
+.generatedTable .generatedTableItem .gameContainer .gameItemCard .cardHeading .icon:hover {
+  cursor: pointer;
+}
+.generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  background: #858585;
+  padding: 0.5em;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  border: 1px solid #1d1d1d;
+}
+.generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody .winner {
+  border: 1px solid greenyellow;
+  color: greenyellow;
+}
+.generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody h1 {
+  color: #21c1fa;
+  margin: 0;
+}
+.generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody p {
+  border: 2px solid #21c1fa;
+  border-radius: 0.25em;
+  min-width: 5em;
+  text-align: center;
+  background: #373737;
+  color: white;
+  font-weight: 600;
+  padding: 0.5em 2em;
+  margin: 0 0.25em;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 8em;
+  box-shadow: 0 10px 20px rgba(200, 200, 200, 0.1);
+}
+.generatedTable .generatedTableItem .gameContainer .gameItemCard .cardBody p:hover {
+  cursor: pointer;
 }
 
 /* ---------- Media Queries ---------- */
