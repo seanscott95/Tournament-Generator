@@ -32,7 +32,6 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
     setTimeout(() => {
       setError(false);
     }, 3000);
-    return;
   };
 
   const handleGenerateButton = () => {
@@ -40,11 +39,11 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
       if (teamNames.filter((item) => item !== null).length <= 2) {
         runError();
         return;
-      }
-    }
+      };
+    };
     if (teamNameInput !== '') {
       runError();
-    }
+    };
 
     if (minTeamLimit) {
       const teamMinimum = [4, 8, 16, 32, 64, 128];
@@ -58,8 +57,8 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
           setTeamMinError(false);
         }, 3000);
         return;
-      }
-    }
+      };
+    };
 
     setGeneratedNamesList([...teamNames]);
 
@@ -67,9 +66,9 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
       if (!teamNames.includes('Bye')) {
         if (location.pathname === '/roundRobin') {
           teamNames.splice(teamNames.length / 2, 0, 'Bye');
-        }
-      }
-    }
+        };
+      };
+    };
 
     if (location.pathname === '/roundRobin') generateRoundRobin();
     if (location.pathname === '/single') generateSingleElimination();
@@ -79,11 +78,26 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
     setIsGenerated(true);
   };
 
+  // Allows the user to click enter to add the inputed team name
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      addTeamName();
+    };
+  };
+
+  // Adds an event listener on the window specifically for enter key
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
+  // Adds the teams names from local storage to the teamNames state
   useEffect(() => {
     if (gNL !== null) {
       let list = gNL.filter((el) => el !== 'Bye');
       setTeamNames(list);
-    }
+    };
   }, []);
 
   return (
@@ -100,9 +114,13 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
             name="teams"
             value={teamNameInput}
             onChange={(e) => setTeamNameInput(e.target.value)}
+            // onChange={(e) => console.log('e', e)}
           />
         </div>
-        <button onClick={addTeamName}>ADD</button>
+        <button
+          onClick={addTeamName}
+          
+        >ADD</button>
       </section>
       <section>
         <ul>
