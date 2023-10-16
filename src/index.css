@@ -213,7 +213,7 @@ a:hover {
 }
 .generatorContainer .heading {
   color: #fff;
-  padding: 1em;
+  padding: 1em 1em 0 1em;
   text-shadow: -0.05em 0.05em 0.05em #000000;
 }
 .generatorContainer .heading .pageHeader {
@@ -251,7 +251,14 @@ a:hover {
   font-size: 0.9em;
 }
 .generatorContainer .minTeamInputGrp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+  margin: 0 1em 1em 1em;
+  padding: 0.5em 0.25em 0.25em 0.25em;
+  border: 1px solid #21c1fa;
+  border-radius: 0.5em;
 }
 .generatorContainer .minTeamInputGrp .warningTeamLimit {
   color: #fff;
@@ -267,6 +274,9 @@ a:hover {
   gap: 1em;
   color: #fff;
   font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+  margin: 0.5em;
+  justify-content: center;
+  align-items: center;
 }
 .generatorContainer .minTeamInputGrp div label {
   margin-bottom: 0.025em;
@@ -278,12 +288,8 @@ a:hover {
   height: 0.5em;
   max-width: 20px;
 }
-.generatorContainer .minTeamInputGrp div label {
-  display: flex;
-  gap: 0.25em;
-}
-.generatorContainer .minTeamInputGrp div label span {
-  font-size: 0.75em;
+.generatorContainer .minTeamInputGrp div input {
+  font-size: clamp(0.7rem, 3vw + 0.75rem, 2.5rem);
 }
 .generatorContainer .errorMessageSection {
   display: flex;
@@ -295,7 +301,9 @@ a:hover {
   min-height: 3em;
 }
 .generatorContainer .errorMessageSection .errorMessage p {
-  background: red;
+  background: rgba(255, 0, 0, 0.3);
+  border: 1px solid red;
+  text-shadow: none;
   margin-top: 0.75em;
   padding: 0.5em 1em;
   border-radius: 10px;
@@ -313,7 +321,11 @@ a:hover {
   align-items: center;
   gap: 1em;
 }
-.generatorContainer .inputGroupContainer button {
+.generatorContainer .inputGroupContainer .btnAdd {
+  width: 30%;
+  margin: 0 0.5em;
+}
+.generatorContainer .inputGroupContainer .btnAdd button {
   background-color: #21c1fa;
   border: 1px solid transparent;
   border-radius: 0.25rem;
@@ -332,17 +344,15 @@ a:hover {
   text-shadow: -0.025em 0.075em rgb(17, 17, 17);
   line-height: 1.1;
   text-shadow: -1px 1px 1px #000000;
-  margin: 0 0.5em;
   width: 100%;
-  max-width: 20vmin;
 }
-.generatorContainer .inputGroupContainer button:hover, .generatorContainer .inputGroupContainer button:focus {
+.generatorContainer .inputGroupContainer .btnAdd button:hover, .generatorContainer .inputGroupContainer .btnAdd button:focus {
   background-color: #0084ff;
 }
 .generatorContainer .inputGroupContainer .inputGroup {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 1em;
   height: 100%;
   width: 100%;
@@ -515,18 +525,36 @@ a:hover {
   height: 0.5em;
   max-width: 20px;
 }
-.generatorContainer .generatedTable .matchFinishedIcon {
+.generatorContainer .generatedTable .matchCountInformation {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.generatorContainer .generatedTable .matchCountInformation .roundTitle {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.generatorContainer .generatedTable .matchCountInformation .roundTitle h1 {
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: clamp(0.7rem, 2vw + 0.75rem, 1.5rem);
+  border-bottom: 3px solid #21c1fa;
+}
+.generatorContainer .generatedTable .matchCountInformation .matchFinishedIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 1em;
   width: 100%;
   color: white;
 }
-.generatorContainer .generatedTable .matchFinishedIcon .completed .icon {
+.generatorContainer .generatedTable .matchCountInformation .matchFinishedIcon .completed .icon {
   color: #21c1fa;
 }
-.generatorContainer .generatedTable .matchFinishedIcon .notCompleted .icon {
+.generatorContainer .generatedTable .matchCountInformation .matchFinishedIcon .notCompleted .icon {
   color: grey;
 }
 .generatorContainer .generatedTable .tableItemContainer {
@@ -664,17 +692,25 @@ a:hover {
   .generatorContainer .heading p {
     font-size: 0.75rem;
   }
+  .matchCountInformation {
+    flex-direction: column;
+    gap: 0.75em;
+  }
 }
 @media (max-width: 450px) {
-  .navbar ul {
-    flex-direction: column;
-  }
   .inputGroupContainer {
     flex-wrap: wrap;
   }
-  .inputGroupContainer button {
-    margin: 0 2em;
-    min-width: 90%;
+  .btnAdd {
+    min-width: 94%;
+    margin: 0 0.5em;
+  }
+  .minTeamInputGrp {
+    flex-direction: column;
+    align-items: center;
+  }
+  .navbar ul {
+    flex-direction: column;
   }
   .tournamentInfo ul {
     flex-direction: column;
