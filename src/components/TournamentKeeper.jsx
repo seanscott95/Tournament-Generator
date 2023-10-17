@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+
+import MatchCountDisplay from './MatchCountDisplay';
 import useRRGenerator from '../hooks/useRRGenerator';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,28 +9,24 @@ import {
   faUserGroup,
   faArrowRotateRight,
 } from '@fortawesome/free-solid-svg-icons';
-import MatchCountDisplay from './MatchCountDisplay';
 
 const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
-  const { generateSingleElimination } = useRRGenerator();
-  const [message, setMessage] = useState('');
-
-  // Used to label the local storage key for 'SE' (Single Elimination)
-  const [round, setRound] = useState(1);
+  const { generateSingleElimination, allGames: allGamesFromHook } = useRRGenerator();
   
-  // Retrieves all the games from local storage
-  let allGames = JSON.parse(localStorage.getItem('allGamesSingle'));
-  // Removes all games with byes in them
-  let allGamesNoByes = allGames
-    .map((g) => g.filter((el) => el !== 'Bye'))
-    .filter((e) => e.length !== 1);
+  const [message, setMessage] = useState('');
+  const [completedGames, setCompletedGames] = useState([]);
+  const [round, setRound] = useState(1);
 
-  // Retrieves the list of team names from local storage
-  let originalTeams = JSON.parse(localStorage.getItem('originalNamesList'));
-  // Removes the byes from the list
-  let originalTeamsNoByes = originalTeams.filter((el) => el !== 'Bye');
+  const [allGames, setAllGames] = useState([]);
+  const [allGamesNoByes, setAllGamesNoByes] = useState([]);
 
-  // Formats the arr to an object to be used in the jsx
+  const [originalTeams, setOriginalTeams] = useState([]);
+  const [originalTeamsNoByes, setOriginalTeamsNoByes] = useState([]);
+
+  const [arrOfAllGamesObjs, setArrOfAllGamesObjs] = useState([]);
+  const [arrOfAllGamesObjsNoByes, setArrOfAllGamesObjsNoByes] = useState([]);
+
+  // Formats an arr into an object to be used in the jsx
   const arrToObjLayout = (arr) => {
     return arr.map((game, index) => {
       if (game[0] === 'Bye' || game[1] === 'Bye') {
@@ -51,9 +49,6 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
     });
   };
 
-  let allGamesObj = arrToObjLayout(allGames);
-  let allGamesNoByesObj = arrToObjLayout(allGamesNoByes);
-
   // Toggles the display matches with byes checkbox
   const [isChecked, setIsChecked] = useState(true);
   const handleShowByes = () => {
@@ -62,31 +57,43 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
 
   // Button event handler that selects the winner on click
   const handleClickForWinner = (e, winner, game) => {
+    let tempAllGames = arrOfAllGamesObjs;
     // If there is already a winner exit function
-    if (allGamesObj[game - 1].winner !== '') return;
+    if (tempAllGames[game - 1].winner !== '') return;
+    if (completedGames.includes(game)) return;
 
-    // Sets the allGamesObj object for the particular game to
+    // Sets the tempAllGames object for the particular game to
     // completed is true, the winning team
-    allGamesObj[game - 1].winner = winner;
-    allGamesObj[game - 1].completed = true;
+    tempAllGames[game - 1].winner = winner;
+    tempAllGames[game - 1].completed = true;
 
     // Adds the class of winner to the event element
     e.target.classList.add('winner');
+    setCompletedGames((prev) => [...prev, game]);
+    setArrOfAllGamesObjs(tempAllGames);
   };
 
   // Refreshes who the winner and completed values of the selected game
   const refreshCardWinner = (game) => {
-    allGamesObj[game - 1].winner = '';
-    allGamesObj[game - 1].completed = false;
+    let tempAllGames = arrOfAllGamesObjs;
+    tempAllGames[game - 1].winner = '';
+    tempAllGames[game - 1].completed = false;
 
     // Removes the winner class from the team names of the selected game card
     const teamNameEl = document.querySelectorAll(`.game${game}`);
     teamNameEl.forEach((game) => game.classList.remove('winner'));
+
+    let completedGamesFromLocal = JSON.parse(localStorage.getItem('completed'));
+    if (completedGamesFromLocal !== null) completedGamesFromLocal.filter((item) => item === game);
+    setCompletedGames((prev) => prev.filter((g) => g !== game));
+    
+    setArrOfAllGamesObjs(tempAllGames);
   };
 
   const handleNextRound = () => {
-    const winners = allGamesObj.filter((e) => e.completed === true);
-    if (allGamesObj.length !== winners.length) {
+    // Throw error if all games do not have a winner
+    const winners = arrOfAllGamesObjs.filter((e) => e.completed === true);
+    if (arrOfAllGamesObjs.length !== winners.length) {
       setMessage(true);
       setTimeout(() => {
         setMessage(false);
@@ -94,20 +101,20 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
       return;
     };
 
-    // Saves each round in the SE local storage key
-    const prevRounds = JSON.parse(localStorage.getItem('SE')) || [];
+    // Saves and updates each round to local storage
+    const prevRounds = JSON.parse(localStorage.getItem('SE')) || {};
     localStorage.setItem(
       `SE`,
       JSON.stringify({
         ...prevRounds,
         [`Round${round}`]: {
-          ...allGamesObj,
+          ...arrOfAllGamesObjs,
         },
-      }),
+      })
     );
 
     // Checks to see if all games are completed
-    if (allGamesObj.length === winners.length) {
+    if (arrOfAllGamesObjs.length === winners.length) {
       const winningTeams = winners.map((el) => el.winner);
       // Ends the tournament
       if (winningTeams.length === 1) {
@@ -115,7 +122,9 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
         setTournamentOver(true);
         return;
       };
-
+      // Checks to see if a Bye is needed to be added to the winning team,
+      // winning teams length needs to be an even number to work
+      // If team limit is off then this will solve the issues associated
       if (winningTeams.length % 2 !== 0) {
         if (!winningTeams.includes('Bye')) {
           winningTeams.push('Bye');
@@ -128,20 +137,44 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
 
       setRound((prev) => prev + 1);
       generateSingleElimination(winningTeams);
+      // Resets each displayed game card
+      arrOfAllGamesObjs.forEach((g) => {
+        refreshCardWinner(g.game);
+      });
     };
   };
 
   useEffect(() => {
-    console.log('useEFfect allgo', allGamesObj);
+    const originalNamesList = JSON.parse(
+      localStorage.getItem('originalNamesList')
+    );
+    if (originalNamesList !== null) {
+      const originalNamesListNoByes = originalNamesList.filter(
+        (el) => el !== 'Bye'
+      );
+      setOriginalTeams(originalNamesList);
+      setOriginalTeamsNoByes(originalNamesListNoByes);
+    };
+  }, []);
 
-    allGamesNoByes = allGames
-      .map((g) => g.filter((el) => el !== 'Bye'))
-      .filter((e) => e.length !== 1);
+  useEffect(() => {
+    const newAllGames = arrToObjLayout(allGames);
+    const newAllGamesNoByes = arrToObjLayout(allGamesNoByes);
+    setArrOfAllGamesObjs(newAllGames);
+    setArrOfAllGamesObjsNoByes(newAllGamesNoByes);
+  }, [allGames, allGamesNoByes, setArrOfAllGamesObjs, setArrOfAllGamesObjsNoByes]);
 
-    originalTeams = JSON.parse(localStorage.getItem('originalNamesList'));
-    originalTeamsNoByes = originalTeams.filter((el) => el !== 'Bye');
-    allGamesNoByesObj = arrToObjLayout(allGamesNoByes);
-  }, [allGamesObj, generateSingleElimination]);
+  useEffect(() => {
+    const allGamesFromLocal = JSON.parse(localStorage.getItem('allGamesSingle'));
+    if (allGamesFromLocal !== null) {
+      setAllGames(allGamesFromLocal);
+
+      const allGamesFromLocalNoByes = allGames
+        .map((g) => g.filter((el) => el !== 'Bye'))
+        .filter((e) => e.length !== 1);
+      setAllGamesNoByes(allGamesFromLocalNoByes);
+    };
+  }, [allGamesFromHook]);
 
   return (
     <section className="generatedTable">
@@ -173,7 +206,7 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
           </ul>
         </div>
       )}
-      {!minTeamLimit && allGamesObj.length >= 1 && (
+      {!minTeamLimit && arrOfAllGamesObjs.length >= 1 && (
         <div className="toggleShowByesInputGrp">
           <input
             type="checkbox"
@@ -186,16 +219,17 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
         </div>
       )}
       <div className="showFinishedMatchesContainer">
-        {allGamesObj && (
+        {arrOfAllGamesObjs && (
           <MatchCountDisplay
-            allGamesNoByesObj={allGamesNoByesObj}
-            allGamesObj={allGamesObj}
+            arrOfAllGamesObjsNoByes={arrOfAllGamesObjsNoByes}
+            arrOfAllGamesObjs={arrOfAllGamesObjs}
+            completedGames={completedGames}
           />
         )}
       </div>
       <div className="tableItemContainer ">
-        {allGamesObj &&
-          (isChecked ? allGamesObj : allGamesNoByesObj).map((game, index) => {
+        {arrOfAllGamesObjs.length >= 1 &&
+          (isChecked ? arrOfAllGamesObjs : arrOfAllGamesObjsNoByes).map((game, index) => {
             const gameNumber = game.game;
             return (
               <div className="generatedTableItem" key={index}>
