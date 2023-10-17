@@ -21,16 +21,18 @@ const DisplayMatches = () => {
       <section className="generatedTable">
         {generatedNamesList.length !== 0 && (
           <div className="generatedNamesList">
-            <ul className="tournamentInfo">
-              <li>
-                <FontAwesomeIcon className="icon" icon={faTrophy} />
-                Round Robin
-              </li>
-              <li>
-                <FontAwesomeIcon className="icon" icon={faUserGroup} />
-                {namesListByesRemoved.length} Teams
-              </li>
-            </ul>
+            <div className="tournamentInfo">
+              <ul>
+                <li>
+                  <FontAwesomeIcon className="icon" icon={faTrophy} />
+                  Round Robin
+                </li>
+                <li>
+                  <FontAwesomeIcon className="icon" icon={faUserGroup} />
+                  {namesListByesRemoved.length} Teams
+                </li>
+              </ul>
+            </div>
             <ul>
               {generatedNamesList &&
                 namesListByesRemoved.map((team, index) => {
