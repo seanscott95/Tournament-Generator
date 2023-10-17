@@ -53,19 +53,22 @@ const SingleGenerator = () => {
                   <li>
                     Total teams should be either 4, 8, 16, 32, 64 or 128 teams
                     long
+                  <p className="instructionsNote">
+                    NOTE - YOU CAN REMOVE THE TEAM LIMIT OPTION IN THE SETTINGS
+                  </p>
                   </li>
                   <li>
-                    Once finished click the Generate button to start tournament
+                    Once you have entered all your teams click Generate to start tournament
                   </li>
                   <li>
-                    NOTE - You can remove the team limit option in the settings
+                    Read the instructions on the next page to choose a winner for each game
                   </li>
                 </ol>
               )}
         </div>
       </section>
       <section>
-        {showSettings && (
+        {showSettings && !tournamentOver && (
           <div className='minTeamInputGrp'>
             <div>
               <input
