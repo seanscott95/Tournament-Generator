@@ -16,6 +16,8 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
   const [message, setMessage] = useState('');
   const [completedGames, setCompletedGames] = useState([]);
   const [round, setRound] = useState(1);
+  // Toggles the display matches with byes checkbox
+  const [isChecked, setIsChecked] = useState(true);
 
   const [allGames, setAllGames] = useState([]);
   const [allGamesNoByes, setAllGamesNoByes] = useState([]);
@@ -25,6 +27,14 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
 
   const [arrOfAllGamesObjs, setArrOfAllGamesObjs] = useState([]);
   const [arrOfAllGamesObjsNoByes, setArrOfAllGamesObjsNoByes] = useState([]);
+
+  useEffect(() => {
+    const tempArrOfAllGamesNoByes = arrOfAllGamesObjs
+      .filter((g) => g.player1 !== 'Bye')
+      .filter((g) => g.player2 !== 'Bye')
+      setArrOfAllGamesObjsNoByes(tempArrOfAllGamesNoByes);
+
+  }, [arrOfAllGamesObjs]);
 
   // Formats an arr into an object to be used in the jsx
   const arrToObjLayout = (arr) => {
@@ -50,7 +60,6 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
   };
 
   // Toggles the display matches with byes checkbox
-  const [isChecked, setIsChecked] = useState(true);
   const handleShowByes = () => {
     setIsChecked((prev) => !prev);
   };
@@ -58,6 +67,7 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
   // Button event handler that selects the winner on click
   const handleClickForWinner = (e, winner, game) => {
     let tempAllGames = arrOfAllGamesObjs;
+    // let tempAllGames = isChecked ? arrOfAllGamesObjs : arrOfAllGamesObjsNoByes;
     // If there is already a winner exit function
     if (tempAllGames[game - 1].winner !== '') return;
     if (completedGames.includes(game)) return;
@@ -70,24 +80,26 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
     // Adds the class of winner to the event element
     e.target.classList.add('winner');
     setCompletedGames((prev) => [...prev, game]);
+
     setArrOfAllGamesObjs(tempAllGames);
+    // isChecked ? setArrOfAllGamesObjs(tempAllGames) : setArrOfAllGamesObjsNoByes(tempAllGames);
   };
 
   // Refreshes who the winner and completed values of the selected game
   const refreshCardWinner = (game) => {
     let tempAllGames = arrOfAllGamesObjs;
+    // let tempAllGames = isChecked ? arrOfAllGamesObjs : arrOfAllGamesObjsNoByes;
     tempAllGames[game - 1].winner = '';
     tempAllGames[game - 1].completed = false;
 
     // Removes the winner class from the team names of the selected game card
     const teamNameEl = document.querySelectorAll(`.game${game}`);
     teamNameEl.forEach((game) => game.classList.remove('winner'));
-
-    let completedGamesFromLocal = JSON.parse(localStorage.getItem('completed'));
-    if (completedGamesFromLocal !== null) completedGamesFromLocal.filter((item) => item === game);
+    
     setCompletedGames((prev) => prev.filter((g) => g !== game));
     
     setArrOfAllGamesObjs(tempAllGames);
+    // isChecked ? setArrOfAllGamesObjs(tempAllGames) : setArrOfAllGamesObjsNoByes(tempAllGames);
   };
 
   const handleNextRound = () => {
@@ -141,6 +153,9 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
       arrOfAllGamesObjs.forEach((g) => {
         refreshCardWinner(g.game);
       });
+      arrOfAllGamesObjsNoByes.forEach((g) => {
+        refreshCardWinner(g.game);
+      });
     };
   };
 
@@ -169,9 +184,10 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
     if (allGamesFromLocal !== null) {
       setAllGames(allGamesFromLocal);
 
-      const allGamesFromLocalNoByes = allGames
+      const allGamesFromLocalNoByes = allGamesFromLocal
         .map((g) => g.filter((el) => el !== 'Bye'))
         .filter((e) => e.length !== 1);
+
       setAllGamesNoByes(allGamesFromLocalNoByes);
     };
   }, [allGamesFromHook]);
@@ -224,6 +240,7 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
             arrOfAllGamesObjsNoByes={arrOfAllGamesObjsNoByes}
             arrOfAllGamesObjs={arrOfAllGamesObjs}
             completedGames={completedGames}
+            isChecked={isChecked}
           />
         )}
       </div>

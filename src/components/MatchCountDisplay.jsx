@@ -7,19 +7,42 @@ const MatchCountDisplay = ({
   arrOfAllGamesObjs,
   arrOfAllGamesObjsNoByes,
   completedGames,
+  isChecked,
 }) => {
   const [round, setRound] = useState('');
   const [allGamesArr, setAllGamesArr] = useState([]);
-  const [length, setLength] = useState('');
+  const [allGamesArrNoByes, setAllGamesArrNoByes] = useState([]);
+  const [lengthOfAllGames, setLengthOfAllGames] = useState(0);
+  const [completedGamesArr, setCompletedGamesArr] = useState([]);
 
   useEffect(() => {
-    const newArr = arrOfAllGamesObjs;
+    let newArr = arrOfAllGamesObjs;
     setAllGamesArr(newArr);
-    setLength(newArr.length);
+    const newArrNoByes = arrOfAllGamesObjsNoByes;
+    setAllGamesArrNoByes(newArrNoByes);
 
+    setCompletedGamesArr(completedGames);
+    
+    // Changes length of all games finished fraction displayed
+    if (!isChecked) {
+      newArr = arrOfAllGamesObjsNoByes;
+    };
+    setLengthOfAllGames(newArr.length);
+
+    // Adds a Bye to the completed games to show correct number of
+    // finished games in fraction displayed
+    newArr.forEach((g) => {
+      if (isChecked) {
+        if (g.player1 === 'Bye' || g.player2 === 'Bye') {
+          setCompletedGamesArr((prev) => [...prev, 'Bye']);
+        };
+      };
+    });
+
+    // Sets the round state variable depending on the round local storage value
     const roundFromLocal = JSON.parse(localStorage.getItem('round')) || '';
     if (roundFromLocal !== null) setRound(roundFromLocal);
-  }, [arrOfAllGamesObjs, completedGames]);
+  }, [arrOfAllGamesObjs, arrOfAllGamesObjsNoByes, completedGames, isChecked]);
 
   return (
     <div className="matchCountInformation">
@@ -28,7 +51,8 @@ const MatchCountDisplay = ({
       </div>
       <div className="matchFinishedIcon">
         {allGamesArr &&
-          allGamesArr.map((game, index) => {
+          (isChecked ? allGamesArr : allGamesArrNoByes).map((game, index) => {
+            // allGamesArr.map((game, index) => {
             return (
               <div key={game + index}>
                 {game.completed ? (
@@ -43,7 +67,9 @@ const MatchCountDisplay = ({
               </div>
             );
           })}
-        {arrOfAllGamesObjs && <p>{`${completedGames.length}/${length}`}</p>}
+        {allGamesArr && (
+          <p>{`${completedGamesArr.length}/${lengthOfAllGames}`}</p>
+        )}
       </div>
     </div>
   );
