@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import TeamInputGroup from './TeamInputGroup';
-import DisplayMatches from './DisplayMatches';
+import TeamInputGroup from '../components/TeamInputGroup';
+import DisplayMatches from '../components/DisplayMatches';
 
 const RRGenerator = () => {
   const [isGenerated, setIsGenerated] = useState(false);

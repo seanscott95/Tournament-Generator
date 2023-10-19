@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-import TeamInputGroup from './TeamInputGroup';
-import TournamentKeeper from './TournamentKeeper';
+import TeamInputGroup from '../components/TeamInputGroup';
+import TournamentKeeper from '../components/TournamentKeeper';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
-import TournamentOver from './TournamentOver';
+import TournamentOver from '../components/TournamentOver';
 
 const SingleGenerator = () => {
   const [isGenerated, setIsGenerated] = useState(false);
