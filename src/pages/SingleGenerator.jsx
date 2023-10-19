@@ -48,6 +48,9 @@ const SingleGenerator = () => {
             : !tournamentOver && (
                 <ol>
                   <li>
+                    In Single ELimination if you lose one game you're out
+                  </li>
+                  <li>
                     To get started enter your team names in the input below
                   </li>
                   <li>
@@ -93,6 +96,7 @@ const SingleGenerator = () => {
           <TournamentKeeper
             setTournamentOver={setTournamentOver}
             minTeamLimit={minTeamLimit}
+            eliminationType='Single'
           />
         )}
       </section>
