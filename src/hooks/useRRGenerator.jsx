@@ -145,7 +145,8 @@ const useRRGenerator = () => {
       }
     }
     if (winningAndLosingTeams !== null) {
-      teamArr = [...winningAndLosingTeams.winners, ...winningAndLosingTeams.losers];
+      const k = [...winningAndLosingTeams.winners, ...winningAndLosingTeams.losers];
+      teamArr = k;
     }
 
     const createGame = (arr) => {
@@ -184,16 +185,14 @@ const useRRGenerator = () => {
       setAllGames(allMatches);
     }
     if (round !== 1) {
-      if (winners.length > 2) {
-        const createdGames = createGame([...winners, ...losers])
-        allMatches.push(createdGames);
+      const createdGames = createGame([...winners, ...losers])
+      allMatches.push(createdGames);
 
-        setWinnersBracket(winners);
-        setLossesBracket(losers);
-      }
-
+      setWinnersBracket(winners);
+      setLossesBracket(losers);
+      
       setAllGames(allMatches);
-    } 
+    }
     
     updateRound();
     
