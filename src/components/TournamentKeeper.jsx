@@ -10,9 +10,17 @@ import {
   faArrowRotateRight,
 } from '@fortawesome/free-solid-svg-icons';
 
-const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
-  const { generateSingleElimination, allGames: allGamesFromHook } = useRRGenerator();
-  
+const TournamentKeeper = ({
+  setTournamentOver,
+  minTeamLimit,
+  eliminationType,
+}) => {
+  const {
+    generateSingleElimination,
+    generateDoubleElimination,
+    allGames: allGamesFromHook,
+  } = useRRGenerator();
+
   const [message, setMessage] = useState('');
   const [completedGames, setCompletedGames] = useState([]);
   const [round, setRound] = useState(1);
@@ -27,14 +35,6 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
 
   const [arrOfAllGamesObjs, setArrOfAllGamesObjs] = useState([]);
   const [arrOfAllGamesObjsNoByes, setArrOfAllGamesObjsNoByes] = useState([]);
-
-  useEffect(() => {
-    const tempArrOfAllGamesNoByes = arrOfAllGamesObjs
-      .filter((g) => g.player1 !== 'Bye')
-      .filter((g) => g.player2 !== 'Bye')
-      setArrOfAllGamesObjsNoByes(tempArrOfAllGamesNoByes);
-
-  }, [arrOfAllGamesObjs]);
 
   // Formats an arr into an object to be used in the jsx
   const arrToObjLayout = (arr) => {
@@ -82,36 +82,34 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
     setCompletedGames((prev) => [...prev, game]);
 
     setArrOfAllGamesObjs(tempAllGames);
-    // isChecked ? setArrOfAllGamesObjs(tempAllGames) : setArrOfAllGamesObjsNoByes(tempAllGames);
   };
 
   // Refreshes who the winner and completed values of the selected game
   const refreshCardWinner = (game) => {
     let tempAllGames = arrOfAllGamesObjs;
-    // let tempAllGames = isChecked ? arrOfAllGamesObjs : arrOfAllGamesObjsNoByes;
     tempAllGames[game - 1].winner = '';
     tempAllGames[game - 1].completed = false;
 
     // Removes the winner class from the team names of the selected game card
     const teamNameEl = document.querySelectorAll(`.game${game}`);
     teamNameEl.forEach((game) => game.classList.remove('winner'));
-    
+
     setCompletedGames((prev) => prev.filter((g) => g !== game));
-    
+
     setArrOfAllGamesObjs(tempAllGames);
-    // isChecked ? setArrOfAllGamesObjs(tempAllGames) : setArrOfAllGamesObjsNoByes(tempAllGames);
   };
 
   const handleNextRound = () => {
     // Throw error if all games do not have a winner
-    const winners = arrOfAllGamesObjs.filter((e) => e.completed === true);
-    if (arrOfAllGamesObjs.length !== winners.length) {
+    const allGames = arrOfAllGamesObjs;
+    const isCompleted = allGames.filter((e) => e.completed === true);
+    if (allGames.length !== isCompleted.length) {
       setMessage(true);
       setTimeout(() => {
         setMessage(false);
       }, 3000);
       return;
-    };
+    }
 
     // Saves and updates each round to local storage
     const prevRounds = JSON.parse(localStorage.getItem('SE')) || {};
@@ -120,43 +118,59 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
       JSON.stringify({
         ...prevRounds,
         [`Round${round}`]: {
-          ...arrOfAllGamesObjs,
+          ...allGames,
         },
       })
     );
 
     // Checks to see if all games are completed
-    if (arrOfAllGamesObjs.length === winners.length) {
-      const winningTeams = winners.map((el) => el.winner);
+    if (allGames.length === isCompleted.length) {
+      const winningTeams = isCompleted.map((el) => el.winner);
+      const losingTeams = isCompleted.map((el) => {
+        return winningTeams.includes(el.player1) ? el.player2 : el.player1;
+      });
       // Ends the tournament
       if (winningTeams.length === 1) {
         setRound(1);
+        localStorage.setItem('round', 1);
         setTournamentOver(true);
         return;
-      };
-      // Checks to see if a Bye is needed to be added to the winning team,
-      // winning teams length needs to be an even number to work
-      // If team limit is off then this will solve the issues associated
-      if (winningTeams.length % 2 !== 0) {
-        if (!winningTeams.includes('Bye')) {
-          winningTeams.push('Bye');
-        };
-      };
+      }
 
       // Removes all winner classes from current game cards
       const teamNameEl = document.querySelectorAll('.cardBody p');
       teamNameEl.forEach((game) => game.classList.remove('winner'));
 
       setRound((prev) => prev + 1);
-      generateSingleElimination(winningTeams);
+
+      if (eliminationType === 'Double') {
+        const games = { winners: [...winningTeams], losers: [...losingTeams] };
+        generateDoubleElimination(games);
+      }
+      if (eliminationType === 'Single') {
+        // Checks to see if a Bye is needed to be added to the winning team,
+        // winning teams length needs to be an even number to work
+        // If team limit is off then this will solve the issues associated
+        if (winningTeams.length % 2 !== 0) {
+          if (!winningTeams.includes('Bye')) {
+            winningTeams.push('Bye');
+          }
+        }
+        generateSingleElimination(winningTeams);
+      }
+
       // Resets each displayed game card
-      arrOfAllGamesObjs.forEach((g) => {
-        refreshCardWinner(g.game);
+      allGames.forEach((g) => {
+        if (g.game !== undefined) {
+          refreshCardWinner(g.game);
+        }
       });
-      arrOfAllGamesObjsNoByes.forEach((g) => {
-        refreshCardWinner(g.game);
+      allGamesNoByes.forEach((g) => {
+        if (g.game !== undefined) {
+          refreshCardWinner(g.game);
+        }
       });
-    };
+    }
   };
 
   useEffect(() => {
@@ -169,7 +183,7 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
       );
       setOriginalTeams(originalNamesList);
       setOriginalTeamsNoByes(originalNamesListNoByes);
-    };
+    }
   }, []);
 
   useEffect(() => {
@@ -177,20 +191,34 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
     const newAllGamesNoByes = arrToObjLayout(allGamesNoByes);
     setArrOfAllGamesObjs(newAllGames);
     setArrOfAllGamesObjsNoByes(newAllGamesNoByes);
-  }, [allGames, allGamesNoByes, setArrOfAllGamesObjs, setArrOfAllGamesObjsNoByes]);
+  }, [
+    allGames,
+    allGamesNoByes,
+    setArrOfAllGamesObjs,
+    setArrOfAllGamesObjsNoByes,
+  ]);
 
   useEffect(() => {
-    const allGamesFromLocal = JSON.parse(localStorage.getItem('allGamesSingle'));
+    const allGamesFromLocal = JSON.parse(
+      localStorage.getItem('allGamesSingle')
+    );
     if (allGamesFromLocal !== null) {
       setAllGames(allGamesFromLocal);
 
       const allGamesFromLocalNoByes = allGamesFromLocal
-        .map((g) => g.filter((el) => el !== 'Bye'))
+        .map((g) => [g].filter((el) => el !== 'Bye'))
         .filter((e) => e.length !== 1);
 
       setAllGamesNoByes(allGamesFromLocalNoByes);
-    };
+    }
   }, [allGamesFromHook]);
+
+  useEffect(() => {
+    const tempArrOfAllGamesNoByes = arrOfAllGamesObjs
+      .filter((g) => g.player1 !== 'Bye')
+      .filter((g) => g.player2 !== 'Bye');
+    setArrOfAllGamesObjsNoByes(tempArrOfAllGamesNoByes);
+  }, [arrOfAllGamesObjs]);
 
   return (
     <section className="generatedTable">
@@ -246,53 +274,55 @@ const TournamentKeeper = ({ setTournamentOver, minTeamLimit }) => {
       </div>
       <div className="tableItemContainer ">
         {arrOfAllGamesObjs.length >= 1 &&
-          (isChecked ? arrOfAllGamesObjs : arrOfAllGamesObjsNoByes).map((game, index) => {
-            const gameNumber = game.game;
-            return (
-              <div className="generatedTableItem" key={index}>
-                <div className="gameContainer">
-                  <div className="gameItemCard">
-                    <div className="cardHeading">
-                      <h3>Game {gameNumber}</h3>
-                      {game.player1 === 'Bye' || game.player2 === 'Bye' ? (
-                        <></>
-                      ) : (
-                        <FontAwesomeIcon
-                          className="icon"
-                          icon={faArrowRotateRight}
-                          onClick={() => refreshCardWinner(gameNumber)}
-                          value={gameNumber}
-                        />
-                      )}
-                    </div>
-                    <div className="cardBody">
-                      <p
-                        onClick={(e) =>
-                          handleClickForWinner(e, game.player1, gameNumber)
-                        }
-                        className={`game${gameNumber} ${
-                          game.winner === game.player1 ? 'winner' : ''
-                        }`}
-                      >
-                        {game.player1}
-                      </p>
-                      <h1>VS</h1>
-                      <p
-                        onClick={(e) =>
-                          handleClickForWinner(e, game.player2, gameNumber)
-                        }
-                        className={`game${gameNumber} ${
-                          game.winner === game.player2 ? 'winner' : ''
-                        }`}
-                      >
-                        {game.player2}
-                      </p>
+          (isChecked ? arrOfAllGamesObjs : arrOfAllGamesObjsNoByes).map(
+            (game, index) => {
+              const gameNumber = game.game;
+              return (
+                <div className="generatedTableItem" key={index}>
+                  <div className="gameContainer">
+                    <div className="gameItemCard">
+                      <div className="cardHeading">
+                        <h3>Game {gameNumber}</h3>
+                        {game.player1 === 'Bye' || game.player2 === 'Bye' ? (
+                          <></>
+                        ) : (
+                          <FontAwesomeIcon
+                            className="icon"
+                            icon={faArrowRotateRight}
+                            onClick={() => refreshCardWinner(gameNumber)}
+                            value={gameNumber}
+                          />
+                        )}
+                      </div>
+                      <div className="cardBody">
+                        <p
+                          onClick={(e) =>
+                            handleClickForWinner(e, game.player1, gameNumber)
+                          }
+                          className={`game${gameNumber} ${
+                            game.winner === game.player1 ? 'winner' : ''
+                          }`}
+                        >
+                          {game.player1}
+                        </p>
+                        <h1>VS</h1>
+                        <p
+                          onClick={(e) =>
+                            handleClickForWinner(e, game.player2, gameNumber)
+                          }
+                          className={`game${gameNumber} ${
+                            game.winner === game.player2 ? 'winner' : ''
+                          }`}
+                        >
+                          {game.player2}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            }
+          )}
       </div>
       <section className="errorMessageSection">
         <div className="errorMessage">
