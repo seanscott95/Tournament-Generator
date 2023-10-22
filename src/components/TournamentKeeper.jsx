@@ -19,6 +19,8 @@ const TournamentKeeper = ({
     generateSingleElimination,
     generateDoubleElimination,
     allGames: allGamesFromHook,
+    finalsBracket,
+    isFinalRound,
   } = useRRGenerator();
 
   const [message, setMessage] = useState('');
@@ -130,12 +132,20 @@ const TournamentKeeper = ({
         return winningTeams.includes(el.player1) ? el.player2 : el.player1;
       });
       // Ends the tournament
-      if (winningTeams.length === 1) {
+      if (isFinalRound) {
+        console.log('HIT OVERRRRRR')
         setRound(1);
         localStorage.setItem('round', 1);
         setTournamentOver(true);
         return;
       }
+      // if (winningTeams.length === 1) {
+      //   console.log('HIT OVERRRRRR')
+      //   setRound(1);
+      //   localStorage.setItem('round', 1);
+      //   setTournamentOver(true);
+      //   return;
+      // }
 
       // Removes all winner classes from current game cards
       const teamNameEl = document.querySelectorAll('.cardBody p');
@@ -144,6 +154,7 @@ const TournamentKeeper = ({
       setRound((prev) => prev + 1);
 
       if (eliminationType === 'Double') {
+        
         const games = { winners: [...winningTeams], losers: [...losingTeams] };
         generateDoubleElimination(games);
       }
@@ -329,7 +340,7 @@ const TournamentKeeper = ({
           {message && <p>Please make sure all games are completed</p>}
         </div>
         <div className="nextRoundBtnContainer">
-          {allGames.length === 1 ? (
+          {isFinalRound ? (
             <button onClick={handleNextRound}>FINISH TOURNAMENT</button>
           ) : (
             <button onClick={handleNextRound}>NEXT ROUND</button>
