@@ -149,7 +149,6 @@ const useRRGenerator = () => {
   };
 
   const generateDoubleElimination = (winningAndLosingTeams = null) => {
-    console.log('WALT-1', winningAndLosingTeams)
     let round = JSON.parse(localStorage.getItem('round')) + 1 || 1;
 
     let teamArr = teamNames;
@@ -157,147 +156,99 @@ const useRRGenerator = () => {
 
     if (round === 1) {
       localStorage.setItem('originalNamesList', JSON.stringify(teamNames));
-    }
+    };
 
     if (teamArr.length % 2 !== 0) {
       if (!teamArr.includes('Bye')) {
         teamArr.push('Bye');
-      }
-    }
-    if (winningAndLosingTeams !== null) {
-      const k = [
-        ...winningAndLosingTeams.winners,
-        ...winningAndLosingTeams.losers,
-      ];
-      console.log('k w-2', winningAndLosingTeams.winners)
-      console.log('k l-2', winningAndLosingTeams.losers)
-      console.log('k-2', k)
-      teamArr = k;
-    }
-
-    
+      };
+    };
 
     let { winners, losers } = winningAndLosingTeams || {};
-    console.log('winners-3', winners?.length, winners);
-    console.log('losers-3', losers?.length, losers);
-    
-    
+
     // Eliminates loser thats already lost before
     if (losers) {
       losers.forEach((player) => {
         if (lossesBracket.includes(player)) {
           losers = losers.filter((l) => l !== player);
           setLossesBracket((prev) => prev.filter((p) => p !== player));
-        }
+        };
       });
       // Removes player from winners and adds to losers if they are on loser bracket
       winners.forEach((player) => {
         if (lossesBracket.includes(player)) {
           winners = winners.filter((l) => l !== player);
           losers = [...losers, player];
-        }
+        };
       });
-    }
+    };
 
     // Sets the winners variables value to the winnersBracket value
     // This happens as the losing bracket in double elim have extra games to play
     // Winners aren't set from returned winners but from previous round winner bracket
-    if (losers?.length === 2 && winners?.length === 0) {
-      if (finalsBracket.length !== 1) {
-        winners = winnersBracket;
-      } 
-
-      console.log('hit wbbbbbbbbbbbbbbbb set')
-      // if (winners.length === 1 && losers.length === 1) {
-      //   setLossesBracket((prev) => prev.filter((l) => l !== losers))
-      //   setWinnersBracket((prev) => prev.filter((l) => l !== losers))
-      //   winners = winners.filter((l) => l !== losers)
-      // } else {
-      //   console.log('hit wbbbbbbbbbbbbbbbb set')
-      //   winners = winnersBracket;
-      // }
-    }
-    console.log('after winners-3', winners?.length, winners);
-    console.log('2winners-3', winners?.length, winners);
-    console.log('2losers-3', losers?.length, losers);
+    if (winners?.length === 0 && losers?.length > 1) {
+      winners = winnersBracket;
+    };
 
     if (round === 1) {
-      console.log('ROUND 1')
       const g = createGame(teamArr);
       allMatches.push(g);
       setAllGames(allMatches);
-    }
-    if (round !== 1) {
-      console.log('ROUND +')
-      // use following without the if statements below on winners length etc
-      // const createdGames = createGame([...winners, ...losers]);
-      // console.log('mmmmm11', losers);
-      // allMatches.push(createdGames);
+    };
 
-      // setWinnersBracket(winners);
-      // setLossesBracket(losers);
-      
+    if (round !== 1) {
       if (winners.length > 2) {
         const createdGames = createGame([...winners, ...losers]);
-        console.log('mmmmm11', losers);
         allMatches.push(createdGames);
 
         setWinnersBracket(winners);
         setLossesBracket(losers);
-      }
+      };
       if (winners.length === 2) {
-        console.log('hit in 2')
-        console.log('hit in 2')
-        if (losers.length !== 2) {
-          console.log('hit in 2-1')
-          console.log('mmmmm12', losers);
+        // true if losers is even
+        if ((losers.length / 2) % 2 === 0) {
           const createdGames = createGame(losers);
-          console.log('createdGames2', createdGames);
           allMatches.push(createdGames);
-          
+
           setWinnersBracket(winners);
           setLossesBracket(losers);
         };
-        if (losers.length === 2) {
-          console.log('hit in 2-2')
-          console.log('mmmmm13', [...winners, ...losers]);
+        // true if losers is odd
+        if ((losers.length / 2) % 2 !== 0) {
           const createdGames = createGame([...winners, ...losers]);
-          console.log('createdGames3', createdGames);
           allMatches.push(createdGames);
 
           setWinnersBracket(winners);
           setLossesBracket(losers);
-        }
-
+        };
       }
-      console.log('SKIPPED')
-      if (winners.length === 1 && losers.length !== 1) {
-        console.log('mmmmm14', losers)
-        const createdGames = createGame(losers)
-        console.log('createdGames4', createdGames)
-        allMatches.push(createdGames);
+      if (winners.length === 1) {
+        if (losers.length !== 1) {
+          const createdGames = createGame(losers);
+          allMatches.push(createdGames);
 
-        setFinalsBracket(winners)
-        setWinnersBracket(winners);
-        setLossesBracket(losers);
-      }
+          setFinalsBracket(winners);
+          setWinnersBracket(winners);
+          setLossesBracket(losers);
+        };
+        if (losers.length === 1) {
+          const createdGames = createGame([finalsBracket, losers]);
+          const formattedCreatedGames = createdGames.map((game) => game.flat());
+          allMatches.push(formattedCreatedGames);
+
+          setIsFinalRound(true);
+        };
+      };
       if (winners.length === 0 && losers.length === 1) {
-        console.log('hit in end')
-        console.log('winners end', winners)
-        console.log('fb end', finalsBracket)
-        console.log('mmmmm15 end', [...winners, ...losers])
-        const createdGames = createGame([finalsBracket, losers])
-        console.log('createdGames4end', createdGames);
+        const createdGames = createGame([finalsBracket, losers]);
         const formattedCreatedGames = createdGames.map((game) => game.flat());
-        console.log('formattedCreatedGames', formattedCreatedGames)
         allMatches.push(formattedCreatedGames);
 
-        setIsFinalRound(true)
-      }
-      console.log('END b4 send', allMatches)
+        setIsFinalRound(true);
+      };
 
       setAllGames(allMatches);
-    }
+    };
 
     updateRound();
 
@@ -318,7 +269,6 @@ const useRRGenerator = () => {
     generatedNamesList,
     generateSingleElimination,
     generateDoubleElimination,
-    finalsBracket,
     isFinalRound,
   };
 };
