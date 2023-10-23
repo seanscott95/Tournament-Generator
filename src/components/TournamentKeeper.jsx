@@ -19,7 +19,6 @@ const TournamentKeeper = ({
     generateSingleElimination,
     generateDoubleElimination,
     allGames: allGamesFromHook,
-    finalsBracket,
     isFinalRound,
   } = useRRGenerator();
 
