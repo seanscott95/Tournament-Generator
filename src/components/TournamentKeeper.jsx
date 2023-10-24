@@ -144,20 +144,12 @@ const TournamentKeeper = ({
 
       setRound((prev) => prev + 1);
 
+      // Generates the games for the tournament
       if (eliminationType === 'Double') {
-        
         const games = { winners: [...winningTeams], losers: [...losingTeams] };
         generateDoubleElimination(games);
       }
       if (eliminationType === 'Single') {
-        // Checks to see if a Bye is needed to be added to the winning team,
-        // winning teams length needs to be an even number to work
-        // If team limit is off then this will solve the issues associated
-        if (winningTeams.length % 2 !== 0) {
-          if (!winningTeams.includes('Bye')) {
-            winningTeams.push('Bye');
-          }
-        }
         generateSingleElimination(winningTeams);
       }
 
@@ -177,7 +169,7 @@ const TournamentKeeper = ({
 
   useEffect(() => {
     const originalNamesList = JSON.parse(
-      localStorage.getItem('originalNamesList')
+      localStorage.getItem('generatedNamesList')
     );
     if (originalNamesList !== null) {
       const originalNamesListNoByes = originalNamesList.filter(
