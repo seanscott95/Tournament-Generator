@@ -112,6 +112,7 @@ const useRRGenerator = () => {
       localStorage.removeItem('allGamesSingle');
       localStorage.removeItem('generatedNamesList');
       localStorage.removeItem('SE');
+      localStorage.setItem('generatedNamesList', JSON.stringify(teamNames));
     }
 
     updateRound();
@@ -148,13 +149,21 @@ const useRRGenerator = () => {
     };
 
     localStorage.setItem('allGamesSingle', JSON.stringify(...allMatches));
+
     
-    if (round === 1) {
-      localStorage.setItem('generatedNamesList', JSON.stringify(teamNames));
-    }
   };
 
   const generateDoubleElimination = (winningAndLosingTeams = null) => {
+    
+    // If it is first round
+    if (winningAndLosingTeams === null) {
+      localStorage.removeItem('round');
+      localStorage.removeItem('allGamesSingle');
+      localStorage.removeItem('generatedNamesList');
+      localStorage.removeItem('SE');
+      localStorage.setItem('generatedNamesList', JSON.stringify(teamNames));
+    }
+
     let round = JSON.parse(localStorage.getItem('round')) + 1 || 1;
 
     let teamArr = teamNames;
@@ -192,13 +201,14 @@ const useRRGenerator = () => {
       winners = winnersBracket;
     };
 
+    console.log('round', round)
     if (round === 1) {
       const g = createGame(teamArr);
       allMatches.push(g);
       setAllGames(allMatches);
     };
 
-    if (round !== 1) {
+    if (round > 1) {
       if (winners.length > 2) {
         const createdGames = createGame([...winners, ...losers]);
         allMatches.push(createdGames);
@@ -255,7 +265,7 @@ const useRRGenerator = () => {
     updateRound();
 
     localStorage.setItem('allGamesSingle', JSON.stringify(...allMatches));
-    localStorage.setItem('generatedNamesList', JSON.stringify(teamNames));
+    
   };
 
   return {
