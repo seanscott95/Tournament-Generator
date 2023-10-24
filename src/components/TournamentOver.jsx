@@ -4,24 +4,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons';
 
 const TournamentOver = ({ setIsGenerated, setTournamentOver}) => {
-
   const [allGames, setAllGames] = useState(null);
   const [winner, setWinner] = useState('');
 
   const resetTournament = () => {
-    setIsGenerated(false);
-    setTournamentOver(false);
     localStorage.removeItem('SE');
-    localStorage.removeItem('originalNamesList');
     localStorage.removeItem('allGamesSingle');
     localStorage.removeItem('generatedNamesList');
     localStorage.removeItem('round');
+    
+    setTournamentOver(false);
+    setIsGenerated(false);
   };
 
   const playAgain = () => {
     localStorage.removeItem('SE');
     localStorage.removeItem('allGamesSingle');
-    localStorage.removeItem('generatedNamesList');
     localStorage.removeItem('round');
     
     setTournamentOver(false);
