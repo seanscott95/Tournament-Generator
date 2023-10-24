@@ -58,14 +58,6 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
 
     setGeneratedNamesList([...teamNames]);
 
-    if (teamNames.length % 2 !== 0) {
-      if (!teamNames.includes('Bye')) {
-        if (location.pathname === '/roundRobin') {
-          teamNames.splice(teamNames.length / 2, 0, 'Bye');
-        };
-      };
-    };
-
     if (location.pathname === '/roundRobin') generateRoundRobin();
     if (location.pathname === '/single') generateSingleElimination();
     if (location.pathname === '/double') generateDoubleElimination();

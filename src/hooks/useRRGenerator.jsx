@@ -82,6 +82,12 @@ const useRRGenerator = () => {
     localStorage.setItem('round', 1);
 
     let teamArr = teamNames;
+    if (teamArr.length % 2 !== 0) {
+      if (!teamArr.includes('Bye')) {
+        teamArr.push('Bye');
+      };
+    };
+    
     const length = teamArr.length;
 
     let rounds = 1;
