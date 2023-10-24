@@ -113,23 +113,22 @@ const useRRGenerator = () => {
       localStorage.removeItem('generatedNamesList');
       localStorage.removeItem('SE');
       localStorage.setItem('generatedNamesList', JSON.stringify(teamNames));
-    }
+    };
 
     updateRound();
 
-    let round = JSON.parse(localStorage.getItem('round')) || 1;
     let teamArr = teamNames;
     let allMatches = [];
 
     if (winningTeams !== null) {
       teamArr = winningTeams;
-    }
+    };
 
     if (teamArr.length % 2 !== 0) {
       if (!teamArr.includes('Bye')) {
         teamArr.push('Bye');
-      }
-    }
+      };
+    };
 
     // Randomise order
     teamArr.sort(() => Math.random() - 0.5);
@@ -137,7 +136,7 @@ const useRRGenerator = () => {
     const gamesObj = teamArr.map((team, index) => {
       if (index % 2 === 0) {
         return [team, teamArr[index + 1]];
-      }
+      };
     });
     const filteredGames = gamesObj.filter((game) => game !== undefined);
 
@@ -149,12 +148,9 @@ const useRRGenerator = () => {
     };
 
     localStorage.setItem('allGamesSingle', JSON.stringify(...allMatches));
-
-    
   };
 
   const generateDoubleElimination = (winningAndLosingTeams = null) => {
-    
     // If it is first round
     if (winningAndLosingTeams === null) {
       localStorage.removeItem('round');
@@ -162,7 +158,7 @@ const useRRGenerator = () => {
       localStorage.removeItem('generatedNamesList');
       localStorage.removeItem('SE');
       localStorage.setItem('generatedNamesList', JSON.stringify(teamNames));
-    }
+    };
 
     let round = JSON.parse(localStorage.getItem('round')) + 1 || 1;
 
@@ -201,13 +197,11 @@ const useRRGenerator = () => {
       winners = winnersBracket;
     };
 
-    console.log('round', round)
     if (round === 1) {
       const g = createGame(teamArr);
       allMatches.push(g);
       setAllGames(allMatches);
     };
-
     if (round > 1) {
       if (winners.length > 2) {
         const createdGames = createGame([...winners, ...losers]);
@@ -216,6 +210,7 @@ const useRRGenerator = () => {
         setWinnersBracket(winners);
         setLossesBracket(losers);
       };
+
       if (winners.length === 2) {
         // true if losers is even
         if ((losers.length / 2) % 2 === 0) {
@@ -233,7 +228,8 @@ const useRRGenerator = () => {
           setWinnersBracket(winners);
           setLossesBracket(losers);
         };
-      }
+      };
+
       if (winners.length === 1) {
         if (losers.length !== 1) {
           const createdGames = createGame(losers);
@@ -251,6 +247,7 @@ const useRRGenerator = () => {
           setIsFinalRound(true);
         };
       };
+
       if (winners.length === 0 && losers.length === 1) {
         const createdGames = createGame([finalsBracket, losers]);
         const formattedCreatedGames = createdGames.map((game) => game.flat());
@@ -265,7 +262,6 @@ const useRRGenerator = () => {
     updateRound();
 
     localStorage.setItem('allGamesSingle', JSON.stringify(...allMatches));
-    
   };
 
   return {
