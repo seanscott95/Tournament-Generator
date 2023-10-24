@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import capitaliseFirstLetter from '../helper/capitaliseFirstLetter';
 
 const useRRGenerator = () => {
@@ -11,11 +11,6 @@ const useRRGenerator = () => {
   const [winnersBracket, setWinnersBracket] = useState([]);
   const [finalsBracket, setFinalsBracket] = useState([]);
   const [isFinalRound, setIsFinalRound] = useState(false);
-
-  useEffect(() => {
-    console.log('Losses bracket', lossesBracket);
-    console.log('Winners bracket', winnersBracket);
-  }, [lossesBracket, winnersBracket]);
 
   const addTeamName = () => {
     if (teamNameInput === '') {
@@ -111,15 +106,19 @@ const useRRGenerator = () => {
   };
 
   const generateSingleElimination = (winningTeams = null) => {
-    updateRound();
-    let round = JSON.parse(localStorage.getItem('round')) || 1;
+    // If it is first round
+    if (winningTeams === null) {
+      localStorage.removeItem('round');
+      localStorage.removeItem('allGamesSingle');
+      localStorage.removeItem('generatedNamesList');
+      localStorage.removeItem('SE');
+    }
 
+    updateRound();
+
+    let round = JSON.parse(localStorage.getItem('round')) || 1;
     let teamArr = teamNames;
     let allMatches = [];
-
-    if (round === 1) {
-      localStorage.setItem('originalNamesList', JSON.stringify(teamNames));
-    }
 
     if (winningTeams !== null) {
       teamArr = winningTeams;
@@ -144,8 +143,15 @@ const useRRGenerator = () => {
     allMatches.push(filteredGames);
     setAllGames(allMatches);
 
+    if (winningTeams?.length === 2) {
+      setIsFinalRound(true);
+    };
+
     localStorage.setItem('allGamesSingle', JSON.stringify(...allMatches));
-    localStorage.setItem('generatedNamesList', JSON.stringify(teamNames));
+    
+    if (round === 1) {
+      localStorage.setItem('generatedNamesList', JSON.stringify(teamNames));
+    }
   };
 
   const generateDoubleElimination = (winningAndLosingTeams = null) => {
@@ -153,10 +159,6 @@ const useRRGenerator = () => {
 
     let teamArr = teamNames;
     let allMatches = [];
-
-    if (round === 1) {
-      localStorage.setItem('originalNamesList', JSON.stringify(teamNames));
-    };
 
     if (teamArr.length % 2 !== 0) {
       if (!teamArr.includes('Bye')) {
