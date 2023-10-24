@@ -87,7 +87,7 @@ const useRRGenerator = () => {
         teamArr.push('Bye');
       };
     };
-    
+
     const length = teamArr.length;
 
     let rounds = 1;
@@ -98,7 +98,9 @@ const useRRGenerator = () => {
 
       let halfOfTeamArr = teamArr.slice(0, length / 2);
       halfOfTeamArr.forEach((team, index) => {
-        gamesObj.push([team, teamArr[length - 1 - index]]);
+        const opponent = teamArr[length - 1 - index];
+        if (team === 'Bye' || opponent === 'Bye') return;
+        gamesObj.push([team, opponent]);
       });
 
       teamArr.splice(1, 0, teamArr[length - 1]);
