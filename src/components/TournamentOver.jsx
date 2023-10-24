@@ -2,10 +2,15 @@ import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { useLocation } from 'react-router-dom';
+
 
 const TournamentOver = ({ setIsGenerated, setTournamentOver}) => {
   const [allGames, setAllGames] = useState(null);
   const [winner, setWinner] = useState('');
+  const [tournamentType, setTournametType] = useState('')
+  const location = useLocation();
+
 
   const resetTournament = () => {
     localStorage.removeItem('SE');
@@ -34,13 +39,16 @@ const TournamentOver = ({ setIsGenerated, setTournamentOver}) => {
       const winnerFromLocal = Object.values(gamesFromLocal).reverse()[0][0].winner;
       setWinner(winnerFromLocal);
     };
+    if (location.pathname === '/roundRobin') setTournametType('roundRobin');
+    if (location.pathname === '/single') setTournametType('single');
+    if (location.pathname === '/double') setTournametType('double');
   }, []);
 
   return (
     <div className='tournamentOver'>
       <FontAwesomeIcon className="icon big" icon={faTrophy} /> 
       <h1>Tournament Over</h1>
-      <h3>Congratulations to the winner <span>{winner}</span></h3>
+      {tournamentType !== 'roundRobin' &&<h3>Congratulations to the winner <span>{winner}</span></h3>}
       <div>
         <button className='btnResetSingleElim' onClick={resetTournament}>Reset</button>
         <button className='btnResetSingleElim' onClick={playAgain}>Play Again</button>
