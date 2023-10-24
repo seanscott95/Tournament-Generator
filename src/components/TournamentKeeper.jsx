@@ -31,8 +31,8 @@ const TournamentKeeper = ({
   const [allGames, setAllGames] = useState([]);
   const [allGamesNoByes, setAllGamesNoByes] = useState([]);
 
-  const [originalTeams, setOriginalTeams] = useState([]);
-  const [originalTeamsNoByes, setOriginalTeamsNoByes] = useState([]);
+  const [generatedTeams, setGeneratedTeams] = useState([]);
+  const [generatedTeamsNoByes, setGeneratedTeamsNoByes] = useState([]);
 
   const [arrOfAllGamesObjs, setArrOfAllGamesObjs] = useState([]);
   const [arrOfAllGamesObjsNoByes, setArrOfAllGamesObjsNoByes] = useState([]);
@@ -168,15 +168,15 @@ const TournamentKeeper = ({
   };
 
   useEffect(() => {
-    const originalNamesList = JSON.parse(
+    const generatedNamesList = JSON.parse(
       localStorage.getItem('generatedNamesList')
     );
-    if (originalNamesList !== null) {
-      const originalNamesListNoByes = originalNamesList.filter(
+    if (generatedNamesList !== null) {
+      const generatedNamesListNoByes = generatedNamesList.filter(
         (el) => el !== 'Bye'
       );
-      setOriginalTeams(originalNamesList);
-      setOriginalTeamsNoByes(originalNamesListNoByes);
+      setGeneratedTeams(generatedNamesList);
+      setGeneratedTeamsNoByes(generatedNamesListNoByes);
     }
   }, []);
 
@@ -216,7 +216,7 @@ const TournamentKeeper = ({
 
   return (
     <section className="generatedTable">
-      {originalTeams.length !== 0 && (
+      {generatedTeams.length !== 0 && (
         <div className="generatedNamesList">
           <div className="tournamentInfo">
             <ul>
@@ -227,13 +227,13 @@ const TournamentKeeper = ({
               </li>
               <li>
                 <FontAwesomeIcon className="icon" icon={faUserGroup} />
-                {originalTeamsNoByes.length} Teams
+                {generatedTeamsNoByes.length} Teams
               </li>
             </ul>
           </div>
           <ul>
-            {originalTeams &&
-              originalTeamsNoByes.map((team, index) => {
+            {generatedTeams &&
+              generatedTeamsNoByes.map((team, index) => {
                 return (
                   <li className="teamAdded leftBorder" key={team + index}>
                     <div className="teamNameText">
