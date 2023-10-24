@@ -51,7 +51,7 @@ const DoubleGenerator = () => {
             : !tournamentOver && (
                 <ol>
                   <li>
-                    In Double ELimination if you lose two games you're out
+                    In Double Elimination if you lose two games you're out
                   </li>
                   <li>
                     To get started enter your team names in the input below
