@@ -332,7 +332,8 @@ const TournamentKeeper = ({
           {message && <p>Please make sure all games are completed</p>}
         </div>
         <div className="nextRoundBtnContainer">
-          {isFinalRound || isRoundRobin && <button onClick={handleNextRound}>FINISH TOURNAMENT</button>}
+          {isRoundRobin && <button onClick={handleNextRound}>FINISH TOURNAMENT</button>}
+          {!isRoundRobin && isFinalRound && <button onClick={handleNextRound}>FINISH TOURNAMENT</button>}
           {!isFinalRound && !isRoundRobin && <button onClick={handleNextRound}>NEXT ROUND</button>}
         </div>
       </section>
