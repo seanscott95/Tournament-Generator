@@ -71,7 +71,6 @@ const TournamentKeeper = ({
   // Button event handler that selects the winner on click
   const handleClickForWinner = (e, winner, game) => {
     let tempAllGames = arrOfAllGamesObjs;
-    // let tempAllGames = isChecked ? arrOfAllGamesObjs : arrOfAllGamesObjsNoByes;
     // If there is already a winner exit function
     if (tempAllGames[game - 1].winner !== '') return;
     if (completedGames.includes(game)) return;
