@@ -132,19 +132,11 @@ const TournamentKeeper = ({
       });
       // Ends the tournament
       if (isFinalRound) {
-        console.log('HIT OVERRRRRR')
         setRound(1);
         localStorage.setItem('round', 1);
         setTournamentOver(true);
         return;
       }
-      // if (winningTeams.length === 1) {
-      //   console.log('HIT OVERRRRRR')
-      //   setRound(1);
-      //   localStorage.setItem('round', 1);
-      //   setTournamentOver(true);
-      //   return;
-      // }
 
       // Removes all winner classes from current game cards
       const teamNameEl = document.querySelectorAll('.cardBody p');
@@ -238,7 +230,8 @@ const TournamentKeeper = ({
             <ul>
               <li>
                 <FontAwesomeIcon className="icon" icon={faTrophy} />
-                Single Elimination
+                {eliminationType === 'Single' && 'Single Elimination'}
+                {eliminationType === 'Double' && 'Double Elimination'}
               </li>
               <li>
                 <FontAwesomeIcon className="icon" icon={faUserGroup} />
