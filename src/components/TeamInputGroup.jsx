@@ -89,8 +89,6 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
       let list = generatedNamesListFromLocal.filter((el) => el !== 'Bye');
       setTeamNames(list);
     };
-    const originalNamesListFromLocal = JSON.parse(localStorage.getItem('originalNamesList'));
-    if (originalNamesListFromLocal !== null) setTeamNames(originalNamesListFromLocal);
   }, []);
   
   // Adds an event listener on the window specifically for enter key
