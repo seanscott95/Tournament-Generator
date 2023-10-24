@@ -70,7 +70,7 @@ const DoubleGenerator = () => {
         </div>
       </section>
       <section>
-        {showSettings && !tournamentOver && (
+        {showSettings && !isGenerated && (
           <div className='minTeamInputGrp'>
             <div>
               <input
