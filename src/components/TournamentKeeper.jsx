@@ -18,6 +18,7 @@ const TournamentKeeper = ({
   const {
     generateSingleElimination,
     generateDoubleElimination,
+    generateRoundRobin,
     allGames: allGamesFromHook,
     isFinalRound,
   } = useRRGenerator();
@@ -36,6 +37,8 @@ const TournamentKeeper = ({
 
   const [arrOfAllGamesObjs, setArrOfAllGamesObjs] = useState([]);
   const [arrOfAllGamesObjsNoByes, setArrOfAllGamesObjsNoByes] = useState([]);
+
+  const [isRoundRobin, setIsRoundRobin] = useState(false);
 
   // Formats an arr into an object to be used in the jsx
   const arrToObjLayout = (arr) => {
@@ -131,7 +134,7 @@ const TournamentKeeper = ({
         return winningTeams.includes(el.player1) ? el.player2 : el.player1;
       });
       // Ends the tournament
-      if (isFinalRound) {
+      if (isFinalRound || isRoundRobin) {
         setRound(1);
         localStorage.setItem('round', 1);
         setTournamentOver(true);
@@ -151,6 +154,9 @@ const TournamentKeeper = ({
       }
       if (eliminationType === 'Single') {
         generateSingleElimination(winningTeams);
+      }
+      if (eliminationType === 'RR') {
+        generateRoundRobin(winningTeams);
       }
 
       // Resets each displayed game card
@@ -177,7 +183,9 @@ const TournamentKeeper = ({
       );
       setGeneratedTeams(generatedNamesList);
       setGeneratedTeamsNoByes(generatedNamesListNoByes);
-    }
+    };
+
+    eliminationType === 'RR' ? setIsRoundRobin(true) : setIsRoundRobin(false);
   }, []);
 
   useEffect(() => {
@@ -245,7 +253,7 @@ const TournamentKeeper = ({
           </ul>
         </div>
       )}
-      {!minTeamLimit && arrOfAllGamesObjs.length >= 1 && (
+      {!minTeamLimit && !isRoundRobin && arrOfAllGamesObjs.length >= 1 && (
         <div className="toggleShowByesInputGrp">
           <input
             type="checkbox"
@@ -324,11 +332,8 @@ const TournamentKeeper = ({
           {message && <p>Please make sure all games are completed</p>}
         </div>
         <div className="nextRoundBtnContainer">
-          {isFinalRound ? (
-            <button onClick={handleNextRound}>FINISH TOURNAMENT</button>
-          ) : (
-            <button onClick={handleNextRound}>NEXT ROUND</button>
-          )}
+          {isFinalRound || isRoundRobin && <button onClick={handleNextRound}>FINISH TOURNAMENT</button>}
+          {!isFinalRound && !isRoundRobin && <button onClick={handleNextRound}>NEXT ROUND</button>}
         </div>
       </section>
     </section>

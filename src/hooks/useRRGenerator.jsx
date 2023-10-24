@@ -76,8 +76,10 @@ const useRRGenerator = () => {
 
   // Generates a round robin tournament array
   const generateRoundRobin = () => {
-    localStorage.removeItem('allGames');
+    localStorage.removeItem('allGamesSingle');
     localStorage.removeItem('generatedNamesList');
+    localStorage.removeItem('SE');
+    localStorage.setItem('round', 1);
 
     let teamArr = teamNames;
     const length = teamArr.length;
@@ -101,7 +103,7 @@ const useRRGenerator = () => {
     }
 
     setAllGames(allMatches);
-    localStorage.setItem('allGames', JSON.stringify(allMatches));
+    localStorage.setItem('allGamesSingle', JSON.stringify(allMatches.flat()));
     localStorage.setItem('generatedNamesList', JSON.stringify(teamNames));
   };
 
