@@ -33,12 +33,12 @@ const SingleGenerator = () => {
             ? !tournamentOver && (
                 <ol>
                   <li>
-                    Click on the team that won their game to turn there name
+                    Click on the team that won their game to turn their name
                     green
                   </li>
                   <li>
-                    Once all the games have a selected winner click on the next
-                    round button
+                    Once all the games have a selected winner click on the Next
+                    Round button
                   </li>
                   <li>
                     Repeat the process until the tournament is over and enjoy!
@@ -48,10 +48,10 @@ const SingleGenerator = () => {
             : !tournamentOver && (
                 <ol>
                   <li>
-                    In Single ELimination if you lose one game you're out
+                    In Single Elimination if you lose one game you're out
                   </li>
                   <li>
-                    To get started enter your team names in the input below
+                    To get started enter the team names in the input below
                   </li>
                   <li>
                     Total teams should be either 4, 8, 16, 32, 64 or 128 teams
@@ -61,10 +61,10 @@ const SingleGenerator = () => {
                   </p>
                   </li>
                   <li>
-                    Once you have entered all your teams click Generate to start tournament
+                    Once you have entered all the teams click Generate to start tournament
                   </li>
                   <li>
-                    Read the instructions on the next page to choose a winner for each game
+                  Read the instructions on the next page on how to select winners for each game
                   </li>
                 </ol>
               )}
@@ -85,7 +85,7 @@ const SingleGenerator = () => {
             </div>
             <p className="warningTeamLimit">
               Turning off team limit can result in an uneven amount of teams
-              suitable for single elimination. In rounds with an odd amount of
+              suitable for Single Elimination. In rounds with an odd amount of
               teams, a team is randomly allocated a bye and therefore the win.
             </p>
           </div>
