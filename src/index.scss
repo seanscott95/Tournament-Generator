@@ -79,9 +79,11 @@ a:hover {
   box-shadow: 0 0.1em rgb(17, 17, 17);
   text-shadow: -0.025em 0.075em rgb(17, 17, 17);
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: #0084ff;
+  }
+  &:active {
+    background-color: $primaryColor;
   }
 }
 
@@ -281,8 +283,14 @@ a:hover {
   }
   .heading {
     color: #fff;
-    padding: 1em 1em 0 1em;
+    margin: 1em;
     text-shadow: -0.05em 0.05em 0.05em #000000;
+    text-align: center;
+    .eliminationTypeSummary {
+      font-size: $fontSize;
+      margin-top: 1em;
+      padding: 0 1em;
+    }
     .pageHeader {
       display: flex;
       justify-content: center;
@@ -302,15 +310,36 @@ a:hover {
         font-size: $lrgFontSize;
       }
     }
+  }
+  .instructionsContainer {
+    color: #fff;
+    text-shadow: -0.05em 0.05em 0.05em #000000;
+    margin: 0 .5em 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .instructionsBtn {
+      width: 75%;
+      @include button;
+      .icon {
+        color: #fff;
+      }
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      line-height: 1;
+    }
     .instructions {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 102%;
+      width: 100%;
       margin: .5em;
       ol {
         font-size: $fontSize;
         margin: .5em;
+        width: 70%;
         li {
           list-style: decimal;
           margin: 0.5em 0;
@@ -322,6 +351,9 @@ a:hover {
           text-shadow: none;
         }
       }
+    }
+    .instructions.hide {
+      display: none;
     }
   }
   .minTeamInputGrp {
@@ -509,7 +541,6 @@ a:hover {
     margin: 0 0.25em;
   }
   .generatedNamesList {
-    padding-top: 1em;
     height: 100%;
     width: 100%;
     ul {
@@ -541,7 +572,7 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin: 1em;
+    margin: .5em;
     .roundTitle {
       width: 60%;
       display: flex;
@@ -562,7 +593,7 @@ a:hover {
       gap: 1em;
       width: 100%;
       color: white;
-      padding: 0 .5em .5em .5em;
+      padding: .5em;
       .completed .icon {
         color: $primaryColor;
       }
@@ -685,9 +716,9 @@ a:hover {
       h1 {
         font-size: 1rem;
       }
-      p {
-        font-size: 0.75rem;
-      }
+      // p {
+      //   font-size: 0.75rem;
+      // }
     }
   }
   

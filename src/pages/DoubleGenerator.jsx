@@ -2,9 +2,10 @@ import { useState } from 'react';
 
 import TeamInputGroup from '../components/TeamInputGroup';
 import TournamentKeeper from '../components/TournamentKeeper';
+import Instructions from '../components/Instructions';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGear } from '@fortawesome/free-solid-svg-icons';
+import { faGear, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import TournamentOver from '../components/TournamentOver';
 
 const DoubleGenerator = () => {
@@ -12,6 +13,7 @@ const DoubleGenerator = () => {
   const [tournamentOver, setTournamentOver] = useState(false);
   const [minTeamLimit, setMinTeamLimit] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
+
   return (
     <>
       <section className="heading">
@@ -27,51 +29,19 @@ const DoubleGenerator = () => {
             </>
           )}
         </div>
-        <div className="instructions">
-          {isGenerated
-            ? !tournamentOver && (
-                <ol>
-                  <li>
-                    Click on the team that won their game to turn their name
-                    green
-                  </li>
-                  <li>
-                    Once all the games have a selected winner click on the Next
-                    Round button
-                  </li>
-                  <li>
-                    Repeat the process until the tournament is over and enjoy!
-                  </li>
-                </ol>
-              )
-            : !tournamentOver && (
-                <ol>
-                  <li>
-                    In Double Elimination if you lose two games you're out
-                  </li>
-                  <li>
-                    To get started enter the team names in the input below
-                  </li>
-                  <li>
-                    Total teams should be either 4, 8, 16, 32, 64 or 128 teams
-                    long
-                  <p className="instructionsNote">
-                    NOTE - YOU CAN REMOVE THE TEAM LIMIT OPTION IN THE SETTINGS
-                  </p>
-                  </li>
-                  <li>
-                    Once you have entered all the teams click Generate to start the tournament
-                  </li>
-                  <li>
-                    Read the instructions on the next page on how to select winners for each game
-                  </li>
-                </ol>
-              )}
-        </div>
+        <p className="eliminationTypeSummary">
+          In Double Elimination if you lose two games you're out
+        </p>
       </section>
+      {!tournamentOver && 
+        <Instructions 
+          isGenerated={isGenerated}
+          eliminationType='Double'
+        />
+      }
       <section>
         {showSettings && !isGenerated && (
-          <div className='minTeamInputGrp'>
+          <div className="minTeamInputGrp">
             <div>
               <input
                 type="checkbox"
@@ -95,7 +65,7 @@ const DoubleGenerator = () => {
           <TournamentKeeper
             setTournamentOver={setTournamentOver}
             minTeamLimit={minTeamLimit}
-            eliminationType='Double'
+            eliminationType="Double"
           />
         )}
       </section>

@@ -212,8 +212,14 @@ a:hover {
 }
 .generatorContainer .heading {
   color: #fff;
-  padding: 1em 1em 0 1em;
+  margin: 1em;
   text-shadow: -0.05em 0.05em 0.05em #000000;
+  text-align: center;
+}
+.generatorContainer .heading .eliminationTypeSummary {
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+  margin-top: 1em;
+  padding: 0 1em;
 }
 .generatorContainer .heading .pageHeader {
   display: flex;
@@ -234,26 +240,71 @@ a:hover {
   top: 5%;
   font-size: clamp(0.7rem, 2vw + 0.75rem, 1.5rem);
 }
-.generatorContainer .heading .instructions {
+.generatorContainer .instructionsContainer {
+  color: #fff;
+  text-shadow: -0.05em 0.05em 0.05em #000000;
+  margin: 0 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.generatorContainer .instructionsContainer .instructionsBtn {
+  width: 75%;
+  background-color: #21c1fa;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: #fff;
+  cursor: pointer;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  padding: 0.3em 1em;
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  box-shadow: 0 0.1em rgb(17, 17, 17);
+  text-shadow: -0.025em 0.075em rgb(17, 17, 17);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1;
+}
+.generatorContainer .instructionsContainer .instructionsBtn:hover {
+  background-color: #0084ff;
+}
+.generatorContainer .instructionsContainer .instructionsBtn:active {
+  background-color: #21c1fa;
+}
+.generatorContainer .instructionsContainer .instructionsBtn .icon {
+  color: #fff;
+}
+.generatorContainer .instructionsContainer .instructions {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 102%;
+  width: 100%;
   margin: 0.5em;
 }
-.generatorContainer .heading .instructions ol {
+.generatorContainer .instructionsContainer .instructions ol {
   font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
   margin: 0.5em;
+  width: 70%;
 }
-.generatorContainer .heading .instructions ol li {
+.generatorContainer .instructionsContainer .instructions ol li {
   list-style: decimal;
   margin: 0.5em 0;
   font-size: 0.9em;
 }
-.generatorContainer .heading .instructions ol .instructionsNote {
+.generatorContainer .instructionsContainer .instructions ol .instructionsNote {
   font-size: 0.75em;
   color: #bdbdbd;
   text-shadow: none;
+}
+.generatorContainer .instructionsContainer .instructions.hide {
+  display: none;
 }
 .generatorContainer .minTeamInputGrp {
   display: flex;
@@ -351,8 +402,11 @@ a:hover {
   text-shadow: -1px 1px 1px #000000;
   width: 100%;
 }
-.generatorContainer .inputGroupContainer .btnAdd button:hover, .generatorContainer .inputGroupContainer .btnAdd button:focus {
+.generatorContainer .inputGroupContainer .btnAdd button:hover {
   background-color: #0084ff;
+}
+.generatorContainer .inputGroupContainer .btnAdd button:active {
+  background-color: #21c1fa;
 }
 .generatorContainer .inputGroupContainer .inputGroup {
   display: flex;
@@ -414,10 +468,13 @@ a:hover {
   font-size: clamp(0.7rem, 2vw + 0.5rem, 1.75rem);
   max-width: 10em;
 }
-.generatorContainer .generateBtnContainer button:hover, .generatorContainer .generateBtnContainer button:focus,
-.generatorContainer .nextRoundBtnContainer button:hover,
-.generatorContainer .nextRoundBtnContainer button:focus {
+.generatorContainer .generateBtnContainer button:hover,
+.generatorContainer .nextRoundBtnContainer button:hover {
   background-color: #0084ff;
+}
+.generatorContainer .generateBtnContainer button:active,
+.generatorContainer .nextRoundBtnContainer button:active {
+  background-color: #21c1fa;
 }
 .generatorContainer ul {
   margin-top: 1.5em;
@@ -501,8 +558,11 @@ a:hover {
   text-shadow: -0.025em 0.075em rgb(17, 17, 17);
   margin: 0.5em;
 }
-.generatorContainer .tournamentOver .btnResetSingleElim:hover, .generatorContainer .tournamentOver .btnResetSingleElim:focus {
+.generatorContainer .tournamentOver .btnResetSingleElim:hover {
   background-color: #0084ff;
+}
+.generatorContainer .tournamentOver .btnResetSingleElim:active {
+  background-color: #21c1fa;
 }
 .generatorContainer .tournamentOver .big {
   font-size: clamp(0.7rem, 3vw + 0.75rem, 2.5rem);
@@ -528,7 +588,6 @@ a:hover {
   margin: 0 0.25em;
 }
 .generatedTable .generatedNamesList {
-  padding-top: 1em;
   height: 100%;
   width: 100%;
 }
@@ -576,7 +635,7 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin: 1em;
+  margin: 0.5em;
 }
 .generatedTable .matchCountInformation .roundTitle {
   width: 60%;
@@ -599,7 +658,7 @@ a:hover {
   gap: 1em;
   width: 100%;
   color: white;
-  padding: 0 0.5em 0.5em 0.5em;
+  padding: 0.5em;
 }
 .generatedTable .matchCountInformation .matchFinishedIcon .completed .icon {
   color: #21c1fa;
@@ -714,9 +773,6 @@ a:hover {
   }
   .generatorContainer .heading h1 {
     font-size: 1rem;
-  }
-  .generatorContainer .heading p {
-    font-size: 0.75rem;
   }
 }
 @media (max-width: 450px) {
