@@ -29,9 +29,11 @@ const SingleGenerator = () => {
             </>
           )}
         </div>
-        <p className="eliminationTypeSummary">
-          In Single Elimination if you lose one game you're out
-        </p>
+        {!isGenerated &&
+          <p className="eliminationTypeSummary">
+            In Single Elimination if you lose one game you're out
+          </p>
+        }
       </section>
       {!tournamentOver && 
         <Instructions 

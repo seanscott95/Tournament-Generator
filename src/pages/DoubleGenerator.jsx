@@ -29,9 +29,11 @@ const DoubleGenerator = () => {
             </>
           )}
         </div>
-        <p className="eliminationTypeSummary">
-          In Double Elimination if you lose two games you're out
-        </p>
+        {!isGenerated &&
+          <p className="eliminationTypeSummary">
+            In Double Elimination if you lose two games you're out
+          </p>
+        }
       </section>
       {!tournamentOver && 
         <Instructions 
