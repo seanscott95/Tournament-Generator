@@ -5,7 +5,7 @@ import TournamentKeeper from '../components/TournamentKeeper';
 import TournamentOver from '../components/TournamentOver';
 import Instructions from '../components/Instructions';
 
-const RRGenerator = () => {
+const RoundRobinGenerator = () => {
   const [isGenerated, setIsGenerated] = useState(false);
   const [tournamentOver, setTournamentOver] = useState(false);
 
@@ -56,4 +56,4 @@ const RRGenerator = () => {
   );
 };
 
-export default RRGenerator;
+export default RoundRobinGenerator;

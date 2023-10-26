@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Homepage from './components/Homepage';
-import RRGenerator from './pages/RRGenerator';
+import RoundRobinGenerator from './pages/RoundRobinGenerator';
 import SingleGenerator from './pages/SingleGenerator';
 import DoubleGenerator from './pages/DoubleGenerator';
 
@@ -15,7 +15,7 @@ const App = () => {
         <div className="generatorContainer">
           <Routes>
             <Route path="/" element={<Homepage />} />
-            <Route path="/roundRobin" element={<RRGenerator />} />
+            <Route path="/roundRobin" element={<RoundRobinGenerator />} />
             <Route path="/single" element={<SingleGenerator />} />
             <Route path="/double" element={<DoubleGenerator />} />
           </Routes>
