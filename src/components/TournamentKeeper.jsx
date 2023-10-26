@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import MatchCountDisplay from './MatchCountDisplay';
-import useRRGenerator from '../hooks/useRRGenerator';
+import useGenerator from '../hooks/useGenerator';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -21,7 +21,7 @@ const TournamentKeeper = ({
     generateRoundRobin,
     allGames: allGamesFromHook,
     isFinalRound,
-  } = useRRGenerator();
+  } = useGenerator();
 
   const [message, setMessage] = useState('');
   const [completedGames, setCompletedGames] = useState([]);

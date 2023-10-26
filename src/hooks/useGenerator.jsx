@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import capitaliseFirstLetter from '../helper/capitaliseFirstLetter';
 
-const useRRGenerator = () => {
+const useGenerator = () => {
   const [teamNameInput, setTeamNameInput] = useState('');
   const [teamNames, setTeamNames] = useState([null, null, null]);
   const [allGames, setAllGames] = useState([]);
@@ -291,4 +291,4 @@ const useRRGenerator = () => {
   };
 };
 
-export default useRRGenerator;
+export default useGenerator;
