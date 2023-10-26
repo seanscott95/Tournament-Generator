@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import WinnersCard from './WinnersCard';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons';
 
 const TournamentOver = ({ setIsGenerated, setTournamentOver, eliminationType}) => {
-  const [allGames, setAllGames] = useState(null);
-  const [winner, setWinner] = useState('');
+  const gamesFromLocal = JSON.parse(localStorage.getItem('SE'));
+  const gamesArr = Object.values(gamesFromLocal);
+  const winnerFromLocal = Object.values(gamesFromLocal).reverse()[0][0].winner;
 
   const resetTournament = () => {
     localStorage.removeItem('SE');
@@ -26,27 +27,20 @@ const TournamentOver = ({ setIsGenerated, setTournamentOver, eliminationType}) =
     setIsGenerated(false);
   };
 
-  useEffect(() => {
-    const gamesFromLocal = JSON.parse(localStorage.getItem('SE'));
-    if (gamesFromLocal !== null) {
-      const gamesArr = Object.values(gamesFromLocal);
-      setAllGames(gamesArr);
-      const winnerFromLocal = Object.values(gamesFromLocal).reverse()[0][0].winner;
-      setWinner(winnerFromLocal);
-    };
-  }, []);
-
   return (
     <div className='tournamentOver'>
       <FontAwesomeIcon className="icon big" icon={faTrophy} /> 
       <h1>Tournament Over</h1>
-      {eliminationType !== 'roundRobin' &&<h3>Congratulations to the winner <span>{winner}</span></h3>}
+      <WinnersCard
+        allGames={gamesArr}
+        eliminationType={eliminationType}
+      />
       <div>
         <button className='btnResetSingleElim' onClick={resetTournament}>Reset</button>
         <button className='btnResetSingleElim' onClick={playAgain}>Play Again</button>
       </div>
       <div className="generatedTable">
-        {allGames !== null && allGames.map((game, index) => {
+        {gamesArr !== null && gamesArr.map((game, index) => {
           return (
             <div className="generatedTableItem" key={index}>
               <h1>ROUND {index + 1}</h1>
