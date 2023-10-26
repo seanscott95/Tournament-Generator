@@ -49,6 +49,7 @@ const RoundRobinGenerator = () => {
           <TournamentOver
             setIsGenerated={setIsGenerated}
             setTournamentOver={setTournamentOver}
+            eliminationType='roundRobin'
           />
         )}
       </section>

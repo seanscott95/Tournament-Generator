@@ -82,6 +82,7 @@ const SingleGenerator = () => {
           <TournamentOver
             setIsGenerated={setIsGenerated}
             setTournamentOver={setTournamentOver}
+            eliminationType='Single'
           />
         )}
       </section>
