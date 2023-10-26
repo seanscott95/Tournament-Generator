@@ -52,7 +52,6 @@ const MatchCountDisplay = ({
       <div className="matchFinishedIcon">
         {allGamesArr &&
           (isChecked ? allGamesArr : allGamesArrNoByes).map((game, index) => {
-            // allGamesArr.map((game, index) => {
             return (
               <div key={game + index}>
                 {game.completed ? (
