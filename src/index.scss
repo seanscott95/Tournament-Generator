@@ -539,7 +539,8 @@ a:hover {
   .matchCountInformation {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    margin: 1em;
     .roundTitle {
       width: 60%;
       display: flex;
@@ -547,6 +548,7 @@ a:hover {
       align-content: center;
       h1 {
         width: fit-content;
+        padding: .125em .5em;
         font-size: $lrgFontSize;
         border-bottom: 3px solid $primaryColor;
       }
@@ -559,6 +561,7 @@ a:hover {
       gap: 1em;
       width: 100%;
       color: white;
+      padding: 0 .5em .5em .5em;
       .completed .icon {
         color: $primaryColor;
       }
@@ -666,11 +669,6 @@ a:hover {
     .leftBorder {
       border: none;
     }
-    & h1:first-of-type {
-      border-bottom: 3px solid $primaryColor;
-      padding: 0.25em 0;
-      margin: 0.5em;
-    }
   }
   .generatorContainer .heading {
     h1 {
@@ -680,9 +678,14 @@ a:hover {
       font-size: 0.75rem;
     }
   }
-  .matchCountInformation {
-    flex-direction: column;
-    gap: .75em;
+  .generatedTable {
+    .matchCountInformation {
+      flex-direction: column;
+      gap: .75em;
+      .roundTitle {
+        width: 100%;
+      }
+    }
   }
 }
 @media (max-width: 450px) {
@@ -705,7 +708,7 @@ a:hover {
       flex-direction: column;
       gap: .5em;
       justify-content: center;
-      align-items: start;
+      align-items: flex-start;
       padding-left: .5em;
     }
   }

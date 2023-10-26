@@ -574,7 +574,8 @@ a:hover {
 .generatedTable .matchCountInformation {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  margin: 1em;
 }
 .generatedTable .matchCountInformation .roundTitle {
   width: 60%;
@@ -585,6 +586,7 @@ a:hover {
 .generatedTable .matchCountInformation .roundTitle h1 {
   width: -moz-fit-content;
   width: fit-content;
+  padding: 0.125em 0.5em;
   font-size: clamp(0.7rem, 2vw + 0.75rem, 1.5rem);
   border-bottom: 3px solid #21c1fa;
 }
@@ -596,6 +598,7 @@ a:hover {
   gap: 1em;
   width: 100%;
   color: white;
+  padding: 0 0.5em 0.5em 0.5em;
 }
 .generatedTable .matchCountInformation .matchFinishedIcon .completed .icon {
   color: #21c1fa;
@@ -701,20 +704,18 @@ a:hover {
   .generatedTableItem .leftBorder {
     border: none;
   }
-  .generatedTableItem h1:first-of-type {
-    border-bottom: 3px solid #21c1fa;
-    padding: 0.25em 0;
-    margin: 0.5em;
-  }
   .generatorContainer .heading h1 {
     font-size: 1rem;
   }
   .generatorContainer .heading p {
     font-size: 0.75rem;
   }
-  .matchCountInformation {
+  .generatedTable .matchCountInformation {
     flex-direction: column;
     gap: 0.75em;
+  }
+  .generatedTable .matchCountInformation .roundTitle {
+    width: 100%;
   }
 }
 @media (max-width: 450px) {
@@ -736,7 +737,7 @@ a:hover {
     flex-direction: column;
     gap: 0.5em;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
     padding-left: 0.5em;
   }
 }
