@@ -12,7 +12,7 @@ const RRGenerator = () => {
       <section className="heading">
       {!tournamentOver && (
         <>
-          <h1>Welcome to the Round Robin Generator!!</h1>
+          <h1>Round Robin Generator</h1>
           <div className="instructions">
             <ol>
               <li>To get started enter the team names in the input below</li>

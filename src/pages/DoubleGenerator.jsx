@@ -18,7 +18,7 @@ const DoubleGenerator = () => {
         <div className="pageHeader">
           {!tournamentOver && (
             <>
-              <h2>Welcome to the Double Elimination Generator!!</h2>
+              <h2>Double Elimination Generator</h2>
               <FontAwesomeIcon
                 onClick={() => setShowSettings((prev) => !prev)}
                 className="icon"

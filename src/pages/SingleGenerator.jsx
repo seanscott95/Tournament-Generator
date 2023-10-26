@@ -19,7 +19,7 @@ const SingleGenerator = () => {
         <div className="pageHeader">
           {!tournamentOver && (
             <>
-              <h2>Welcome to the Single Elimination Generator!!</h2>
+              <h2>Single Elimination Generator</h2>
               <FontAwesomeIcon
                 onClick={() => setShowSettings((prev) => !prev)}
                 className="icon"
