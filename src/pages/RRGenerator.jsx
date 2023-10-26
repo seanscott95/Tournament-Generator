@@ -27,7 +27,7 @@ const RRGenerator = () => {
           <TournamentKeeper
             setTournamentOver={setTournamentOver}
             minTeamLimit={false}
-            eliminationType='RR'
+            eliminationType='roundRobin'
           />
         )}
       </section>

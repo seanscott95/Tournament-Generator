@@ -112,7 +112,7 @@ const TournamentKeeper = ({
         setMessage(false);
       }, 3000);
       return;
-    }
+    };
 
     // Saves and updates each round to local storage
     const prevRounds = JSON.parse(localStorage.getItem('SE')) || {};
@@ -138,7 +138,7 @@ const TournamentKeeper = ({
         localStorage.setItem('round', 1);
         setTournamentOver(true);
         return;
-      }
+      };
 
       // Removes all winner classes from current game cards
       const teamNameEl = document.querySelectorAll('.cardBody p');
@@ -150,26 +150,26 @@ const TournamentKeeper = ({
       if (eliminationType === 'Double') {
         const games = { winners: [...winningTeams], losers: [...losingTeams] };
         generateDoubleElimination(games);
-      }
+      };
       if (eliminationType === 'Single') {
         generateSingleElimination(winningTeams);
-      }
-      if (eliminationType === 'RR') {
+      };
+      if (eliminationType === 'roundRobin') {
         generateRoundRobin(winningTeams);
-      }
+      };
 
       // Resets each displayed game card
       allGames.forEach((g) => {
         if (g.game !== undefined) {
           refreshCardWinner(g.game);
-        }
+        };
       });
       allGamesNoByes.forEach((g) => {
         if (g.game !== undefined) {
           refreshCardWinner(g.game);
-        }
+        };
       });
-    }
+    };
   };
 
   useEffect(() => {
@@ -184,7 +184,7 @@ const TournamentKeeper = ({
       setGeneratedTeamsNoByes(generatedNamesListNoByes);
     };
 
-    eliminationType === 'RR' ? setIsRoundRobin(true) : setIsRoundRobin(false);
+    eliminationType === 'roundRobin' ? setIsRoundRobin(true) : setIsRoundRobin(false);
   }, []);
 
   useEffect(() => {
@@ -211,7 +211,7 @@ const TournamentKeeper = ({
         .filter((e) => e.length !== 1);
 
       setAllGamesNoByes(allGamesFromLocalNoByes);
-    }
+    };
   }, [allGamesFromHook]);
 
   useEffect(() => {
@@ -231,6 +231,7 @@ const TournamentKeeper = ({
                 <FontAwesomeIcon className="icon" icon={faTrophy} />
                 {eliminationType === 'Single' && 'Single Elimination'}
                 {eliminationType === 'Double' && 'Double Elimination'}
+                {eliminationType === 'roundRobin' && 'Round Robin Elimination'}
               </li>
               <li>
                 <FontAwesomeIcon className="icon" icon={faUserGroup} />
@@ -331,9 +332,15 @@ const TournamentKeeper = ({
           {message && <p>Please make sure all games are completed</p>}
         </div>
         <div className="nextRoundBtnContainer">
-          {isRoundRobin && <button onClick={handleNextRound}>FINISH TOURNAMENT</button>}
-          {!isRoundRobin && isFinalRound && <button onClick={handleNextRound}>FINISH TOURNAMENT</button>}
-          {!isFinalRound && !isRoundRobin && <button onClick={handleNextRound}>NEXT ROUND</button>}
+          {isRoundRobin && (
+            <button onClick={handleNextRound}>FINISH TOURNAMENT</button>
+          )}
+          {!isRoundRobin && isFinalRound && (
+            <button onClick={handleNextRound}>FINISH TOURNAMENT</button>
+          )}
+          {!isFinalRound && !isRoundRobin && (
+            <button onClick={handleNextRound}>NEXT ROUND</button>
+          )}
         </div>
       </section>
     </section>
