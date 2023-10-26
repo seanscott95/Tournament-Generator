@@ -226,6 +226,7 @@ a:hover {
   text-align: center;
   color: #21c1fa;
   margin: 0 1.5em;
+  font-size: clamp(0.7rem, 2vw + 0.75rem, 1.5rem);
 }
 .generatorContainer .heading .pageHeader svg {
   position: absolute;
@@ -698,10 +699,17 @@ a:hover {
 
 /* ---------- Media Queries ---------- */
 @media (max-width: 400px) {
-  .generatedTableItem {
+  .generatorContainer .generatedTable .matchCountInformation {
+    flex-direction: column;
+    gap: 0.75em;
+  }
+  .generatorContainer .generatedTable .matchCountInformation .roundTitle {
+    width: 100%;
+  }
+  .generatorContainer .generatedTable .generatedTableItem {
     flex-direction: column;
   }
-  .generatedTableItem .leftBorder {
+  .generatorContainer .generatedTable .generatedTableItem .leftBorder {
     border: none;
   }
   .generatorContainer .heading h1 {
@@ -709,13 +717,6 @@ a:hover {
   }
   .generatorContainer .heading p {
     font-size: 0.75rem;
-  }
-  .generatedTable .matchCountInformation {
-    flex-direction: column;
-    gap: 0.75em;
-  }
-  .generatedTable .matchCountInformation .roundTitle {
-    width: 100%;
   }
 }
 @media (max-width: 450px) {

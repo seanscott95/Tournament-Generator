@@ -293,6 +293,7 @@ a:hover {
         text-align: center;
         color: $primaryColor;
         margin: 0 1.5em;
+        font-size: $lrgFontSize;
       }
       svg {
         position: absolute;
@@ -664,29 +665,32 @@ a:hover {
 
 /* ---------- Media Queries ---------- */
 @media (max-width: 400px) {
-  .generatedTableItem {
-    flex-direction: column;
-    .leftBorder {
-      border: none;
+  .generatorContainer {
+    .generatedTable {
+      .matchCountInformation {
+        flex-direction: column;
+        gap: .75em;
+        .roundTitle {
+          width: 100%;
+        }
+      }
+      .generatedTableItem {
+        flex-direction: column;
+        .leftBorder {
+          border: none;
+        }
+      }
     }
-  }
-  .generatorContainer .heading {
-    h1 {
-      font-size: 1rem;
-    }
-    p {
-      font-size: 0.75rem;
-    }
-  }
-  .generatedTable {
-    .matchCountInformation {
-      flex-direction: column;
-      gap: .75em;
-      .roundTitle {
-        width: 100%;
+    .heading {
+      h1 {
+        font-size: 1rem;
+      }
+      p {
+        font-size: 0.75rem;
       }
     }
   }
+  
 }
 @media (max-width: 450px) {
   .inputGroupContainer {
@@ -712,6 +716,7 @@ a:hover {
       padding-left: .5em;
     }
   }
+  
 }
 @media (max-width: 600px) {
   .infoContainer {
