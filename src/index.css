@@ -533,7 +533,7 @@ a:hover {
   text-align: center;
   color: #fff;
 }
-.generatorContainer .tournamentOver h3 {
+.generatorContainer .tournamentOver .winnerRunnerUpInfo {
   margin: 0.5em 0.5em 1em 0.5em;
 }
 .generatorContainer .tournamentOver span {

@@ -1,9 +1,6 @@
 const WinnersCard = ({ allGames, eliminationType }) => {
   const teamNamesList = JSON.parse(localStorage.getItem('generatedNamesList'));
 
-  // Returns the winner, works for all tournaments
-  const winner = Object.values(allGames).reverse()[0][0].winner;
-
   // Returns a list of all the winners
   const winnersArr = allGames
     .map((game) => {
@@ -36,7 +33,7 @@ const WinnersCard = ({ allGames, eliminationType }) => {
   };
 
   // Sorts the array depending on teams win total
-  sortable.sort(function (a, b) {
+  sortable.sort((a, b) => {
     return b[1] - a[1];
   });
 
@@ -45,10 +42,10 @@ const WinnersCard = ({ allGames, eliminationType }) => {
     return [index + 1, ...game];
   });
 
-  // Double Elimination
+  // Single and Double Elimination
   // Returns the last two games so the top three winners can be displayed
   const lastTwogames = allGames.slice(1).slice(-2);
-  const positionsForDouble = lastTwogames.map((game) => {
+  const winnerAndRunnersUp = lastTwogames.map((game) => {
     let pos = [];
     pos.push([game[0].winner]);
     game[0].winner === game[0].player1
@@ -57,43 +54,73 @@ const WinnersCard = ({ allGames, eliminationType }) => {
     return pos;
   });
 
+  // Returns all the winners in round robin if there are more than one
+  const winners = teamSortedPositions
+    .map((team) => {
+      if (team[2] === teamSortedPositions[0][2]) {
+        return team[1];
+      };
+    })
+    .filter((w) => w !== undefined);
+
   return (
     <>
-      {eliminationType === 'Single' && (
+      {eliminationType === 'Single' ||
+        (eliminationType === 'Double' && (
+          <>
+            <div className="winnerRunnerUpInfo">
+              <h3>
+                Congratulations to the winner
+                <span> {winnerAndRunnersUp[1][0]}</span>
+              </h3>
+              <h4>
+                Runner up is
+                <span> {winnerAndRunnersUp[1][1]}</span>
+              </h4>
+              {eliminationType === 'Double' && (
+                <h4>
+                  Third place was
+                  <span> {winnerAndRunnersUp[0][1]}</span>
+                </h4>
+              )}
+            </div>
+            <ul>
+              {teamSortedPositions.map((team, index) => {
+                return (
+                  <li
+                    key={index}
+                  >{`${team[0]}) ${team[1]} with ${team[2]} wins`}</li>
+                );
+              })}
+            </ul>
+          </>
+        ))}
+      {eliminationType === 'roundRobin' && (
         <>
-          <h3>
-            Congratulations to the winner <span>{winner}</span>
-          </h3>
-          <ul>
-            {teamSortedPositions.map((team, index) => {
-              return (
-                <li
-                  key={index}
-                >{`${team[0]}) ${team[1]} with ${team[2]} wins`}</li>
-              );
-            })}
-          </ul>
-        </>
-      )}
-      {eliminationType === 'Double' && (
-        <>
-          <h3>
-            Congratulations to the winner{' '}
-            <span>{positionsForDouble[1][0]}</span>
-          </h3>
-          <h4>
-            Runner up was <span>{positionsForDouble[1][1]}</span>
-          </h4>
-          <h4>
-            Third place was <span>{positionsForDouble[0][1]}</span>
-          </h4>
+          <div className="winnerRunnerUpInfo">
+            {winners.length === 1 && (
+              <h3>
+                Congratulations to the winner
+                <span> {winners}</span>
+              </h3>
+            )}
+            {winners.length > 1 && (
+              <h3>
+                Congratulations to the winners{' '}
+                {winners.map((winner, index) => {
+                  if (index + 1 === winners.length) {
+                    return ` ${winner}.`;
+                  };
+                  return ` ${winner},`;
+                })}
+              </h3>
+            )}
+          </div>
           {teamSortedPositions.map((team, index) => {
-              return (
-                <li
-                  key={index}
-                >{`${team[0]}) ${team[1]} with ${team[2]} wins`}</li>
-              );
-            })}
+            return (
+              <p key={index}>{`${team[0]}) ${team[1]} with ${team[2]} wins`}</p>
+            );
+          })}
         </>
       )}
     </>
