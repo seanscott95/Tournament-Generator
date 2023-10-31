@@ -73,12 +73,12 @@ const WinnersCard = ({ allGames, eliminationType }) => {
                 <span> {winnerAndRunnersUp[1][0]}</span>
               </h3>
               <h4>
-                Runner up is
+                Second place is
                 <span> {winnerAndRunnersUp[1][1]}</span>
               </h4>
               {eliminationType === 'Double' && (
                 <h4>
-                  Third place was
+                  Third place is
                   <span> {winnerAndRunnersUp[0][1]}</span>
                 </h4>
               )}
@@ -105,7 +105,7 @@ const WinnersCard = ({ allGames, eliminationType }) => {
             )}
             {winners.length > 1 && (
               <h3>
-                Congratulations to the winners{' '}
+                Congratulations to the winners
                 {winners.map((winner, index) => {
                   if (index + 1 === winners.length) {
                     return ` ${winner}.`;
