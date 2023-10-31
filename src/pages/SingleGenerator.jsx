@@ -23,7 +23,7 @@ const SingleGenerator = () => {
               <h2>Single Elimination Generator</h2>
               <FontAwesomeIcon
                 onClick={() => setShowSettings((prev) => !prev)}
-                className="icon"
+                className="icon settingsIcon"
                 icon={faGear}
               />
             </>

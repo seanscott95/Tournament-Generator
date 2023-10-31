@@ -309,6 +309,10 @@ a:hover {
         top: 5%;
         font-size: $lrgFontSize;
       }
+      .settingsIcon:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+      }
     }
   }
   .instructionsContainer {

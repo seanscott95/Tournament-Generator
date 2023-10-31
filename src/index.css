@@ -240,6 +240,10 @@ a:hover {
   top: 5%;
   font-size: clamp(0.7rem, 2vw + 0.75rem, 1.5rem);
 }
+.generatorContainer .heading .pageHeader .settingsIcon:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
 .generatorContainer .instructionsContainer {
   color: #fff;
   text-shadow: -0.05em 0.05em 0.05em #000000;
