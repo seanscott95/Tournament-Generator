@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPen, faUserGroup, faUserCheck, faPersonChalkboard } from '@fortawesome/free-solid-svg-icons';
 
-import RRMatches from '../assets/images/roundRobinMatches.PNG';
+import RRMatches from '../assets/images/HomepagePicture.PNG';
 
 const Homepage = () => {
   return (

@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Homepage from './components/Homepage';
+import Homepage from './pages/Homepage';
 import RoundRobinGenerator from './pages/RoundRobinGenerator';
 import SingleGenerator from './pages/SingleGenerator';
 import DoubleGenerator from './pages/DoubleGenerator';
