@@ -127,18 +127,24 @@ const WinnersCard = ({ allGames, eliminationType }) => {
                 Congratulations to the winners
                 {winners.map((winner, index) => {
                   if (index + 1 === winners.length) {
-                    return ` ${winner}.`;
+                    return <span>{` ${winner}.`}</span>;
                   }
-                  return ` ${winner},`;
+                  return <span>{` ${winner},`}</span>;
                 })}
               </h3>
             )}
           </div>
-          {teamSortedPositions.map((team, index) => {
-            return (
-              <p key={index}>{`${team[0]}) ${team[1]} with ${team[2]} wins`}</p>
-            );
-          })}
+          <div className='teamsWinsList'>
+            <ul>
+              {teamSortedPositions.map((team, index) => {
+                return (
+                  <li
+                    key={index}
+                  >{`${team[0]})`} <span>{team[1]}</span> {'with'} <span>{team[2]}</span> {'wins'}</li>
+                );
+              })}
+            </ul>
+          </div>
         </>
       )}
     </>
