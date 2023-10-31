@@ -12,44 +12,49 @@ const useGenerator = () => {
   const [finalsBracket, setFinalsBracket] = useState([]);
   const [isFinalRound, setIsFinalRound] = useState(false);
 
+  // Adds the team name the user inputted to the teamNames state variable
   const addTeamName = () => {
     if (teamNameInput === '') {
       return;
-    }
+    };
     const capTeamNameInput = capitaliseFirstLetter(teamNameInput);
 
+    // Teamnames defualt value is three null values so the team names
+    // always shows three empty teamnames on the list
     const hasNull = teamNames[teamNames.length - 1] === null;
     if (hasNull) {
       let count = teamNames.filter((item) => item !== null).length;
 
+      // Replaces a default value of null for the inputted team name to the
+      // inputted team name state variable depending on how many nulls remain
       if (count < 3) {
         let diff = 3 - count;
-
         if (diff === 3) {
           setTeamNames([capTeamNameInput, null, null]);
-        }
+        };
         if (diff === 2) {
           setTeamNames((prev) => [
             ...prev.filter((item) => item !== null),
             capTeamNameInput,
             null,
           ]);
-        }
+        };
         if (diff === 1) {
           setTeamNames((prev) => [
             ...prev.filter((item) => item !== null),
             capTeamNameInput,
           ]);
-        }
+        };
         setTeamNameInput('');
         return;
-      }
-    }
+      };
+    };
 
     setTeamNames((prev) => [...prev, capTeamNameInput]);
     setTeamNameInput('');
   };
 
+  // Removes the team name the user has clicked to remove
   const removeTeamName = (e) => {
     const teamToRemove = e.target.getAttribute('value');
 
@@ -57,12 +62,13 @@ const useGenerator = () => {
     setTeamNames(newTeamNames);
   };
 
+  // Takes an array and matches the teams into pairs to play each other
   const createGame = (arr) => {
     // Match teams into pairs
     const gamesObj = arr.map((team, index) => {
       if (index % 2 === 0) {
         return [team, arr[index + 1]];
-      }
+      };
     });
     const filteredGames = gamesObj.filter((game) => game !== undefined);
     return filteredGames;
@@ -82,6 +88,8 @@ const useGenerator = () => {
     localStorage.setItem('round', 1);
 
     let teamArr = teamNames;
+    // If team array is an odd number a bye is introduced to even team array
+    // as teams can't be sorted as an odd number
     if (teamArr.length % 2 !== 0) {
       if (!teamArr.includes('Bye')) {
         teamArr.push('Bye');
@@ -90,23 +98,28 @@ const useGenerator = () => {
 
     const length = teamArr.length;
 
-    let rounds = 1;
+    let round = 1;
     let allMatches = [];
-
-    while (rounds <= length - 1) {
+    
+    // Takes half the team and pairs with the other half
+    while (round <= length - 1) {
       let gamesObj = [];
-
+      
+      // Uses half of the team to pair against other half based on the index
+      // Pairs first with last, second with second last etc...
       let halfOfTeamArr = teamArr.slice(0, length / 2);
       halfOfTeamArr.forEach((team, index) => {
         const opponent = teamArr[length - 1 - index];
+        // Removes the games with byes that was needed to create games
         if (team === 'Bye' || opponent === 'Bye') return;
         gamesObj.push([team, opponent]);
       });
 
+      // Removes the last element of the array and adds to start of array
       teamArr.splice(1, 0, teamArr[length - 1]);
       teamArr.pop();
 
-      rounds++;
+      round++;
       allMatches.push(gamesObj);
     }
 
@@ -116,7 +129,7 @@ const useGenerator = () => {
   };
 
   const generateSingleElimination = (winningTeams = null) => {
-    // If it is first round
+    // If it is first round remove and set local storage items
     if (winningTeams === null) {
       localStorage.removeItem('round');
       localStorage.removeItem('allGamesSingle');
@@ -130,10 +143,14 @@ const useGenerator = () => {
     let teamArr = teamNames;
     let allMatches = [];
 
+    // Sets the teamArr as the winning teams for all rounds but the first
+    // as there are no winning teams when generating first round
     if (winningTeams !== null) {
       teamArr = winningTeams;
     };
 
+    // If team array is an odd number a bye is introduced to even team array
+    // as teams can't be sorted as an odd number
     if (teamArr.length % 2 !== 0) {
       if (!teamArr.includes('Bye')) {
         teamArr.push('Bye');
@@ -161,7 +178,7 @@ const useGenerator = () => {
   };
 
   const generateDoubleElimination = (winningAndLosingTeams = null) => {
-    // If it is first round
+    // If it is first round remove and set local storage items
     if (winningAndLosingTeams === null) {
       localStorage.removeItem('round');
       localStorage.removeItem('allGamesSingle');
@@ -175,6 +192,8 @@ const useGenerator = () => {
     let teamArr = teamNames;
     let allMatches = [];
 
+    // If team array is an odd number a bye is introduced to even team array
+    // as teams can't be sorted as an odd number
     if (teamArr.length % 2 !== 0) {
       if (!teamArr.includes('Bye')) {
         teamArr.push('Bye');
@@ -241,6 +260,7 @@ const useGenerator = () => {
       };
 
       if (winners.length === 1) {
+        // Sets the games when it is the second last round
         if (losers.length !== 1) {
           const createdGames = createGame(losers);
           allMatches.push(createdGames);
@@ -249,6 +269,7 @@ const useGenerator = () => {
           setWinnersBracket(winners);
           setLossesBracket(losers);
         };
+        // Sets the games when it is the last round
         if (losers.length === 1) {
           const createdGames = createGame([finalsBracket, losers]);
           const formattedCreatedGames = createdGames.map((game) => game.flat());
@@ -258,6 +279,8 @@ const useGenerator = () => {
         };
       };
 
+      // Sets the game for the final round with the team already in the finals
+      // bracket and the last team from the losing bracket
       if (winners.length === 0 && losers.length === 1) {
         const createdGames = createGame([finalsBracket, losers]);
         const formattedCreatedGames = createdGames.map((game) => game.flat());
