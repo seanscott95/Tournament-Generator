@@ -62,10 +62,6 @@ const WinnersCard = ({ allGames, eliminationType }) => {
     })
     .filter((w) => w !== undefined);
 
-  console.log('w', winnerAndRunnersUp);
-  console.log('wd', winnerAndRunnersUp[1]);
-  console.log('e', eliminationType)
-
   return (
     <>
       {eliminationType !== 'roundRobin' && 
