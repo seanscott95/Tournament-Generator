@@ -23,6 +23,7 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
 
   const [error, setError] = useState(false);
   const [teamMinError, setTeamMinError] = useState(false);
+  const [teamNameTakenError, setTeamNameTakenError] = useState(false);
   const runError = () => {
     setError(true);
     setTimeout(() => {
@@ -69,6 +70,28 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
   // Allows the user to click enter to add the inputed team name
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
+      // Checks to see if team name has already been used
+      const teamNamesArr = teamNames.filter((team) => team !== null)
+      
+      // Add team name if the teamnames array has no value with the three
+      // default null values removed, this means its the first name to be addedd
+      if (teamNamesArr.length === 0) {
+        addTeamName();
+        return;
+      };
+
+      const teamNamesLowerCase = teamNamesArr.map((team) => team.toLowerCase());
+      const teamNameInputLowerCase = teamNameInput.toLowerCase();
+
+      // Sends error if team name is already taken
+      if (teamNamesLowerCase.includes(teamNameInputLowerCase)) {
+        setTeamNameTakenError(true);
+        setTimeout(() => {
+          setTeamNameTakenError(false);
+        }, 3000);
+        return;
+      };
+      
       addTeamName();
     };
   };
@@ -148,6 +171,9 @@ const TeamInputGroup = ({ setIsGenerated, minTeamLimit }) => {
             )}
           {teamMinError && (
             <p>Please have exactly 4, 8, 16, 32, 64 or 128 teams</p>
+          )}
+          {teamNameTakenError && (
+            <p>Team name already taken, please choose another team name</p>
           )}
         </div>
         <div className="generateBtnContainer">
