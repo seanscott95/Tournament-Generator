@@ -198,6 +198,20 @@ a:hover {
   /* --- Generator Button Section --- */
   /* --- Tournament Over Component --- */
 }
+.generatorContainer .teamsWinsList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.generatorContainer .teamsWinsList ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: -moz-fit-content;
+  width: fit-content;
+}
 .generatorContainer .leftBorder {
   border-left: 3px solid #21c1fa;
   height: 2em;

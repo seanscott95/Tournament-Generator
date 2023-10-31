@@ -22,14 +22,14 @@ const WinnersCard = ({ allGames, eliminationType }) => {
   // Adds winners with their amount of wins to the sortable array
   for (const winners in winnersReduced) {
     sortable.push([winners, winnersReduced[winners]]);
-  };
+  }
 
   // Adds any teams with zero wins to the sortable array
   for (const team of teamNamesList) {
     if (!Object.keys(winnersReduced).includes(team)) {
       sortable.push([team, 0]);
-    };
-  };
+    }
+  }
 
   // Sorts the array depending on teams win total
   sortable.sort((a, b) => {
@@ -58,42 +58,61 @@ const WinnersCard = ({ allGames, eliminationType }) => {
     .map((team) => {
       if (team[2] === teamSortedPositions[0][2]) {
         return team[1];
-      };
+      }
     })
     .filter((w) => w !== undefined);
 
+  console.log('w', winnerAndRunnersUp);
+  console.log('wd', winnerAndRunnersUp[1]);
+  console.log('e', eliminationType)
+
   return (
     <>
-      {eliminationType === 'Single' ||
-        (eliminationType === 'Double' && (
+      {eliminationType !== 'roundRobin' && 
           <>
             <div className="winnerRunnerUpInfo">
-              <h3>
-                Congratulations to the winner
-                <span> {winnerAndRunnersUp[1][0]}</span>
-              </h3>
-              <h4>
-                Second place is
-                <span> {winnerAndRunnersUp[1][1]}</span>
-              </h4>
+              {eliminationType === 'Single' && (
+                <>
+                  <h3>
+                    Congratulations to the winner
+                    <span> {winnerAndRunnersUp[0][0]}</span>
+                  </h3>
+                  <h4>
+                    Second place is
+                    <span> {winnerAndRunnersUp[0][1]}</span>
+                  </h4>
+                </>
+              )}
               {eliminationType === 'Double' && (
-                <h4>
-                  Third place is
-                  <span> {winnerAndRunnersUp[0][1]}</span>
-                </h4>
+                <>
+                  <h3>
+                    Congratulations to the winner
+                    <span> {winnerAndRunnersUp[1][0]}</span>
+                  </h3>
+                  <h4>
+                    Second place is
+                    <span> {winnerAndRunnersUp[1][1]}</span>
+                  </h4>
+                  <h4>
+                    Third place is
+                    <span> {winnerAndRunnersUp[0][1]}</span>
+                  </h4>
+                </>
               )}
             </div>
-            <ul>
-              {teamSortedPositions.map((team, index) => {
-                return (
-                  <li
-                    key={index}
-                  >{`${team[0]}) ${team[1]} with ${team[2]} wins`}</li>
-                );
-              })}
-            </ul>
+            <div className='teamsWinsList'>
+              <ul>
+                {teamSortedPositions.map((team, index) => {
+                  return (
+                    <li
+                      key={index}
+                    >{`${team[0]})`} <span>{team[1]}</span> {'with'} <span>{team[2]}</span> {'wins'}</li>
+                  );
+                })}
+              </ul>
+            </div>
           </>
-        ))}
+        }
       {eliminationType === 'roundRobin' && (
         <>
           <div className="winnerRunnerUpInfo">
@@ -109,7 +128,7 @@ const WinnersCard = ({ allGames, eliminationType }) => {
                 {winners.map((winner, index) => {
                   if (index + 1 === winners.length) {
                     return ` ${winner}.`;
-                  };
+                  }
                   return ` ${winner},`;
                 })}
               </h3>
