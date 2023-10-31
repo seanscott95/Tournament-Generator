@@ -40,7 +40,7 @@ body {
 p,
 label {
   font-size: $fontSize;
-  text-shadow: -0.05em 0.05em 0.05em #000000;
+  text-shadow: -0.025em 0.05em 0.05em #000000;
 }
 li {
   list-style: none;
@@ -87,8 +87,8 @@ a:hover {
   }
 }
 
+/* Neon Button */
 @mixin neonButton {
-  /* Neon Button */
   & {
     background: $primaryColor;
     padding: 0;

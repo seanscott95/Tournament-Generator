@@ -28,7 +28,7 @@ body {
 p,
 label {
   font-size: clamp(0.7rem, 2vw + 0.5rem, 1.2rem);
-  text-shadow: -0.05em 0.05em 0.05em #000000;
+  text-shadow: -0.025em 0.05em 0.05em #000000;
 }
 
 li {
@@ -52,6 +52,7 @@ a:hover {
 }
 
 /* ------------ Mixins ------------ */
+/* Neon Button */
 /* --------------- Components --------------- */
 /* ----------- Navbar ----------- */
 .navbar {
@@ -86,7 +87,6 @@ a:hover {
   width: 100%;
 }
 .navbar ul li .customBtn {
-  /* Neon Button */
   color: #fff;
   font-weight: 500;
   background: transparent;
