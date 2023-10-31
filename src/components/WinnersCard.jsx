@@ -4,7 +4,6 @@ const WinnersCard = ({ allGames, eliminationType }) => {
   // Returns a list of all the winners
   const winnersArr = allGames
     .map((game) => {
-      // console.log('game', game);
       return Object.values(game).map((g) => {
         return g.winner;
       });
@@ -12,10 +11,10 @@ const WinnersCard = ({ allGames, eliminationType }) => {
     .flat();
 
   // Creates object of winners with their amount of wins
-  const winnersReduced = winnersArr.reduce((accumulator, value) => {
+  const winnersReduced = winnersArr.reduce((acc, val) => {
     return {
-      ...accumulator,
-      [value]: (accumulator[value] || 0) + 1,
+      ...acc,
+      [val]: (acc[val] || 0) + 1,
     };
   }, {});
 
